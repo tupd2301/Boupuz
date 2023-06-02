@@ -9,9 +9,15 @@ public class GameFlow : MonoBehaviour
     [SerializeField] private BallController _ballController;
     [SerializeField] private FixedJoystick _joystick;
 
+    public float timeScale = 1;
+    public bool canShoot = true;
+
+    public float timeCount = 0;
+
     void Start()
     {
         GameFlow.Instance = this;
+        timeScale = 1;
         if (_poolManager != null)
         {
             _poolManager.Init();
@@ -23,7 +29,7 @@ public class GameFlow : MonoBehaviour
 
         if (_ballController != null)
         {
-            _ballController.GetBall(1);
+            _ballController.GetBall(10);
         }
         else
         {
@@ -40,13 +46,26 @@ public class GameFlow : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    public void ChangePositionJoystick(float x)
+    {
+        _joystick.transform.position = new Vector3(x, _joystick.transform.position.y, _joystick.transform.position.z);
+    }
+
     public void Shoot(Vector2 direction)
     {
         StartCoroutine(_ballController.BallShooting(direction));
     }
 
-    void Update()
+    public void SpeedUp(float time, float scaleUp)
     {
+        timeScale = scaleUp;
+        Debug.Log("SpeedUp:" + timeScale);
+    }
+
+    void FixedUpdate()
+    {
+        SpeedUp(2,1.5f);
+        SpeedUp(5,2f);
         if (_ballController.isShooted)
         {
             _ballController.BallRunning();

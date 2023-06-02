@@ -61,21 +61,29 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        OnDrag(eventData);
+        if (GameFlow.Instance.canShoot)
+        {
+            OnDrag(eventData);
+            originalPosition = transform.position;
+            StopAllCoroutines();
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        cam = null;
-        if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
-            cam = canvas.worldCamera;
+        if (GameFlow.Instance.canShoot)
+        {
+            cam = null;
+            if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
+                cam = canvas.worldCamera;
 
-        Vector2 position = RectTransformUtility.WorldToScreenPoint(cam, background.position);
-        Vector2 radius = background.sizeDelta / 2;
-        input = (eventData.position - position) / (radius * canvas.scaleFactor);
-        FormatInput();
-        HandleInput(input.magnitude, input.normalized, radius, cam);
-        handle.anchoredPosition = input * radius * handleRange;
+            Vector2 position = RectTransformUtility.WorldToScreenPoint(cam, background.position);
+            Vector2 radius = background.sizeDelta / 2;
+            input = (eventData.position - position) / (radius * canvas.scaleFactor);
+            FormatInput();
+            HandleInput(input.magnitude, input.normalized, radius, cam);
+            handle.anchoredPosition = input * radius * handleRange;
+        }
     }
 
     void OnDrawGizmos()
@@ -143,11 +151,14 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public virtual void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("Up");
-        Vector2 direction = handle.anchoredPosition - Vector2.zero;
-        GameFlow.Instance.Shoot(direction);
-        input = Vector2.zero;
-        handle.anchoredPosition = Vector2.zero;
+        if (GameFlow.Instance.canShoot)
+        {
+            Debug.Log("Up");
+            Vector2 direction = handle.anchoredPosition - Vector2.zero;
+            GameFlow.Instance.Shoot(direction);
+            input = Vector2.zero;
+            handle.anchoredPosition = Vector2.zero;
+        }
     }
 
     protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)

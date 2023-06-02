@@ -44,3 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c232e555391405ea26fd5658a3e8da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _balls: []
+  _totalBall: 0
+  _speedToShoot: 0.3
+  _speedToRun: 1
+  _gunPosition: {x: 0, y: 0, z: 0}
+  _direction: {x: 0, y: 0}
+  isShooted: 0
