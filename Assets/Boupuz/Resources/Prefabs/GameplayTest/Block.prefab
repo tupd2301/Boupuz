@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8537881325387557477}
   - component: {fileID: 8537881325387557474}
   - component: {fileID: 8537881325387557476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Block
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af22045c07bf1174c85766b14e89263f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _listDirection: []
+  _listPosition: []
 --- !u!61 &8537881325387557474
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,9 +139,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0

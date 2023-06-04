@@ -57,7 +57,7 @@ public class BallController : MonoBehaviour
     public void CheckContact(ContactPoint2D contact, GameObject ball)
     {
         //Debug.Log("pos:" + ball.transform.position);
-        Vector3 direction = Vector3.Reflect(ball.GetComponentInChildren<BallModel>().Direction.normalized, contact.normal.normalized);
+        Vector3 direction = Vector3.Reflect(ball.GetComponentInChildren<BallModel>().Direction, contact.normal);
         ball.GetComponentInChildren<BallModel>().Direction = direction;
     }
 

@@ -8,6 +8,7 @@ public class GameFlow : MonoBehaviour
     [SerializeField] private PoolManager _poolManager;
     [SerializeField] private BallController _ballController;
     [SerializeField] private FixedJoystick _joystick;
+    public Laser _laser;
 
     public float timeScale = 1;
     public bool canShoot = true;
@@ -38,6 +39,11 @@ public class GameFlow : MonoBehaviour
 
         if (_joystick != null)
         {
+            if (_laser != null)
+            {
+                _laser.SetPosition(_joystick.transform.position);
+                _laser.SetActive(false);
+            }
         }
         else
         {
@@ -49,6 +55,7 @@ public class GameFlow : MonoBehaviour
     public void ChangePositionJoystick(float x)
     {
         _joystick.transform.position = new Vector3(x, _joystick.transform.position.y, _joystick.transform.position.z);
+        _laser.SetPosition(new Vector3(x, _joystick.transform.position.y, _joystick.transform.position.z));
     }
 
     public void Shoot(Vector2 direction)
@@ -64,8 +71,8 @@ public class GameFlow : MonoBehaviour
 
     void FixedUpdate()
     {
-        SpeedUp(2,1.5f);
-        SpeedUp(5,2f);
+        //SpeedUp(2,1.5f);
+        //SpeedUp(5,2f);
         if (_ballController.isShooted)
         {
             _ballController.BallRunning();

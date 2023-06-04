@@ -66,6 +66,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             OnDrag(eventData);
             originalPosition = transform.position;
             StopAllCoroutines();
+            GameFlow.Instance._laser.SetActive(true);
         }
     }
 
@@ -83,18 +84,19 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             FormatInput();
             HandleInput(input.magnitude, input.normalized, radius, cam);
             handle.anchoredPosition = input * radius * handleRange;
+            Vector2 direction = handle.anchoredPosition - originalPosition;
+            GameFlow.Instance._laser.ChnageDirection(direction);
         }
     }
 
-    void OnDrawGizmos()
-    {
-        if (handle.anchoredPosition != Vector2.zero)
-        {
-
-            Gizmos.color = Color.white;
-            Gizmos.DrawLine(originalPosition, handle.anchoredPosition);
-        }
-    }
+    //void OnDrawGizmos()
+    //{
+    //    if (handle.anchoredPosition != Vector2.zero)
+    //    {
+    //        Gizmos.color = Color.white;
+    //        Gizmos.DrawLine(originalPosition, handle.anchoredPosition);
+    //    }
+    //}
 
     protected virtual void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
     {
@@ -158,6 +160,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             GameFlow.Instance.Shoot(direction);
             input = Vector2.zero;
             handle.anchoredPosition = Vector2.zero;
+            GameFlow.Instance._laser.SetActive(false);
+
         }
     }
 
