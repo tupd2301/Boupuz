@@ -15,13 +15,7 @@ public class BrickView : MonoBehaviour
     private Animator _animator;
     [SerializeField]
     private BrickData _brickData;
-    public BrickData brickData
-    {
-        get
-        {
-            return _brickData;
-        }
-    }
+    
     private float _size;
     private int _boardWidth, _boardHeight;
 

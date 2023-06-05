@@ -15,7 +15,7 @@ public struct GridCoordinate
 }
 
 [System.Serializable]
-public class BrickData
+public class BrickData : MonoBehaviour
 {
     public int Id;
     public GridCoordinate BrickCoordinate;
@@ -24,7 +24,7 @@ public class BrickData
     public int Atk;
     public int LvFreeze;
     public float Speed;
-    public Vector2 Direction;
+    public Vector3 Direction;
     public bool isFreeze;
     public bool isBurn;
 

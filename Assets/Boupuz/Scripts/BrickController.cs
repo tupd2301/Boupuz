@@ -15,8 +15,9 @@ public class BrickController : MonoBehaviour
         }
     }
 
-    public BrickData BrickData {get {return _brickData;}}
-    private BrickData _brickData;
+    public BrickData Data {get {return _data;}}
+    [SerializeField]
+    private BrickData _data;
 
     private int _boardWidth, _boardHeight;
     private float _size;
@@ -37,12 +38,20 @@ public class BrickController : MonoBehaviour
         _boardWidth = boardWidth;
         _boardHeight = boardHeight;
         _size = size;
-        _brickData = brickData;
+        _data = brickData;
         _view.Setup();
     }
 
-    public void Move(Vector2 direction, int speed)
+    public IEnumerator Move(float duration) 
     {
+        Vector3 startPos = transform.localPosition;
+        Vector3 endPos = startPos + Data.Direction;
+        for (float elasped = 0; elasped < duration; elasped += Time.deltaTime) 
+        {
+            transform.localPosition = Vector3.Lerp(startPos, endPos, elasped / duration);
+            yield return null;
+        }
+        transform.localPosition = endPos;
         
     }
 
@@ -78,10 +87,10 @@ public class BrickController : MonoBehaviour
             }
 
             //Decrease brick health
-            _view.brickData.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
+            Data.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
 
             // When brick health <= 0, disable it
-            if ( _view.brickData.Hp <= 0)
+            if ( Data.Hp <= 0)
             {
                 gameObject.SetActive(false);
             }

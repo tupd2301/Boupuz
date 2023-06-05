@@ -16,20 +16,39 @@ public class GameBoardController : MonoBehaviour
 
     void Start()
     {
-
+        InitGrid();
+        //MoveAll();
     }
 
-    void InitGrid()
+    public void InitGrid()
     {
-        //Vector3 positionOffset = transform.position - new Vector3(_gridWidth * Distance / 2.0f, _gridHeight * Distance / 2.0f, 0); // 1
+        Debug.Log("Number of brick: " + _brickControllers.Count.ToString());
+        Grid = new BrickController[_gridWidth, _gridHeight];
         for (int brickIndex = 0; brickIndex < _brickControllers.Count; brickIndex++)
         {
             BrickController newBrick = _brickControllers[brickIndex];
-            if (newBrick.BrickData.BrickCoordinate.X < _gridWidth && newBrick.BrickData.BrickCoordinate.Y < _gridHeight)
+            if (newBrick?.Data.BrickCoordinate.X < _gridWidth && newBrick?.Data.BrickCoordinate.Y < _gridHeight)
             {
-                Grid[newBrick.BrickData.BrickCoordinate.X,newBrick.BrickData.BrickCoordinate.Y] = newBrick;
+                if (Grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] == null)
+                {
+                    Grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] = newBrick;
+                } 
+                else
+                {
+                    Debug.Log("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK");
+                }
             }
-            
+        }
+        
+    }
+
+    public void MoveAll()
+    {
+        StopAllCoroutines();
+        for (int i = 0; i < _brickControllers.Count; i++)
+        {
+            // TODO: if not block, move
+            StartCoroutine(_brickControllers[i].Move(1));
         }
     }
 
