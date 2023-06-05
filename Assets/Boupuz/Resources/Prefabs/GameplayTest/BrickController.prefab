@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5493496145938070131}
   - component: {fileID: 8191443020903665310}
-  - component: {fileID: 2722022343004946572}
+  - component: {fileID: 4451323059744412634}
   m_Layer: 0
   m_Name: BrickView
   m_TagString: Untagged
@@ -55,7 +55,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2722022343004946572
+--- !u!114 &4451323059744412634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,17 +64,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2107670128694354791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f1c311fe9455174f98b51c37c80c3b1, type: 3}
+  m_Script: {fileID: 11500000, guid: cd959bc285e8848f8aee5d30481ecb65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainGraphic: {fileID: 21300000, guid: 6b53e4efe09f0b84dbf637202b021e5f, type: 3}
-  _animator: {fileID: 8191443020903665310}
+  _mainGraphic: {fileID: 21300000, guid: 7cdea31f394c5450d95d6a9078328c5b, type: 3}
+  _animator: {fileID: 0}
   _brickData:
     Id: -1
     BrickCoordinate:
       X: 0
       Y: 0
-    BrickSize: 0000000000000000
+    BrickSize: 
     Hp: 0
     Atk: 0
     LvFreeze: 0
@@ -140,7 +140,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 2180264, guid: 26195988f49424c3483c250db49394a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -184,8 +184,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 16
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 26195988f49424c3483c250db49394a7, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 26195988f49424c3483c250db49394a7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -263,7 +263,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3314086927972503842}
-  - component: {fileID: 3622241276135286606}
+  - component: {fileID: 8741076295938774346}
   m_Layer: 0
   m_Name: BrickController
   m_TagString: Untagged
@@ -287,7 +287,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3622241276135286606
+--- !u!114 &8741076295938774346
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,10 +296,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7905594212609445272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2061fa9e69f42534cb55f59f8f213b02, type: 3}
+  m_Script: {fileID: 11500000, guid: a5d2bdca7f8d94213bafa0544e234a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 0}
+  _view: {fileID: 4451323059744412634}
 --- !u!1 &8086973390344421784
 GameObject:
   m_ObjectHideFlags: 0
