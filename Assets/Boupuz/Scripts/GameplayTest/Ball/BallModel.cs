@@ -9,6 +9,6 @@ public class BallModel : MonoBehaviour
     [SerializeField] private bool _isRunning;
 
     public Vector3 Direction { get => _direction; set => _direction = value; }
-    public int Damage { get => _damage; set => _damage = value; }
+    public int Damage { get { return _damage;} }
     public bool IsRunning { get => _isRunning; set => _isRunning = value; }
 }

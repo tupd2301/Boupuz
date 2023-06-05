@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class GameBoardController : MonoBehaviour
 {
-    public List<BrickController> TileControllers { get { return _brickControllers; } }
+    
     [SerializeField]
     private List<BrickController> _brickControllers = new List<BrickController>();
+    public List<BrickController> BrickControllers { get { return _brickControllers; } }
 
-    //public List<Sprite> Sprites = new List<Sprite>();
-    //public GameObject TilePrefab;
-    private const int _gridWidth = 7;
-    private const int _gridHeight = 11;
-    public float Distance = 1.0f;
+    [SerializeField]
+    private int _gridWidth, _gridHeight;
+
     private BrickController[,] Grid;
 
     void Start()
@@ -26,11 +25,13 @@ public class GameBoardController : MonoBehaviour
         for (int brickIndex = 0; brickIndex < _brickControllers.Count; brickIndex++)
         {
             BrickController newBrick = _brickControllers[brickIndex];
-            if (newBrick.Data.BrickCoordinate.X < _gridWidth && newBrick.Data.BrickCoordinate.Y < _gridHeight)
+            if (newBrick.BrickData.BrickCoordinate.X < _gridWidth && newBrick.BrickData.BrickCoordinate.Y < _gridHeight)
             {
-                Grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] = newBrick;
+                Grid[newBrick.BrickData.BrickCoordinate.X,newBrick.BrickData.BrickCoordinate.Y] = newBrick;
             }
             
         }
     }
+
+    
 }
