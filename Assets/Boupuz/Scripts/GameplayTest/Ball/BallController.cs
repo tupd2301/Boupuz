@@ -14,6 +14,7 @@ public class BallController : MonoBehaviour
     [SerializeField] private Vector2 _direction;
 
     public bool isShooted;
+    public bool isEndRound;
     private float _xFirstBall;
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class BallController : MonoBehaviour
 
     public IEnumerator BallShooting(Vector2 direction)
     {
+        isEndRound = false;
         isShooted = true;
         GameFlow.Instance.canShoot = false;
         GameFlow.Instance.timeScale = 1;
@@ -79,18 +81,20 @@ public class BallController : MonoBehaviour
                 if (_balls[i].activeInHierarchy && _balls[i].GetComponentInChildren<BallModel>().IsRunning)
                 {
                     Vector3 direction = _balls[i].GetComponentInChildren<BallModel>().Direction;
-                    _balls[i].transform.Translate(direction.normalized * _speedToRun * 0.01f * GameFlow.Instance.timeScale);
+                    //_balls[i].transform.Translate(direction.normalized * _speedToRun * 0.01f * GameFlow.Instance.timeScale);
+                    _balls[i].transform.position = Vector3.MoveTowards(_balls[i].transform.position,(direction.normalized+_balls[i].transform.position),0.01f*_speedToRun);
                     if (_balls[i].transform.position.y <= _gunPosition.y)
                     {
                         SetUpFirstBallReturned(_balls[i].transform.position.x);
-                        _balls[i].transform.position = new Vector3(_xFirstBall, _gunPosition.y, _gunPosition.z * GameFlow.Instance.timeScale);
+                        _balls[i].transform.position = new Vector3(_xFirstBall, _gunPosition.y, _gunPosition.z) * GameFlow.Instance.timeScale;
                         _balls[i].GetComponentInChildren<BallModel>().IsRunning = false;
                     }
                 }
             }
         }
-        if (_balls.Where(ball => ball.GetComponentInChildren<BallModel>().IsRunning).Count() <= 0) // Scale up speed by time
+        if (_balls.Where(ball => ball.GetComponentInChildren<BallModel>().IsRunning).Count() <= 0 && !isEndRound) // Scale up speed by time
         {
+            isEndRound = true;
             StopAllCoroutines();
             GameFlow.Instance.canShoot = true;
             GameFlow.Instance.timeScale = 1;
