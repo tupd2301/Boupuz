@@ -567,6 +567,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3818671813279012272, guid: 1dfa716f9ffb44246be3d144aa2ada8f, type: 3}
+      propertyPath: _gun
+      value: 
+      objectReference: {fileID: 730152062}
+    - target: {fileID: 3818671813279012272, guid: 1dfa716f9ffb44246be3d144aa2ada8f, type: 3}
       propertyPath: _speedToRun
       value: 10
       objectReference: {fileID: 0}
@@ -715,6 +719,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 566206945, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 566206945, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 566206945, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1361159576040732970, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: Direction.y
       value: -2

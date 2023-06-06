@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 8741076295938774346}
   m_Layer: 0
   m_Name: BrickController
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -287,9 +287,9 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7905594212609445272}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -298,7 +298,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 7
 --- !u!114 &8741076295938774346
 MonoBehaviour:
@@ -475,12 +475,12 @@ MonoBehaviour:
   Id: -1
   BrickCoordinate:
     X: 0
-    Y: 0
+    Y: 4
   BrickSize: 
   Hp: 0
   Atk: 0
   LvFreeze: 0
   Speed: 0
-  Direction: {x: 0, y: 0, z: 0}
+  Direction: {x: 0, y: -2, z: 0}
   isFreeze: 0
   isBurn: 0
