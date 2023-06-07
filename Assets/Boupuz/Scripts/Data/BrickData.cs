@@ -15,9 +15,19 @@ public struct GridCoordinate
 }
 
 [System.Serializable]
+public enum ObjectType
+{
+    //TODO
+    Brickie = 1,
+    Item = 2,
+    Special = 3,
+}
+
+[System.Serializable]
 public class BrickData : MonoBehaviour
 {
     public int Id;
+    public ObjectType Type;
     public GridCoordinate BrickCoordinate;
     public List<int> BrickSize;
     public int Hp;
@@ -27,6 +37,8 @@ public class BrickData : MonoBehaviour
     public Vector3 Direction;
     public bool isFreeze;
     public bool isBurn;
+    public bool movable;
+    //public int numBallEat;
 
     public BrickData()
     {

@@ -52,5 +52,10 @@ public class GameBoardController : MonoBehaviour
         }
     }
 
+    public void BallBrickCollision(Collision2D col)
+    {
+        
+    }
+
     
 }

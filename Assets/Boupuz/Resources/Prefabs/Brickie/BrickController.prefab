@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5493496145938070131}
   - component: {fileID: 8191443020903665310}
   - component: {fileID: 4451323059744412634}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BrickView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 8607664257582132575}
   - component: {fileID: 4986214333449208595}
   - component: {fileID: 8402786879242785148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 3314086927972503842}
   - component: {fileID: 566206945}
   - component: {fileID: 8741076295938774346}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BrickController
   m_TagString: Block
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 7210874724018135934}
   - component: {fileID: 7635044719649780959}
   - component: {fileID: 6028300500882632922}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,7 +438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 839614951138253606}
   - component: {fileID: 1361159576040732970}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BrickData
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,6 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: -1
+  Type: 0
   BrickCoordinate:
     X: 0
     Y: 4
@@ -484,3 +485,4 @@ MonoBehaviour:
   Direction: {x: 0, y: -2, z: 0}
   isFreeze: 0
   isBurn: 0
+  movable: 0

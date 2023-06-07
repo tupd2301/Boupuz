@@ -59,7 +59,38 @@ public class BrickController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Ball"))
         {
-            Vector3 direction = col.gameObject.GetComponent<BallModel>().Direction;
+            
+            BallReflect(col);
+            DecreaseHP(col);
+            if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
+            {
+                // Disable ball
+                col.gameObject.SetActive(false);
+                // Total number ball -= 1
+                
+            }
+
+            // When brick health <= 0, disable it
+            if ( Data.Hp <= 0)
+            {
+                RemoveBrick();
+            }
+        }
+    }
+
+    public void DecreaseHP(Collision2D col)
+    {
+        Data.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
+    }
+
+    public void RemoveBrick()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void BallReflect(Collision2D col)
+    {
+        Vector3 direction = col.gameObject.GetComponent<BallModel>().Direction;
             if (_listDirection.Where(a => a == direction).Count() > 0)
             {
                 int index = _listDirection.IndexOf(direction);
@@ -85,15 +116,5 @@ public class BrickController : MonoBehaviour
                 _listContact.Add(col.contacts[0]);
                 BallController.Instance.CheckContact(col.contacts[0], col.gameObject);
             }
-
-            //Decrease brick health
-            Data.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
-
-            // When brick health <= 0, disable it
-            if ( Data.Hp <= 0)
-            {
-                gameObject.SetActive(false);
-            }
-        }
     }
 }

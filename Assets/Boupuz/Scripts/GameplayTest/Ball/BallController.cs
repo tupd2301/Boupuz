@@ -9,6 +9,7 @@ public class BallController : MonoBehaviour
     [SerializeField] private List<GameObject> _balls = new List<GameObject>();
     [SerializeField] private List<BallModel> _listBallModel = new List<BallModel>();
     [SerializeField] private int _totalBall;
+    public int totalBall { get {return _totalBall;} }
     [SerializeField] private float _speedToShoot;
     [SerializeField] private float _speedToRun;
     [SerializeField] private Vector3 _gunPosition;
