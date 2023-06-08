@@ -21,6 +21,8 @@ public class BrickController : MonoBehaviour
 
     private int _boardWidth, _boardHeight;
     private float _size;
+    [SerializeField]
+    private Collider2D _collider;
 
     [SerializeField] private List<Vector3> _listDirection;
     [SerializeField] private List<ContactPoint2D> _listContact;
@@ -44,15 +46,21 @@ public class BrickController : MonoBehaviour
 
     public IEnumerator Move(float duration) 
     {
-        Vector3 startPos = transform.localPosition;
-        Vector3 endPos = startPos + Data.Direction;
-        for (float elasped = 0; elasped < duration; elasped += Time.deltaTime) 
+        for (int s = 0; s < Data.Speed; s++)
         {
-            transform.localPosition = Vector3.Lerp(startPos, endPos, elasped / duration);
-            yield return null;
+            if (!GameBoardController.Instance.CheckBlockingObject(this))
+            {
+                Vector3 startPos = transform.localPosition;
+                Vector3 endPos = startPos + Data.Direction * _collider.bounds.size[1];
+                //Debug.Log("Collider bounds: " + _collider.bounds.size);
+                for (float elasped = 0; elasped < duration; elasped += Time.deltaTime) 
+                {
+                    transform.localPosition = Vector3.Lerp(startPos, endPos, elasped / duration);
+                    yield return null;
+                }
+                transform.localPosition = endPos;
+            }
         }
-        transform.localPosition = endPos;
-        
     }
 
     public void OnCollisionEnter2D(Collision2D col)
@@ -65,6 +73,7 @@ public class BrickController : MonoBehaviour
             if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
             {
                 // Disable ball
+                Debug.Log("Starvy ate 1 ball");
                 col.gameObject.SetActive(false);
                 // Total number ball -= 1
                 
@@ -97,7 +106,7 @@ public class BrickController : MonoBehaviour
                 float distance = Vector3.Distance(col.transform.position, _listPosition[index]);
                 if (distance < 0.3f)
                 {
-                    Debug.Log("yub");
+                    //Debug.Log("yub");
                     col.transform.position = _listPosition[index];
                     BallController.Instance.CheckContact(_listContact[index], col.gameObject);
                 }

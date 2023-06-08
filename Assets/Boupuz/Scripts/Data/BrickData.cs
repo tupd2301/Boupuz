@@ -12,6 +12,50 @@ public struct GridCoordinate
         X = x;
         Y = y;
     }
+
+    public static bool operator == (GridCoordinate c1, GridCoordinate c2)
+    {
+        return (c1.X == c2.X) & (c1.Y == c2.Y);
+    }
+
+    public static bool operator != (GridCoordinate c1, GridCoordinate c2)
+    {
+        return (c1.X == c2.X) | (c1.Y == c2.Y);
+    }
+
+    public static GridCoordinate operator +(GridCoordinate c, Vector3 addition)
+    {
+        return new GridCoordinate(c.X + (int)addition.x, c.Y + (int)addition.y);
+    }
+
+    public static GridCoordinate operator -(GridCoordinate c, int subtraction)
+    {
+        return new GridCoordinate(c.X + subtraction, c.Y + subtraction);
+    }
+
+    public static GridCoordinate operator *(GridCoordinate c, int multiplier)
+    {
+        return new GridCoordinate(c.X * multiplier, c.Y * multiplier);
+    }
+
+    public static GridCoordinate operator /(GridCoordinate c, int multiplier)
+    {
+        return new GridCoordinate(c.X / multiplier, c.Y / multiplier);
+    }
+
+    public override bool Equals(object o)
+    {
+        if (o == null)
+            return false;
+
+        GridCoordinate c = (GridCoordinate)o;
+        return (X == c.X & Y == c.Y);
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
 }
 
 [System.Serializable]
@@ -33,7 +77,7 @@ public class BrickData : MonoBehaviour
     public int Hp;
     public int Atk;
     public int LvFreeze;
-    public float Speed;
+    public int Speed;
     public Vector3 Direction;
     public bool isFreeze;
     public bool isBurn;
@@ -43,7 +87,7 @@ public class BrickData : MonoBehaviour
     public BrickData()
     {
         Id = -1;
-        
+        isFreeze = !movable;
     }
 
 

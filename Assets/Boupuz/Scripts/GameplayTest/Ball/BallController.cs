@@ -106,6 +106,7 @@ public class BallController : MonoBehaviour
             StopAllCoroutines();
             GameFlow.Instance.canShoot = true;
             GameFlow.Instance.timeScale = 1;
+            GameBoardController.Instance.MoveAll();
         }
     }
 }

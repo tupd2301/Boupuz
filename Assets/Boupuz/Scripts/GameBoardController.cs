@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameBoardController : MonoBehaviour
 {
-    
+    public static GameBoardController Instance;
     [SerializeField]
     private List<BrickController> _brickControllers = new List<BrickController>();
     public List<BrickController> BrickControllers { get { return _brickControllers; } }
@@ -14,15 +14,33 @@ public class GameBoardController : MonoBehaviour
 
     private BrickController[,] Grid;
 
+    void Awake()
+    {
+        GameBoardController.Instance = this;
+    }
+
     void Start()
     {
         InitGrid();
         //MoveAll();
     }
 
+    /* 4x4 GRID
+    [(0,0) (1,0) (2,0) (3,0)
+     (0,1) (1,1) (2,1) (3,1)
+     (0,2) (1,2) (2,2) (3,2)
+     (0,3) (1,3) (2,3) (3,3)]
+    */
+
     public void InitGrid()
     {
         Debug.Log("Number of brick: " + _brickControllers.Count.ToString());
+        UpdateGrid();
+        
+    }
+
+    public void UpdateGrid()
+    {
         Grid = new BrickController[_gridWidth, _gridHeight];
         for (int brickIndex = 0; brickIndex < _brickControllers.Count; brickIndex++)
         {
@@ -39,7 +57,13 @@ public class GameBoardController : MonoBehaviour
                 }
             }
         }
-        
+    }
+
+    public void UpdateBrickCoordinate(BrickController brick)
+    {
+        // update coordinate
+        brick.Data.BrickCoordinate.X += (int)(brick.Data.Direction[0] * brick.Data.Speed);
+        brick.Data.BrickCoordinate.Y += (int)(brick.Data.Direction[1] * brick.Data.Speed);
     }
 
     public void MoveAll()
@@ -47,13 +71,27 @@ public class GameBoardController : MonoBehaviour
         StopAllCoroutines();
         for (int i = 0; i < _brickControllers.Count; i++)
         {
-            // TODO: if not block, move
-            StartCoroutine(_brickControllers[i].Move(1));
+            // TODO: if not blocked or frozen, move
+            if (_brickControllers[i].Data.movable)
+            {
+                if (!_brickControllers[i].Data.isFreeze)
+                {
+                    StartCoroutine(_brickControllers[i].Move(1));
+                    UpdateBrickCoordinate(_brickControllers[i]);
+                }
+            }
         }
+        UpdateGrid();
     }
 
-    public void BallBrickCollision(Collision2D col)
+    public bool CheckBlockingObject(BrickController brick) //return true if is blocked
     {
+        GridCoordinate nextCoordinate = brick.Data.BrickCoordinate + brick.Data.Direction;
+        if (Grid[nextCoordinate.X,nextCoordinate.Y] != null)
+        {
+            return Grid[nextCoordinate.X,nextCoordinate.Y].Data.isFreeze; //|| !Grid[nextCoordinate.X,nextCoordinate.Y].Data.movable;
+        }
+        return false;
         
     }
 
