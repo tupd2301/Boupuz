@@ -23,8 +23,13 @@ public class BrickView : MonoBehaviour
     {
         // TODO
         // Set sprite
-        _spriteRenderer.sprite = _mainGraphic;
+        //_spriteRenderer.sprite = _mainGraphic;
         // Display health
+        DisplayHealth();
+    }
+
+    public void DisplayHealth()
+    {
         _health.text = _brickData.Hp.ToString();
     }
 }

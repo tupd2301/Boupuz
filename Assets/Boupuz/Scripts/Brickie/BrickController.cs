@@ -35,12 +35,12 @@ public class BrickController : MonoBehaviour
         _listPosition = new List<Vector2>();
     }
 
-    public void Initialize(BrickData brickData, int boardWidth, int boardHeight, float size)
+    public void Initialize()
     {
-        _boardWidth = boardWidth;
-        _boardHeight = boardHeight;
-        _size = size;
-        _data = brickData;
+        //_boardWidth = boardWidth;
+        //_boardHeight = boardHeight;
+        //_size = size;
+        //_data = brickData;
         _view.Setup();
     }
 
@@ -70,6 +70,7 @@ public class BrickController : MonoBehaviour
             
             BallReflect(col);
             DecreaseHP(col);
+            _view.DisplayHealth();
             if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
             {
                 // Disable ball

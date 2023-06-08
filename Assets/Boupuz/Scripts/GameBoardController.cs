@@ -50,6 +50,7 @@ public class GameBoardController : MonoBehaviour
                 if (Grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] == null)
                 {
                     Grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] = newBrick;
+                    newBrick.Initialize();
                 } 
                 else
                 {
@@ -87,6 +88,7 @@ public class GameBoardController : MonoBehaviour
     public bool CheckBlockingObject(BrickController brick) //return true if is blocked
     {
         GridCoordinate nextCoordinate = brick.Data.BrickCoordinate + brick.Data.Direction;
+        Debug.Log(nextCoordinate);
         if (Grid[nextCoordinate.X,nextCoordinate.Y] != null)
         {
             return Grid[nextCoordinate.X,nextCoordinate.Y].Data.isFreeze; //|| !Grid[nextCoordinate.X,nextCoordinate.Y].Data.movable;
