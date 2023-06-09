@@ -48,18 +48,17 @@ public class BrickController : MonoBehaviour
     {
         for (int s = 0; s < Data.Speed; s++)
         {
-            if (!GameBoardController.Instance.CheckBlockingObject(this))
+        
+            Vector3 startPos = transform.localPosition;
+            Vector3 endPos = startPos + Data.Direction * _collider.bounds.size[1];
+            //Debug.Log("Collider bounds: " + _collider.bounds.size);
+            for (float elasped = 0; elasped < duration; elasped += Time.deltaTime) 
             {
-                Vector3 startPos = transform.localPosition;
-                Vector3 endPos = startPos + Data.Direction * _collider.bounds.size[1];
-                //Debug.Log("Collider bounds: " + _collider.bounds.size);
-                for (float elasped = 0; elasped < duration; elasped += Time.deltaTime) 
-                {
-                    transform.localPosition = Vector3.Lerp(startPos, endPos, elasped / duration);
-                    yield return null;
-                }
-                transform.localPosition = endPos;
+                transform.localPosition = Vector3.Lerp(startPos, endPos, elasped / duration);
+                yield return null;
             }
+            transform.localPosition = endPos;
+            
         }
     }
 
@@ -83,7 +82,15 @@ public class BrickController : MonoBehaviour
             // When brick health <= 0, disable it
             if ( Data.Hp <= 0)
             {
-                RemoveBrick();
+                if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
+                {
+                    DecreaseAdjacentBrickHealth();
+                }
+                else
+                {
+                    RemoveBrick();
+                }
+                
             }
         }
     }
@@ -93,10 +100,45 @@ public class BrickController : MonoBehaviour
         Data.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
     }
 
+    public void DecreasHpByValue(int value)
+    {
+        if (Data.Hp <= value)
+        {
+            RemoveBrick();
+        }
+        else
+        {
+            Data.Hp -= value;
+        }
+    }
+
     public void RemoveBrick()
     {
         gameObject.SetActive(false);
     }
+
+    public void DecreaseAdjacentBrickHealth()
+    {
+        for (int i = -1; i < 2; i++)
+        {
+            for (int j = -1; j < 2; j++)
+            {
+                if (i != 0 && j != 0)
+                {
+                    
+                    GridCoordinate adjacentCoordinate = Data.BrickCoordinate + new Vector3(i,j,0);
+                    if (GameBoardController.Instance.Grid[adjacentCoordinate.X, adjacentCoordinate.Y] != null)
+                    {   
+                        BrickController adjacentBrick = GameBoardController.Instance.Grid[adjacentCoordinate.X, adjacentCoordinate.Y];
+                        adjacentBrick.DecreasHpByValue((int)adjacentBrick.Data.Hp / 2);
+                    }
+                }
+                
+                
+            }
+        }
+    }
+
 
     public void BallReflect(Collision2D col)
     {

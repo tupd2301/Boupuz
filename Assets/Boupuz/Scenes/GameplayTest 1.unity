@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
+    - target: {fileID: 4630737737566178259, guid: 01ef6a33a1caf40f4b0bdd8ba9d6b6e3, type: 3}
+      propertyPath: _damage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8750669908912397551, guid: 01ef6a33a1caf40f4b0bdd8ba9d6b6e3, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1095,7 +1099,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1361159576040732970, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: Hp
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1361159576040732970, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: Id

@@ -12,7 +12,8 @@ public class GameBoardController : MonoBehaviour
     [SerializeField]
     private int _gridWidth, _gridHeight;
 
-    private BrickController[,] Grid;
+    private BrickController[,] _grid;
+    public BrickController[,] Grid { get {return _grid;}}
 
     void Awake()
     {
@@ -41,15 +42,15 @@ public class GameBoardController : MonoBehaviour
 
     public void UpdateGrid()
     {
-        Grid = new BrickController[_gridWidth, _gridHeight];
+        _grid = new BrickController[_gridWidth, _gridHeight];
         for (int brickIndex = 0; brickIndex < _brickControllers.Count; brickIndex++)
         {
             BrickController newBrick = _brickControllers[brickIndex];
             if (newBrick?.Data.BrickCoordinate.X < _gridWidth && newBrick?.Data.BrickCoordinate.Y < _gridHeight)
             {
-                if (Grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] == null)
+                if (_grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] == null)
                 {
-                    Grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] = newBrick;
+                    _grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] = newBrick;
                     newBrick.Initialize();
                 } 
                 else
@@ -75,7 +76,7 @@ public class GameBoardController : MonoBehaviour
             // TODO: if not blocked or frozen, move
             if (_brickControllers[i].Data.movable)
             {
-                if (!_brickControllers[i].Data.isFreeze)
+                if (!_brickControllers[i].Data.isFreeze && !CheckBlockingObject(_brickControllers[i]))
                 {
                     StartCoroutine(_brickControllers[i].Move(1));
                     UpdateBrickCoordinate(_brickControllers[i]);
@@ -88,10 +89,10 @@ public class GameBoardController : MonoBehaviour
     public bool CheckBlockingObject(BrickController brick) //return true if is blocked
     {
         GridCoordinate nextCoordinate = brick.Data.BrickCoordinate + brick.Data.Direction;
-        Debug.Log(nextCoordinate);
-        if (Grid[nextCoordinate.X,nextCoordinate.Y] != null)
+        //Debug.Log(nextCoordinate);
+        if (_grid[nextCoordinate.X,nextCoordinate.Y] != null)
         {
-            return Grid[nextCoordinate.X,nextCoordinate.Y].Data.isFreeze; //|| !Grid[nextCoordinate.X,nextCoordinate.Y].Data.movable;
+            return _grid[nextCoordinate.X,nextCoordinate.Y].Data.isFreeze; //|| !Grid[nextCoordinate.X,nextCoordinate.Y].Data.movable;
         }
         return false;
         

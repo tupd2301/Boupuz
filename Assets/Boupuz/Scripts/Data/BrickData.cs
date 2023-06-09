@@ -74,6 +74,7 @@ public class BrickData : MonoBehaviour
     public ObjectType Type;
     public GridCoordinate BrickCoordinate;
     public List<int> BrickSize;
+    public int maxHp;
     public int Hp;
     public int Atk;
     public int LvFreeze;
