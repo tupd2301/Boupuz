@@ -13,6 +13,13 @@ public struct GridCoordinate
         Y = y;
     }
 
+    public static float Distance(GridCoordinate c1, GridCoordinate c2)
+    {
+        float distance = Mathf.Abs(Mathf.Pow(c1.X - c2.X, 2) + Mathf.Pow(c1.Y - c2.Y, 2));
+                                                
+        return distance;
+    }
+
     public static bool operator == (GridCoordinate c1, GridCoordinate c2)
     {
         return (c1.X == c2.X) & (c1.Y == c2.Y);

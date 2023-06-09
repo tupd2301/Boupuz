@@ -69,7 +69,7 @@ public class BrickController : MonoBehaviour
             
             BallReflect(col);
             DecreaseHP(col);
-            _view.DisplayHealth();
+            
             if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
             {
                 // Disable ball
@@ -84,7 +84,8 @@ public class BrickController : MonoBehaviour
             {
                 if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
                 {
-                    DecreaseAdjacentBrickHealth();
+                    DecreaseAdjacentBrickHealth(this);
+                    RemoveBrick();
                 }
                 else
                 {
@@ -98,6 +99,7 @@ public class BrickController : MonoBehaviour
     public void DecreaseHP(Collision2D col)
     {
         Data.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
+        _view.DisplayHealth();
     }
 
     public void DecreasHpByValue(int value)
@@ -110,31 +112,25 @@ public class BrickController : MonoBehaviour
         {
             Data.Hp -= value;
         }
+        _view.DisplayHealth();
     }
 
     public void RemoveBrick()
     {
         gameObject.SetActive(false);
+        GameBoardController.Instance.BrickControllers.Remove(this);
     }
 
-    public void DecreaseAdjacentBrickHealth()
+    public void DecreaseAdjacentBrickHealth(BrickController brick)
     {
-        for (int i = -1; i < 2; i++)
+    
+        for (int i = 0; i < GameBoardController.Instance.BrickControllers.Count; i++)
         {
-            for (int j = -1; j < 2; j++)
+            BrickController otherBrick = GameBoardController.Instance.BrickControllers[i];
+            float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, brick.Data.BrickCoordinate);
+            if (distance > 0 && distance < Mathf.Sqrt(2))
             {
-                if (i != 0 && j != 0)
-                {
-                    
-                    GridCoordinate adjacentCoordinate = Data.BrickCoordinate + new Vector3(i,j,0);
-                    if (GameBoardController.Instance.Grid[adjacentCoordinate.X, adjacentCoordinate.Y] != null)
-                    {   
-                        BrickController adjacentBrick = GameBoardController.Instance.Grid[adjacentCoordinate.X, adjacentCoordinate.Y];
-                        adjacentBrick.DecreasHpByValue((int)adjacentBrick.Data.Hp / 2);
-                    }
-                }
-                
-                
+                otherBrick.DecreasHpByValue((int)(otherBrick.Data.maxHp / 2));
             }
         }
     }
