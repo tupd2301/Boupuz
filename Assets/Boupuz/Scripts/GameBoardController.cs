@@ -81,6 +81,14 @@ public class GameBoardController : MonoBehaviour
                     StartCoroutine(_brickControllers[i].Move(1));
                     UpdateBrickCoordinate(_brickControllers[i]);
                 }
+                else if (_brickControllers[i].Data.isFreeze)
+                {
+                    _brickControllers[i].Data.LvFreeze -= 1;
+                    if (_brickControllers[i].Data.LvFreeze == 0)
+                    {
+                        _brickControllers[i].Data.isFreeze = false;
+                    }
+                }
             }
         }
         UpdateGrid();

@@ -82,15 +82,17 @@ public class BrickController : MonoBehaviour
             // When brick health <= 0, disable it
             if ( Data.Hp <= 0)
             {
+                RemoveBrick();
                 if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
                 {
                     DecreaseAdjacentBrickHealth(this);
-                    RemoveBrick();
+                    //RemoveBrick();
                 }
-                else
+                else if (Data.Id == 2 && Data.Type == ObjectType.Brickie) // if icy
                 {
-                    RemoveBrick();
+                    FreezeAllBrick();
                 }
+                
                 
             }
         }
@@ -135,27 +137,29 @@ public class BrickController : MonoBehaviour
         }
     }
 
+    public void FreezeAllBrick()
+    {
+        for (int i = 0; i < GameBoardController.Instance.BrickControllers.Count; i++)
+        {
+            BrickController otherBrick = GameBoardController.Instance.BrickControllers[i];
+            otherBrick.Data.isFreeze = true;
+            otherBrick.Data.LvFreeze = 2;
+        }
+    }
+
 
     public void BallReflect(Collision2D col)
     {
         Vector3 direction = col.gameObject.GetComponent<BallModel>().Direction;
-            if (_listDirection.Where(a => a == direction).Count() > 0)
+        if (_listDirection.Where(a => a == direction).Count() > 0)
+        {
+            int index = _listDirection.IndexOf(direction);
+            float distance = Vector3.Distance(col.transform.position, _listPosition[index]);
+            if (distance < 0.3f)
             {
-                int index = _listDirection.IndexOf(direction);
-                float distance = Vector3.Distance(col.transform.position, _listPosition[index]);
-                if (distance < 0.3f)
-                {
-                    //Debug.Log("yub");
-                    col.transform.position = _listPosition[index];
-                    BallController.Instance.CheckContact(_listContact[index], col.gameObject);
-                }
-                else
-                {
-                    _listDirection.Add(direction);
-                    _listPosition.Add(col.transform.position);
-                    _listContact.Add(col.contacts[0]);
-                    BallController.Instance.CheckContact(col.contacts[0], col.gameObject);
-                }
+                //Debug.Log("yub");
+                col.transform.position = _listPosition[index];
+                BallController.Instance.CheckContact(_listContact[index], col.gameObject);
             }
             else
             {
@@ -164,5 +168,13 @@ public class BrickController : MonoBehaviour
                 _listContact.Add(col.contacts[0]);
                 BallController.Instance.CheckContact(col.contacts[0], col.gameObject);
             }
+        }
+        else
+        {
+            _listDirection.Add(direction);
+            _listPosition.Add(col.transform.position);
+            _listContact.Add(col.contacts[0]);
+            BallController.Instance.CheckContact(col.contacts[0], col.gameObject);
+        }
     }
 }
