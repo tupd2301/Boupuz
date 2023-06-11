@@ -17,18 +17,33 @@ public class Laser : MonoBehaviour
         _laserGraphic.SetActive(isActive);
     }
 
+    //public void ChnageDirection(Vector2 direction)
+    //{
+    //    float angle = Mathf.Atan2(direction.y, direction.x)*Mathf.Rad2Deg;
+    //    transform.localRotation = Quaternion.Euler(0,0,angle);
+    //    RaycastHit2D hit = Physics2D.Raycast(this.transform.position,direction, 50f,_layerMask);
+    //    if(hit.collider == null)
+    //    {
+    //        _laserGraphic.transform.localScale = new Vector3(50, _laserGraphic.transform.localScale.y, 1);
+    //    }
+    //    else
+    //    {
+    //        _laserGraphic.transform.localScale = new Vector3(hit.distance, _laserGraphic.transform.localScale.y, 1);
+    //    }
+    //}
+
     public void ChnageDirection(Vector2 direction)
     {
-        float angle = Mathf.Atan2(direction.y, direction.x)*Mathf.Rad2Deg;
-        transform.localRotation = Quaternion.Euler(0,0,angle);
-        RaycastHit2D hit = Physics2D.Raycast(this.transform.position,direction, 50f,_layerMask);
-        if(hit.collider == null)
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.localRotation = Quaternion.Euler(0, 0, angle);
+        RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction, 20f, _layerMask);
+        if (hit.collider == null)
         {
-            _laserGraphic.transform.localScale = new Vector3(50, _laserGraphic.transform.localScale.y, 1);
+            _laserGraphic.GetComponent<SpriteRenderer>().size = new Vector2(50,0.25f);
         }
         else
         {
-            _laserGraphic.transform.localScale = new Vector3(hit.distance, _laserGraphic.transform.localScale.y, 1);
+            _laserGraphic.GetComponent<SpriteRenderer>().size = new Vector2(hit.distance*2, 0.25f);
         }
     }
 }

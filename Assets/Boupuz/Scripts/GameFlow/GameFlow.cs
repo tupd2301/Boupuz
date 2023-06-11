@@ -15,6 +15,8 @@ public class GameFlow : MonoBehaviour
 
     public float timeCount = 0;
 
+    public FixedJoystick Joystick { get => _joystick; set => _joystick = value; }
+
     void Start()
     {
         GameFlow.Instance = this;
@@ -37,11 +39,11 @@ public class GameFlow : MonoBehaviour
             Debug.LogError("GameFlow can not see BallController");
         }
 
-        if (_joystick != null)
+        if (Joystick != null)
         {
             if (_laser != null)
             {
-                _laser.SetPosition(_joystick.transform.position);
+                _laser.SetPosition(Joystick.transform.position);
                 _laser.SetActive(false);
             }
         }
@@ -54,8 +56,8 @@ public class GameFlow : MonoBehaviour
 
     public void ChangePositionJoystick(float x)
     {
-        _joystick.transform.position = new Vector3(x, _joystick.transform.position.y, _joystick.transform.position.z);
-        _laser.SetPosition(new Vector3(x, _joystick.transform.position.y, _joystick.transform.position.z));
+        Joystick.transform.position = new Vector3(x, Joystick.transform.position.y, Joystick.transform.position.z);
+        _laser.SetPosition(new Vector3(x, Joystick.transform.position.y, Joystick.transform.position.z));
     }
 
     public void Shoot(Vector2 direction)

@@ -25,7 +25,7 @@ public class BlockTest : MonoBehaviour
             {
                 int index = _listDirection.IndexOf(direction);
                 float distance = Vector3.Distance(coll.transform.position, _listPosition[index]);
-                if (distance < 0.3f)
+                if (distance < 0.1f)
                 {
                     Debug.Log("yub");
                     coll.transform.position = _listPosition[index];
