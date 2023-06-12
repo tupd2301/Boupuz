@@ -32,6 +32,7 @@ public class GameFlow : MonoBehaviour
 
         if (_ballController != null)
         {
+            _ballController.SetUp();
             _ballController.GetBall(10);
         }
         else
