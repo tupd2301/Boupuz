@@ -124,7 +124,7 @@ public class BallController : MonoBehaviour
                 }
             }
         }
-        if (CountBallRunnning <= 0 && !isEndRound) // Scale up speed by time
+        if (CountBallRunnning - _listRemove.Count <= 0 && !isEndRound) // Scale up speed by time
         {
             RemoveBalls();
             _timeRunning = 0;
@@ -138,7 +138,6 @@ public class BallController : MonoBehaviour
 
     public void AddListRemoveBall(GameObject ball)
     {
-        _countBallRunnning -= 1;
         _listRemove.Add(ball);
     }
 
