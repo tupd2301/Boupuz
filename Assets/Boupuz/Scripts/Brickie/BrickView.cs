@@ -10,6 +10,8 @@ public class BrickView : MonoBehaviour
     [SerializeField]
     private Sprite _mainGraphic;
     [SerializeField]
+    private SpriteRenderer _childGraphic;
+    [SerializeField]
     private TextMeshPro _health;
     [SerializeField]
     private Animator _animator;
@@ -31,5 +33,16 @@ public class BrickView : MonoBehaviour
     public void DisplayHealth()
     {
         _health.text = _brickData.Hp.ToString();
+    }
+
+    public void EnableChildGraphic()
+    {
+        Debug.Log("Enable child graphic");
+        _childGraphic.enabled = true;
+    }
+
+    public void DisableChildGraphic()
+    {
+        _childGraphic.enabled = false;
     }
 }

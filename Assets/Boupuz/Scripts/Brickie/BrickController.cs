@@ -127,12 +127,12 @@ public class BrickController : MonoBehaviour
 
     public void DecreaseAdjacentBrickHealth(BrickController brick)
     {
-    
+        Debug.Log("hello");
         for (int i = 0; i < GameBoardController.Instance.BrickControllers.Count; i++)
         {
             BrickController otherBrick = GameBoardController.Instance.BrickControllers[i];
             float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, brick.Data.BrickCoordinate);
-            if (distance > 0 && distance < Mathf.Sqrt(2))
+            if (distance > 0 && distance < Mathf.Sqrt(5))
             {
                 otherBrick.DecreasHpByValue((int)(otherBrick.Data.maxHp / 2));
             }
@@ -146,6 +146,7 @@ public class BrickController : MonoBehaviour
             BrickController otherBrick = GameBoardController.Instance.BrickControllers[i];
             otherBrick.Data.isFreeze = true;
             otherBrick.Data.LvFreeze = 2;
+            otherBrick.View.EnableChildGraphic();
         }
     }
 

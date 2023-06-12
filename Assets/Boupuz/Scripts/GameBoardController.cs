@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class GameBoardController : MonoBehaviour
 {
@@ -55,6 +57,7 @@ public class GameBoardController : MonoBehaviour
                 } 
                 else
                 {
+                    Debug.Log(newBrick.gameObject.name);
                     Debug.Log("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK");
                 }
             }
@@ -93,6 +96,10 @@ public class GameBoardController : MonoBehaviour
                     if(!CheckLose(_brickControllers[i])){
                         UpdateBrickCoordinate(_brickControllers[i]);
                     }
+                    else
+                    {
+                        SceneManager.LoadScene("GameplayTest");
+                    }
                 }
                 else if (_brickControllers[i].Data.isFreeze)
                 {
@@ -100,6 +107,7 @@ public class GameBoardController : MonoBehaviour
                     if (_brickControllers[i].Data.LvFreeze == 0)
                     {
                         _brickControllers[i].Data.isFreeze = false;
+                        _brickControllers[i].View.DisableChildGraphic();
                     }
                 }
             }
@@ -111,9 +119,18 @@ public class GameBoardController : MonoBehaviour
     {
         GridCoordinate nextCoordinate = brick.Data.BrickCoordinate + brick.Data.Direction;
         //Debug.Log(nextCoordinate);
-        if (_grid[nextCoordinate.X,nextCoordinate.Y] != null)
+        try{
+            if (_grid[nextCoordinate.X,nextCoordinate.Y] != null)
+            {
+                return _grid[nextCoordinate.X,nextCoordinate.Y].Data.isFreeze; //|| !Grid[nextCoordinate.X,nextCoordinate.Y].Data.movable;
+            }
+            return false;
+        }
+        catch
         {
-            return _grid[nextCoordinate.X,nextCoordinate.Y].Data.isFreeze; //|| !Grid[nextCoordinate.X,nextCoordinate.Y].Data.movable;
+            Debug.Log(brick.gameObject.name);
+            Debug.Log(brick.Data.BrickCoordinate.Y);
+            Debug.Log(nextCoordinate.Y);
         }
         return false;
         
