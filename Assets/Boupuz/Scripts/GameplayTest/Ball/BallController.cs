@@ -9,13 +9,13 @@ public class BallController : MonoBehaviour
     [SerializeField] private List<GameObject> _balls = new List<GameObject>();
     [SerializeField] private List<BallModel> _listBallModel = new List<BallModel>();
     [SerializeField] private int _totalBall;
-    public int totalBall { get {return _totalBall;} }
 
     public float SpeedToRun { get => _speedToRun; set => _speedToRun = value; }
     public Vector3 GunPosition { get => _gunPosition; set => _gunPosition = value; }
     public Vector2 Direction { get => _direction; set => _direction = value; }
     public int CountBallRunnning { get => _countBallRunnning; set => _countBallRunnning = value; }
     public GameObject Gun { get => _gun; set => _gun = value; }
+    public int TotalBall { get => _totalBall; set => _totalBall = value; }
 
     [SerializeField] private float _speedToShoot;
     [SerializeField] private float _speedToRun;
@@ -40,10 +40,10 @@ public class BallController : MonoBehaviour
     {
         isShooted = false;
         GunPosition = Gun.transform.position;
-        _totalBall = amount;
+        TotalBall = amount;
         _xFirstBall = 0;
         _balls.AddRange(PoolManager.Instance.GetObjects("Ball", amount, transform));
-        for (int i = 0; i < _totalBall; i++)
+        for (int i = 0; i < TotalBall; i++)
         {
             _listBallModel.Add(_balls[i].GetComponentInChildren<BallModel>());
             _listBallModel[i].Direction = Vector3.up;
@@ -58,12 +58,12 @@ public class BallController : MonoBehaviour
         _timeRunning = 0;
         isEndRound = false;
         isShooted = true;
-        CountBallRunnning = _totalBall;
+        CountBallRunnning = TotalBall;
         GameFlow.Instance.canShoot = false;
         GameFlow.Instance.timeScale = 1;
         if (_speedToShoot > 0)
         {
-            for (int i = 0; i < _totalBall; i++)
+            for (int i = 0; i < TotalBall; i++)
             {
                 _listBallModel[i].Direction = direction;
                 //_balls[i].GetComponentInChildren<BallModel>().Direction = Vector3.up;
@@ -84,7 +84,7 @@ public class BallController : MonoBehaviour
 
     public void SetUpFirstBallReturned(float x)
     {
-        if (CountBallRunnning == _totalBall)
+        if (CountBallRunnning == TotalBall)
         {
             GameFlow.Instance.ChangePositionJoystick(x);
             _xFirstBall = x;
@@ -129,7 +129,14 @@ public class BallController : MonoBehaviour
             StopAllCoroutines();
             GameFlow.Instance.canShoot = true;
             GameFlow.Instance.timeScale = 1;
-            //GameBoardController.Instance.MoveAll();
+            GameBoardController.Instance.MoveAll();
         }
+    }
+
+    public void RemoveBall(GameObject ball)
+    {
+        _totalBall -= 1;
+        _balls.Remove(ball);
+        _listBallModel.Remove(ball.GetComponentInChildren<BallModel>());
     }
 }

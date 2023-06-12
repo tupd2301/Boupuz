@@ -75,6 +75,9 @@ public class BrickController : MonoBehaviour
                 // Disable ball
                 Debug.Log("Starvy ate 1 ball");
                 col.gameObject.SetActive(false);
+                //BallController.Instance.TotalBall -= 1;
+                BallController.Instance.CountBallRunnning -= 1;
+                BallController.Instance.RemoveBall(col.gameObject);
                 // Total number ball -= 1
                 
             }

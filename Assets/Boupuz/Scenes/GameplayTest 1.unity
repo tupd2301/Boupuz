@@ -1147,7 +1147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1361159576040732970, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: isFreeze
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1361159576040732970, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: Direction.y
@@ -1398,7 +1398,7 @@ GameObject:
   - component: {fileID: 1381680883}
   - component: {fileID: 1381680887}
   - component: {fileID: 1381680886}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PortalA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1727,7 +1727,7 @@ GameObject:
   - component: {fileID: 1810603626}
   - component: {fileID: 1810603630}
   - component: {fileID: 1810603629}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PortalB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2525,11 +2525,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6905532254217298670, guid: f26e44942971d45f59a6b0b02d0f4233, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.36
+      value: 2.28
       objectReference: {fileID: 0}
     - target: {fileID: 6905532254217298670, guid: f26e44942971d45f59a6b0b02d0f4233, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.82
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 6905532254217298670, guid: f26e44942971d45f59a6b0b02d0f4233, type: 3}
       propertyPath: m_LocalPosition.z

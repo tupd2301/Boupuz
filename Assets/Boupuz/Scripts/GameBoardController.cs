@@ -68,6 +68,17 @@ public class GameBoardController : MonoBehaviour
         brick.Data.BrickCoordinate.Y += (int)(brick.Data.Direction[1] * brick.Data.Speed);
     }
 
+    public bool CheckLose(BrickController brick)
+    {
+        if(brick.Data.BrickCoordinate.Y<brick.Data.Speed)
+        {
+            Debug.Log("Lose");
+            GameFlow.Instance.canShoot = false;
+            return true;
+        }
+        return false;
+    }
+
     public void MoveAll()
     {
         StopAllCoroutines();
@@ -79,7 +90,9 @@ public class GameBoardController : MonoBehaviour
                 if (!_brickControllers[i].Data.isFreeze && !CheckBlockingObject(_brickControllers[i]))
                 {
                     StartCoroutine(_brickControllers[i].Move(1));
-                    UpdateBrickCoordinate(_brickControllers[i]);
+                    if(!CheckLose(_brickControllers[i])){
+                        UpdateBrickCoordinate(_brickControllers[i]);
+                    }
                 }
                 else if (_brickControllers[i].Data.isFreeze)
                 {
