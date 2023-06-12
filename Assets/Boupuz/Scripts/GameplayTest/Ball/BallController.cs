@@ -20,14 +20,15 @@ public class BallController : MonoBehaviour
 
     [SerializeField] private float _speedToShoot;
     [SerializeField] private float _speedToRun;
+    [SerializeField] private GameObject _gun;
     [SerializeField] private Vector3 _gunPosition;
     [SerializeField] private Vector2 _direction;
     [SerializeField] private int _countBallRunnning;
-    [SerializeField] private GameObject _gun;
 
+    private int _addBall;
     public bool isShooted;
     public bool isEndRound;
-    private float _xFirstBall;
+    private float _xFirstBall = 0;
 
     [SerializeField] private float _timeCheckLoop = 5;
     private List<Vector3> _listDirectionRegister;
@@ -37,25 +38,41 @@ public class BallController : MonoBehaviour
     {
         BallController.Instance = this;
     }
-    public void GetBall(int amount)
+
+    public void SetUp()
     {
         isShooted = false;
         GunPosition = Gun.transform.position;
+    }
+    public void GetBall(int amount)
+    {
         TotalBall = amount;
-        _xFirstBall = 0;
         _balls.AddRange(PoolManager.Instance.GetObjects("Ball", amount, transform));
-        for (int i = 0; i < TotalBall; i++)
+        for (int i = 0; i < amount; i++)
         {
-            _listBallModel.Add(_balls[i].GetComponentInChildren<BallModel>());
+            _listBallModel.Add(_balls[i].GetComponent<BallModel>());
             _listBallModel[i].Direction = Vector3.up;
-            _balls[i].transform.position = new Vector3(GunPosition.x, GunPosition.y, 0);
+            _balls[i].transform.position = new Vector3(_xFirstBall, GunPosition.y, 0);
+            _listBallModel[i].IsRunning = false;
+        }
+    }
+    public void AddNewBall(int amount)
+    {
+        _balls.AddRange(PoolManager.Instance.GetObjects("Ball", amount, transform));
+        TotalBall = _balls.Count;
+        _listBallModel = new List<BallModel>();
+        for (int i = 0; i < _balls.Count; i++)
+        {
+            _listBallModel.Add(_balls[i].GetComponent<BallModel>());
+            _listBallModel[i].Direction = Vector3.up;
+            _balls[i].transform.position = new Vector3(_xFirstBall, GunPosition.y, 0);
             _listBallModel[i].IsRunning = false;
         }
     }
 
-
     public IEnumerator BallShooting(Vector2 direction)
     {
+        _addBall = 0;
         _listRemove = new List<GameObject>();
         _timeRunning = 0;
         isEndRound = false;
@@ -63,6 +80,7 @@ public class BallController : MonoBehaviour
         CountBallRunnning = TotalBall;
         GameFlow.Instance.canShoot = false;
         GameFlow.Instance.timeScale = 1;
+        float x = _xFirstBall;
         if (_speedToShoot > 0)
         {
             for (int i = 0; i < TotalBall; i++)
@@ -70,7 +88,7 @@ public class BallController : MonoBehaviour
                 _listBallModel[i].Direction = direction;
                 //_balls[i].GetComponentInChildren<BallModel>().Direction = Vector3.up;
 
-                _balls[i].transform.position = new Vector3(_xFirstBall, GunPosition.y, 0);
+                _balls[i].transform.position = new Vector3(x, GunPosition.y, 0);
                 _listBallModel[i].IsRunning = true;
                 yield return new WaitForSeconds(_speedToShoot * GameFlow.Instance.timeScale);
             }
@@ -79,7 +97,7 @@ public class BallController : MonoBehaviour
 
     public void CheckContact(ContactPoint2D contact, GameObject ball)
     {
-        //Debug.Log("pos:" + ball.transform.position);
+        Debug.Log("pos:");
         Vector3 direction = Vector3.Reflect(ball.GetComponentInChildren<BallModel>().Direction, contact.normal);
         ball.GetComponentInChildren<BallModel>().Direction = direction;
     }
@@ -114,11 +132,11 @@ public class BallController : MonoBehaviour
                     Vector3 direction = _listBallModel[i].Direction;
                     //_balls[i].transform.Translate(direction.normalized * _speedToRun * 0.01f * GameFlow.Instance.timeScale);
                     _balls[i].transform.position = Vector3.MoveTowards(_balls[i].transform.position, (direction.normalized + _balls[i].transform.position), 0.01f * SpeedToRun);
-                    if (_balls[i].transform.position.y <= GunPosition.y && _balls[i].transform.position.x != _xFirstBall)
+                    if (_balls[i].transform.position.y < GunPosition.y && _balls[i].transform.position.x != _xFirstBall)
                     {
                         SetUpFirstBallReturned(_balls[i].transform.position.x);
                         CountBallRunnning--;
-                        _balls[i].transform.position = new Vector3(_xFirstBall, GunPosition.y, GunPosition.z) * GameFlow.Instance.timeScale;
+                        _balls[i].transform.position = new Vector3(_xFirstBall, GunPosition.y, 0) * GameFlow.Instance.timeScale;
                         _listBallModel[i].IsRunning = false;
                     }
                 }
@@ -126,13 +144,15 @@ public class BallController : MonoBehaviour
         }
         if (CountBallRunnning - _listRemove.Count <= 0 && !isEndRound) // Scale up speed by time
         {
-            RemoveBalls();
             _timeRunning = 0;
             isEndRound = true;
             StopAllCoroutines();
-            GameFlow.Instance.canShoot = true;
             GameFlow.Instance.timeScale = 1;
             GameBoardController.Instance.MoveAll();
+            RemoveBalls();
+            AddBall(1);
+            CalculateBalls();
+            GameFlow.Instance.canShoot = true;
         }
     }
 
@@ -150,5 +170,15 @@ public class BallController : MonoBehaviour
             _balls.Remove(_listRemove[i]);
             _listBallModel.Remove(_listRemove[i].GetComponentInChildren<BallModel>());
         }
+    }
+
+    public void CalculateBalls()
+    {
+        AddNewBall(_addBall);
+    }
+
+    public void AddBall(int i)
+    {
+        _addBall += i;
     }
 }
