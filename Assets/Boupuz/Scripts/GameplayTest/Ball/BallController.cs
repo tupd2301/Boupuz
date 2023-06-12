@@ -7,6 +7,7 @@ public class BallController : MonoBehaviour
 {
     public static BallController Instance;
     [SerializeField] private List<GameObject> _balls = new List<GameObject>();
+    [SerializeField] private List<GameObject> _listRemove = new List<GameObject>();
     [SerializeField] private List<BallModel> _listBallModel = new List<BallModel>();
     [SerializeField] private int _totalBall;
 
@@ -55,6 +56,7 @@ public class BallController : MonoBehaviour
 
     public IEnumerator BallShooting(Vector2 direction)
     {
+        _listRemove = new List<GameObject>();
         _timeRunning = 0;
         isEndRound = false;
         isShooted = true;
@@ -99,7 +101,7 @@ public class BallController : MonoBehaviour
     public void BallRunning()
     {
         _timeRunning += 1 / 60 * GameFlow.Instance.timeScale;
-        if(_timeRunning == _timeCheckLoop)
+        if (_timeRunning == _timeCheckLoop)
         {
             CheckLoop();
         }
@@ -124,6 +126,7 @@ public class BallController : MonoBehaviour
         }
         if (CountBallRunnning <= 0 && !isEndRound) // Scale up speed by time
         {
+            RemoveBalls();
             _timeRunning = 0;
             isEndRound = true;
             StopAllCoroutines();
@@ -133,10 +136,19 @@ public class BallController : MonoBehaviour
         }
     }
 
-    public void RemoveBall(GameObject ball)
+    public void AddListRemoveBall(GameObject ball)
     {
-        _totalBall -= 1;
-        _balls.Remove(ball);
-        _listBallModel.Remove(ball.GetComponentInChildren<BallModel>());
+        _countBallRunnning -= 1;
+        _listRemove.Add(ball);
+    }
+
+    public void RemoveBalls()
+    {
+        for (int i = 0; i < _listRemove.Count; i++)
+        {
+            _totalBall -= 1;
+            _balls.Remove(_listRemove[i]);
+            _listBallModel.Remove(_listRemove[i].GetComponentInChildren<BallModel>());
+        }
     }
 }
