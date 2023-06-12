@@ -158,7 +158,7 @@ public class BrickController : MonoBehaviour
         {
             int index = _listDirection.IndexOf(direction);
             float distance = Vector3.Distance(col.transform.position, _listPosition[index]);
-            if (distance < 0.3f)
+            if (distance < 0.05f)
             {
                 //Debug.Log("yub");
                 col.transform.position = _listPosition[index];

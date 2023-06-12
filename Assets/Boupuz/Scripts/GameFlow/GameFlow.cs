@@ -20,6 +20,7 @@ public class GameFlow : MonoBehaviour
     void Start()
     {
         GameFlow.Instance = this;
+        Application.targetFrameRate = 60;
         timeScale = 1;
         if (_poolManager != null)
         {
@@ -47,6 +48,7 @@ public class GameFlow : MonoBehaviour
                 _laser.SetPosition(Joystick.transform.position);
                 _laser.SetActive(false);
             }
+            Joystick.transform.position = new Vector3(BallController.Instance.GunPosition.x, BallController.Instance.GunPosition.y, Joystick.transform.position.z);
         }
         else
         {
@@ -57,7 +59,7 @@ public class GameFlow : MonoBehaviour
 
     public void ChangePositionJoystick(float x)
     {
-        Joystick.transform.position = new Vector3(x, Joystick.transform.position.y, Joystick.transform.position.z);
+        Joystick.transform.position = new Vector3(x, BallController.Instance.GunPosition.y, Joystick.transform.position.z);
         _laser.SetPosition(new Vector3(x, Joystick.transform.position.y, Joystick.transform.position.z));
     }
 
