@@ -1641,7 +1641,7 @@ GameObject:
   - component: {fileID: 1810603626}
   - component: {fileID: 1810603630}
   - component: {fileID: 1810603629}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PortalB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2423,14 +2423,6 @@ PrefabInstance:
     - target: {fileID: 6703806975200159394, guid: 07a7fd1d168ef3045b77b413b7a83683, type: 3}
       propertyPath: m_RootOrder
       value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 6703806975200159394, guid: 07a7fd1d168ef3045b77b413b7a83683, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6703806975200159394, guid: 07a7fd1d168ef3045b77b413b7a83683, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6703806975200159394, guid: 07a7fd1d168ef3045b77b413b7a83683, type: 3}
       propertyPath: m_LocalPosition.x
