@@ -138,6 +138,7 @@ public class BallController : MonoBehaviour
 
     public void AddListRemoveBall(GameObject ball)
     {
+        ball.GetComponentInChildren<BallModel>().IsRunning = false;
         _listRemove.Add(ball);
     }
 
