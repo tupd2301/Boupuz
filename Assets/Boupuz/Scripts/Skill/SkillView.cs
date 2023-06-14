@@ -17,11 +17,16 @@ public class SkillView : MonoBehaviour
 
     [SerializeField] private int _skillChosing;
 
+    [SerializeField] private List<int> _idSlots = new List<int>();
+    [SerializeField] private List<int> _levelSlots = new List<int>();
+
     public void Submit()
     {
         if (_skillChosing != 0)
         {
-            Debug.Log("Choose Skill:" + _skillChosing);
+            SkillController.Instance.UpdateSkill(_idSlots[_skillChosing - 1],_levelSlots[_skillChosing-1]);
+            _idSlots = new List<int>();
+            _levelSlots = new List<int>();
         }
     }
 
@@ -41,7 +46,7 @@ public class SkillView : MonoBehaviour
         }
     }
 
-    public void SetUp(int slot, Sprite sprite, string name, int level, string effect)
+    public void SetUp(int slot, int id, Sprite sprite, string name, int level, string effect)
     {
         string textLevel = "Lv." + level;
         if (level == 5)
@@ -52,5 +57,7 @@ public class SkillView : MonoBehaviour
         _skillNames[slot].text = name;
         _skillLevels[slot].text = "Lv." + level;
         _skillEffects[slot].text = effect;
+        _idSlots.Add(id);
+        _levelSlots.Add(level);
     }
 }

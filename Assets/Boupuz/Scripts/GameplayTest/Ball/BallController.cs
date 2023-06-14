@@ -17,6 +17,9 @@ public class BallController : MonoBehaviour
     public int CountBallRunnning { get => _countBallRunnning; set => _countBallRunnning = value; }
     public GameObject Gun { get => _gun; set => _gun = value; }
     public int TotalBall { get => _totalBall; set => _totalBall = value; }
+    public int AddDamageBySkill { get => _addDamageBySkill; set => _addDamageBySkill = value; }
+    public int AddBallBySkill { get => _addBallBySkill; set => _addBallBySkill = value; }
+    public float AddFreezeBySkill { get => _addFreezeBySkill; set => _addFreezeBySkill = value; }
 
     [SerializeField] private float _speedToShoot;
     [SerializeField] private float _speedToRun;
@@ -34,6 +37,10 @@ public class BallController : MonoBehaviour
     private List<Vector3> _listDirectionRegister;
     private float _timeRunning = 0;
 
+    [SerializeField] private int _addDamageBySkill;
+    [SerializeField] private int _addBallBySkill;
+    [SerializeField] private float _addFreezeBySkill;
+
     private void Awake()
     {
         BallController.Instance = this;
@@ -41,11 +48,15 @@ public class BallController : MonoBehaviour
 
     public void SetUp()
     {
+        AddDamageBySkill = 0;
+        AddFreezeBySkill = 0;
+        AddBallBySkill = 0;
         isShooted = false;
         GunPosition = Gun.transform.position;
     }
     public void GetBall(int amount)
     {
+        
         TotalBall = amount;
         _balls.AddRange(PoolManager.Instance.GetObjects("Ball", amount, transform));
         for (int i = 0; i < amount; i++)
@@ -92,6 +103,7 @@ public class BallController : MonoBehaviour
                 _balls[i].transform.position = new Vector3(x, GunPosition.y, 0);
                 _listBallModel[i].IsRunning = true;
                 _listBallModel[i].ImpactTime = 0;
+                _listBallModel[i].Damage = _addDamageBySkill+1;
                 _countBallRunnning += 1;
                 UIManager.Instance.UpdateTotalBall(_totalBall-_countBallRunnning);
                 yield return new WaitForSeconds(_speedToShoot * GameFlow.Instance.timeScale);
