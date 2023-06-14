@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [Header("Top Bar UI")]
     [SerializeField] private Text _destroyedBricksText;
     [SerializeField] private Text _numCandyText;
+    [SerializeField] private Text _numCoinText;
 
     public List<Character> ListCharacter { get => _listCharacter; set => _listCharacter = value; }
 
@@ -56,6 +57,7 @@ public class UIManager : MonoBehaviour
     {
         LoadUI("Home");
         UpdateDestroyedBricksUI();
+        UpdateCoinUI();
     }
 
     public void UpdateDestroyedBricksUI()
@@ -75,5 +77,10 @@ public class UIManager : MonoBehaviour
     public void UpdateCandyUI()
     {
         _numCandyText.text = GameBoardController.Instance.LevelData.numCandies.ToString();
+    }
+
+    public void UpdateCoinUI()
+    {
+        _numCoinText.text = GameBoardController.Instance.LevelData.numCoins.ToString();
     }
 }

@@ -35,6 +35,9 @@ public class GameBoardController : MonoBehaviour
             Instance = this;
         }
         LevelData = GetComponentInChildren<LevelData>();
+
+        //temporary
+        //PlayerPrefs.SetInt("coins", 9999);
     }
 
     void Start()

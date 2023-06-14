@@ -3162,6 +3162,7 @@ MonoBehaviour:
   _totalBall: {fileID: 1263229968817293650}
   _destroyedBricksText: {fileID: 4872871091484494504}
   _numCandyText: {fileID: 7260275635199029937}
+  _numCoinText: {fileID: 961674601694746743}
 --- !u!1 &1609751529445655633
 GameObject:
   m_ObjectHideFlags: 0
@@ -5806,7 +5807,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2157669045473989993}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5817,7 +5818,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: -70, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4605553806713344576
 CanvasRenderer:
@@ -5847,7 +5848,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3458c119c69e9bc4f9647599c2901dee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08ca676f629ac463ea8a497c3ffef407, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6595,10 +6596,10 @@ RectTransform:
   m_Father: {fileID: 1680971111242211477}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 60, y: 0}
-  m_SizeDelta: {x: -220, y: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -140, y: 0}
+  m_SizeDelta: {x: 180, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3759054060833414410
 CanvasRenderer:
