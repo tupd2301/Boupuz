@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -156,5 +157,10 @@ public class GameBoardController : MonoBehaviour
         LevelData.UpdateDestroyedBricks();
         UIManager.Instance.UpdateDestroyedBricksUI();
     }
-    
+
+    public void UpdateCandy(int value)
+    {
+        LevelData.AddCandies(value);
+        UIManager.Instance.UpdateCandyUI();
+    }
 }

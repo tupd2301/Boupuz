@@ -90,6 +90,7 @@ public class BrickData : MonoBehaviour
     public bool isFreeze;
     public bool isBurn;
     public bool movable;
+    public bool hasCandy;
     //public int numBallEat;
 
     public BrickData()
