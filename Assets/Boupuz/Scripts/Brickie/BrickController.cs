@@ -102,7 +102,17 @@ public class BrickController : MonoBehaviour
 
     public void DecreaseHP(Collision2D col)
     {
+        // if (Data.Id == 3 && Data.Type == ObjectType.Brickie)
+        // {
+        //     DecreasHpByValue(col.gameObject.GetComponent<BallModel>().Damage - 1);
+        // }
+        // else
+        // {
+        //     DecreasHpByValue(1);
+        // }
+
         Data.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
+        
         _view.DisplayHealth();
     }
 
