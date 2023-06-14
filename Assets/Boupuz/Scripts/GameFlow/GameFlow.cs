@@ -55,6 +55,7 @@ public class GameFlow : MonoBehaviour
             Debug.LogError("GameFlow can not see Joystick");
         }
         DontDestroyOnLoad(this);
+        SkillController.Instance.ShowUISkill();
     }
 
     public void ChangePositionJoystick(float x)
