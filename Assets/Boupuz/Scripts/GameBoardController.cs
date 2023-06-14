@@ -13,6 +13,11 @@ public class GameBoardController : MonoBehaviour
     [SerializeField]
     private int _gridWidth, _gridHeight;
 
+    [SerializeField]
+    private int _gridScreenWidth, _gridScreenHeight;
+    public int GridScreenWidth { get { return _gridScreenWidth;}}
+    public int GridScreenHeight { get { return _gridScreenHeight;}}
+
     private BrickController[,] _grid;
     public BrickController[,] Grid { get {return _grid;}}
 

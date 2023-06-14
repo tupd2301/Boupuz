@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class BrickController : MonoBehaviour
 {
@@ -98,6 +99,45 @@ public class BrickController : MonoBehaviour
                 
             }
         }
+        else if (col.gameObject.CompareTag("Block"))
+        {
+            BrickController brick = col.gameObject.GetComponent<BrickController>();
+            if (brick.Data.Id == 1 && brick.Data.Type == ObjectType.Special) // if trampoline
+            {
+                RandomChangeBrickPosition(this, 1);
+            }
+        }
+    }
+
+    private GridCoordinate? RandomChangeBrickPosition(BrickController brick, int radius)
+    {
+        HashSet<GridCoordinate> listCoordinate = new HashSet<GridCoordinate>();
+        GridCoordinate newCoordinate = GetRandomAdjacentGridCoordinate(brick.Data.BrickCoordinate, 1);
+        while (GameBoardController.Instance.Grid[newCoordinate.X, newCoordinate.Y] != null)
+        {
+            listCoordinate.Add(newCoordinate);
+            if (listCoordinate.Count > 9)
+            {
+                return null;
+            }
+
+            newCoordinate = GetRandomAdjacentGridCoordinate(brick.Data.BrickCoordinate, 1);
+        }
+        return newCoordinate;
+    }
+
+    private GridCoordinate GetRandomAdjacentGridCoordinate(GridCoordinate coordinate, int radius)
+    {
+        int Xmin = (coordinate.X - radius) < 0 ? 0 : coordinate.X - radius;
+        int Xmax = (coordinate.X + radius) > GameBoardController.Instance.GridScreenWidth ? GameBoardController.Instance.GridScreenWidth : coordinate.X + radius;
+        int X = UnityEngine.Random.Range(Xmin, Xmax);
+
+        int Ymin = (coordinate.Y - radius) < 0 ? 0 : coordinate.Y - radius;
+        int Ymax = (coordinate.Y + radius) > GameBoardController.Instance.GridScreenHeight ? GameBoardController.Instance.GridScreenHeight : coordinate.Y + radius;
+
+        int Y = UnityEngine.Random.Range(Ymin, Ymax);
+
+        return new GridCoordinate(X, Y);
     }
 
     public void DecreaseHP(Collision2D col)
