@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<ButtonNavigator> _listNavigator;
     [SerializeField] private List<Character> _listCharacter;
     [SerializeField] private CharacterUI _characterUI;
+    [SerializeField] private Text _totalBall;
 
     public List<Character> ListCharacter { get => _listCharacter; set => _listCharacter = value; }
 
@@ -39,6 +41,11 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void UpdateTotalBall(int totalBall)
+    {
+        _totalBall.text = "x " + totalBall;
     }
 
     private void Start()

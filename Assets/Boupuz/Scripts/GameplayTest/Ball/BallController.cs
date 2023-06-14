@@ -55,6 +55,7 @@ public class BallController : MonoBehaviour
             _balls[i].transform.position = new Vector3(_xFirstBall, GunPosition.y, 0);
             _listBallModel[i].IsRunning = false;
         }
+        UIManager.Instance.UpdateTotalBall(_totalBall);
     }
     public void AddNewBall(int amount)
     {
@@ -77,7 +78,7 @@ public class BallController : MonoBehaviour
         _timeRunning = 0;
         isEndRound = false;
         isShooted = true;
-        CountBallRunnning = TotalBall;
+        _countBallRunnning = 0;
         GameFlow.Instance.canShoot = false;
         GameFlow.Instance.timeScale = 1;
         float x = _xFirstBall;
@@ -90,6 +91,9 @@ public class BallController : MonoBehaviour
 
                 _balls[i].transform.position = new Vector3(x, GunPosition.y, 0);
                 _listBallModel[i].IsRunning = true;
+                _listBallModel[i].ImpactTime = 0;
+                _countBallRunnning += 1;
+                UIManager.Instance.UpdateTotalBall(_totalBall-_countBallRunnning);
                 yield return new WaitForSeconds(_speedToShoot * GameFlow.Instance.timeScale);
             }
         }
@@ -98,8 +102,10 @@ public class BallController : MonoBehaviour
     public void CheckContact(ContactPoint2D contact, GameObject ball)
     {
         Debug.Log("pos:");
-        Vector3 direction = Vector3.Reflect(ball.GetComponentInChildren<BallModel>().Direction, contact.normal);
-        ball.GetComponentInChildren<BallModel>().Direction = direction;
+        Vector3 direction = Vector3.Reflect(ball.GetComponent<BallModel>().Direction, contact.normal);
+        ball.GetComponent<BallModel>().Direction = direction;
+        ball.GetComponent<BallModel>().ImpactTime += 1;
+
     }
 
     public void SetUpFirstBallReturned(float x)
@@ -138,6 +144,7 @@ public class BallController : MonoBehaviour
                         CountBallRunnning--;
                         _balls[i].transform.position = new Vector3(_xFirstBall, GunPosition.y, 0) * GameFlow.Instance.timeScale;
                         _listBallModel[i].IsRunning = false;
+                        UIManager.Instance.UpdateTotalBall(_totalBall-CountBallRunnning);
                     }
                 }
             }
@@ -152,6 +159,7 @@ public class BallController : MonoBehaviour
             RemoveBalls();
             AddBall(1);
             CalculateBalls();
+            UIManager.Instance.UpdateTotalBall(_totalBall);
             GameFlow.Instance.canShoot = true;
         }
     }
