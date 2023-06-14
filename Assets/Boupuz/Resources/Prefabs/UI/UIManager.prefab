@@ -119,6 +119,8 @@ MonoBehaviour:
   - {fileID: 2008447967101885480}
   - {fileID: 4677177096527426304}
   _skillChosing: 0
+  _idSlots: 
+  _levelSlots: 
 --- !u!1 &323133100
 GameObject:
   m_ObjectHideFlags: 0
@@ -3078,6 +3080,7 @@ MonoBehaviour:
     _Image: {fileID: 21300000, guid: 98eb95e03b8ec914384e8d97119ec6a2, type: 3}
   _characterUI: {fileID: 1609751530403855880}
   _totalBall: {fileID: 1263229968817293650}
+  _destroyedBricksText: {fileID: 4872871091484494504}
 --- !u!1 &1609751529445655633
 GameObject:
   m_ObjectHideFlags: 0

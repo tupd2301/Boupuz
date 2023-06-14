@@ -12,6 +12,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CharacterUI _characterUI;
     [SerializeField] private Text _totalBall;
 
+    [Header("Top Bar UI")]
+    [SerializeField] private Text _destroyedBricksText;
+
     public List<Character> ListCharacter { get => _listCharacter; set => _listCharacter = value; }
 
     private void Awake()
@@ -51,5 +54,20 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         LoadUI("Home");
+        UpdateDestroyedBricksUI();
+    }
+
+    public void UpdateDestroyedBricksUI()
+    {
+        if (GameBoardController.Instance != null)
+        {
+            string totalBricks = GameBoardController.Instance.LevelData.totalBricks.ToString();
+            string destroyedBricks = GameBoardController.Instance.LevelData.destroyedBricks.ToString();
+            _destroyedBricksText.text = destroyedBricks + "/" + totalBricks;
+        }
+        else
+        {
+            Debug.Log("GameBoardController is null");
+        }
     }
 }

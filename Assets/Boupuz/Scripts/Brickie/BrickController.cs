@@ -173,6 +173,7 @@ public class BrickController : MonoBehaviour
     {
         gameObject.SetActive(false);
         GameBoardController.Instance.BrickControllers.Remove(this);
+        GameBoardController.Instance.UpdateDestroyedBricks();
     }
 
     public void DecreaseAdjacentBrickHealth(BrickController brick)

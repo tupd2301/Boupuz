@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameBoardController : MonoBehaviour
 {
-    public static GameBoardController Instance;
+    public static GameBoardController Instance { get; private set; }
     [SerializeField]
     private List<BrickController> _brickControllers = new List<BrickController>();
     public List<BrickController> BrickControllers { get { return _brickControllers; } }
@@ -21,15 +21,25 @@ public class GameBoardController : MonoBehaviour
     private BrickController[,] _grid;
     public BrickController[,] Grid { get {return _grid;}}
 
+    public LevelData LevelData { get; private set; }
+
     void Awake()
     {
-        GameBoardController.Instance = this;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+        LevelData = GetComponentInChildren<LevelData>();
     }
 
     void Start()
     {
         InitGrid();
-        //MoveAll();
+        
     }
 
     /* 4x4 GRID
@@ -42,6 +52,7 @@ public class GameBoardController : MonoBehaviour
     public void InitGrid()
     {
         Debug.Log("Number of brick: " + _brickControllers.Count.ToString());
+        LevelData.GetTotalBricks(_brickControllers.Count);
         UpdateGrid();
         
     }
@@ -140,5 +151,10 @@ public class GameBoardController : MonoBehaviour
         
     }
 
+    public void UpdateDestroyedBricks()
+    {
+        LevelData.UpdateDestroyedBricks();
+        UIManager.Instance.UpdateDestroyedBricksUI();
+    }
     
 }
