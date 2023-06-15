@@ -116,6 +116,30 @@ public class BrickController : MonoBehaviour
                 Data.BrickCoordinate = newCoordinate;
             }
         }
+        else if (col.gameObject.CompareTag("Portal"))
+        {
+            gameObject.SetActive(false);
+            BrickController otherPortal =  col.gameObject.GetComponent<Portals>().otherPortal;
+            GridCoordinate newCoordinate = otherPortal.Data.BrickCoordinate + Data.Direction;
+            if (newCoordinate.X >= 0 && newCoordinate.X < GameBoardController.Instance.GridScreenWidth &&
+                newCoordinate.Y >= 0 && newCoordinate.Y < GameBoardController.Instance.GridScreenHeight)
+                {
+                    if (GameBoardController.Instance.Grid[newCoordinate.X, newCoordinate.Y] == null)
+                    {
+                        Data.BrickCoordinate = newCoordinate;
+                    }
+                    else
+                    {
+                        // add health 
+                        GameBoardController.Instance.Grid[newCoordinate.X, newCoordinate.Y].Data.Hp += Data.Hp;
+                    }
+                }
+            else
+            {
+                Debug.Log("Portal: new coordinate is invalid");
+            }
+            
+        }
     }
     #region Trampoline
     private GridCoordinate RandomChangeBrickCoordinate(BrickController brick, int radius)
@@ -207,12 +231,15 @@ public class BrickController : MonoBehaviour
         for (int i = 0; i < GameBoardController.Instance.BrickControllers.Count; i++)
         {
             BrickController otherBrick = GameBoardController.Instance.BrickControllers[i];
-            if (otherBrick.Data.Type == ObjectType.Brickie)
+            if (otherBrick.Data.BrickCoordinate.Y < GameBoardController.Instance.GridScreenHeight)
             {
-                float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, brick.Data.BrickCoordinate);
-                if (distance > 0 && distance < Mathf.Sqrt(5))
+                if (otherBrick.Data.Type == ObjectType.Brickie)
                 {
-                    otherBrick.DecreasHpByValue((int)(otherBrick.Data.maxHp / 2));
+                    float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, brick.Data.BrickCoordinate);
+                    if (distance > 0 && distance < Mathf.Sqrt(5))
+                    {
+                        otherBrick.DecreasHpByValue((int)(otherBrick.Data.maxHp / 2));
+                    }
                 }
             }
         }
@@ -225,12 +252,15 @@ public class BrickController : MonoBehaviour
             BrickController otherBrick = GameBoardController.Instance.BrickControllers[i];
             if (otherBrick.Data.BrickCoordinate.Y < GameBoardController.Instance.GridScreenHeight)
             {
-                float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, brick.Data.BrickCoordinate);
-                if (distance > 0 && distance < Mathf.Sqrt(5))
+                if (otherBrick.Data.Type == ObjectType.Brickie)
                 {
-                    otherBrick.Data.isFreeze = true;
-                    otherBrick.Data.LvFreeze = 2;
-                    otherBrick.View.EnableChildGraphic();
+                    float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, brick.Data.BrickCoordinate);
+                    if (distance > 0 && distance < Mathf.Sqrt(5))
+                    {
+                        otherBrick.Data.isFreeze = true;
+                        otherBrick.Data.LvFreeze = 2;
+                        otherBrick.View.EnableChildGraphic();
+                    }
                 }
             }
         }

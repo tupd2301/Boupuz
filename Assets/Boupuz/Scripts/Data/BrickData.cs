@@ -40,6 +40,11 @@ public struct GridCoordinate
         return new GridCoordinate(c.X + (int)addition.x, c.Y + (int)addition.y);
     }
 
+    public static GridCoordinate operator +(GridCoordinate c1, GridCoordinate c2)
+    {
+        return new GridCoordinate(c1.X + c2.X, c1.Y + c2.Y);
+    }
+
     public static GridCoordinate operator -(GridCoordinate c, int subtraction)
     {
         return new GridCoordinate(c.X + subtraction, c.Y + subtraction);
