@@ -21,6 +21,7 @@ public class BrickView : MonoBehaviour
     private float _size;
     private int _boardWidth, _boardHeight;
 
+
     public void Setup()
     {
         // TODO

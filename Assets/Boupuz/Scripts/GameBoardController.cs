@@ -13,6 +13,10 @@ public class GameBoardController : MonoBehaviour
 
     [SerializeField]
     private int _gridWidth, _gridHeight;
+    [SerializeField]
+    private GameObject _brickOri1;
+    [SerializeField]
+    private GameObject _brickOri2;
 
     [SerializeField]
     private int _gridScreenWidth, _gridScreenHeight;
@@ -23,6 +27,9 @@ public class GameBoardController : MonoBehaviour
     public BrickController[,] Grid { get {return _grid;}}
 
     public LevelData LevelData { get; private set; }
+
+    public GameObject BrickOri1 { get => _brickOri1; set => _brickOri1 = value; }
+    public GameObject BrickOri2 { get => _brickOri2; set => _brickOri2 = value; }
 
     void Awake()
     {

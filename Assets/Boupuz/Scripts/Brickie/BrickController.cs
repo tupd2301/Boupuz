@@ -43,13 +43,13 @@ public class BrickController : MonoBehaviour
         //_size = size;
         //_data = brickData;
         _view.Setup();
+        SetUpPositionAndSize();
     }
 
     public IEnumerator Move(float duration) 
     {
         for (int s = 0; s < Data.Speed; s++)
         {
-        
             Vector3 startPos = transform.localPosition;
             Vector3 endPos = startPos + Data.Direction * _collider.bounds.size[1];
             //Debug.Log("Collider bounds: " + _collider.bounds.size);
@@ -216,10 +216,22 @@ public class BrickController : MonoBehaviour
         }
     }
 
+    public void FreezeBySkill(BallModel data)
+    {
+        int isFreeze = UnityEngine.Random.Range(1, 100);
+        if (isFreeze <= data.CanFreeze)
+        {
+            _data.isFreeze = true;
+        }
+    }
+
 
     public void BallReflect(Collision2D col)
     {
         Vector3 direction = col.gameObject.GetComponent<BallModel>().Direction;
+
+        FreezeBySkill(col.gameObject.GetComponent<BallModel>());
+
         if (_listDirection.Where(a => a == direction).Count() > 0)
         {
             int index = _listDirection.IndexOf(direction);
@@ -245,5 +257,15 @@ public class BrickController : MonoBehaviour
             _listContact.Add(col.contacts[0]);
             BallController.Instance.CheckContact(col.contacts[0], col.gameObject);
         }
+    }
+
+    public void SetUpPositionAndSize()
+    {
+        GameObject ori1 = GameBoardController.Instance.BrickOri1;
+        GameObject ori2 = GameBoardController.Instance.BrickOri2;
+        float distance = Vector3.Distance(ori1.transform.position,ori2.transform.position);
+        Vector3 oriPosition = ori1.transform.position;
+        transform.position = new Vector3(oriPosition.x + distance * Data.BrickCoordinate.X, oriPosition.y + distance * Data.BrickCoordinate.Y);
+        _view.transform.localScale = new Vector3(0.73f,0.73f,0.73f);
     }
 }

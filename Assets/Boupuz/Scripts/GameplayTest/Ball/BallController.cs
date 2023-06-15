@@ -104,6 +104,7 @@ public class BallController : MonoBehaviour
                 _listBallModel[i].IsRunning = true;
                 _listBallModel[i].ImpactTime = 0;
                 _listBallModel[i].Damage = _addDamageBySkill+1;
+                _listBallModel[i].CanFreeze = _addFreezeBySkill;
                 _countBallRunnning += 1;
                 UIManager.Instance.UpdateTotalBall(_totalBall-_countBallRunnning);
                 yield return new WaitForSeconds(_speedToShoot * GameFlow.Instance.timeScale);
