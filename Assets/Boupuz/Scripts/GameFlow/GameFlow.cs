@@ -20,7 +20,7 @@ public class GameFlow : MonoBehaviour
     void Start()
     {
         GameFlow.Instance = this;
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 120;
         timeScale = 1;
         if (_poolManager != null)
         {

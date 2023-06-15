@@ -64,7 +64,24 @@ public class GameBoardController : MonoBehaviour
     {
         Debug.Log("Number of brick: " + _brickControllers.Count.ToString());
         LevelData.GetTotalBricks(_brickControllers.Count);
-        UpdateGrid();
+        _grid = new BrickController[_gridWidth, _gridHeight];
+        for (int brickIndex = 0; brickIndex < _brickControllers.Count; brickIndex++)
+        {
+            BrickController newBrick = _brickControllers[brickIndex];
+            if (newBrick?.Data.BrickCoordinate.X < _gridWidth && newBrick?.Data.BrickCoordinate.Y < _gridHeight)
+            {
+                if (_grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] == null)
+                {
+                    _grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] = newBrick;
+                    newBrick.Initialize();
+                } 
+                else
+                {
+                    Debug.Log(newBrick.gameObject.name);
+                    Debug.Log("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK");
+                }
+            }
+        }
         
     }
 
@@ -79,7 +96,7 @@ public class GameBoardController : MonoBehaviour
                 if (_grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] == null)
                 {
                     _grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] = newBrick;
-                    newBrick.Initialize();
+                    //newBrick.Initialize();
                 } 
                 else
                 {
