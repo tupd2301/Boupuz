@@ -20,6 +20,11 @@ public struct GridCoordinate
         return distance;
     }
 
+    public static bool IsNegative(GridCoordinate c)
+    {
+        return (c.X < 0) && c.Y < 0;
+    }
+
     public static bool operator == (GridCoordinate c1, GridCoordinate c2)
     {
         return (c1.X == c2.X) & (c1.Y == c2.Y);
@@ -80,14 +85,14 @@ public class BrickData : MonoBehaviour
     public int Id;
     public ObjectType Type;
     public GridCoordinate BrickCoordinate;
-    public List<int> BrickSize;
+    //public List<int> BrickSize;
     public int maxHp;
     public int Hp;
     public int Atk;
-    public int LvFreeze;
     public int Speed;
     public Vector3 Direction;
     public bool isFreeze;
+    public int LvFreeze;
     public bool isBurn;
     public bool movable;
     public bool hasCandy;

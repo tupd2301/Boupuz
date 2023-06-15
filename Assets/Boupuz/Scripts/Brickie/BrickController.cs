@@ -59,7 +59,7 @@ public class BrickController : MonoBehaviour
                 yield return null;
             }
             transform.localPosition = endPos;
-            
+            SetScenePositionBasedOnGridCoordinate();
         }
     }
 
@@ -107,17 +107,18 @@ public class BrickController : MonoBehaviour
                 
             }
         }
-        else if (col.gameObject.CompareTag("Block"))
+        else if (col.gameObject.CompareTag("Trampoline"))
         {
-            BrickController brick = col.gameObject.GetComponent<BrickController>();
-            if (brick.Data.Id == 1 && brick.Data.Type == ObjectType.Special) // if trampoline
+            gameObject.SetActive(false);
+            GridCoordinate newCoordinate = RandomChangeBrickCoordinate(this, 1);
+            if (!GridCoordinate.IsNegative(newCoordinate))
             {
-                RandomChangeBrickPosition(this, 1);
+                Data.BrickCoordinate = newCoordinate;
             }
         }
     }
-
-    private GridCoordinate? RandomChangeBrickPosition(BrickController brick, int radius)
+    #region Trampoline
+    private GridCoordinate RandomChangeBrickCoordinate(BrickController brick, int radius)
     {
         HashSet<GridCoordinate> listCoordinate = new HashSet<GridCoordinate>();
         GridCoordinate newCoordinate = GetRandomAdjacentGridCoordinate(brick.Data.BrickCoordinate, 1);
@@ -126,7 +127,8 @@ public class BrickController : MonoBehaviour
             listCoordinate.Add(newCoordinate);
             if (listCoordinate.Count > 9)
             {
-                return null;
+                AddHealthToLowestAdjacentBrick(brick, listCoordinate);
+                return new GridCoordinate(-1,-1);
             }
 
             newCoordinate = GetRandomAdjacentGridCoordinate(brick.Data.BrickCoordinate, 1);
@@ -137,17 +139,32 @@ public class BrickController : MonoBehaviour
     private GridCoordinate GetRandomAdjacentGridCoordinate(GridCoordinate coordinate, int radius)
     {
         int Xmin = (coordinate.X - radius) < 0 ? 0 : coordinate.X - radius;
-        int Xmax = (coordinate.X + radius) > GameBoardController.Instance.GridScreenWidth ? GameBoardController.Instance.GridScreenWidth : coordinate.X + radius;
+        int Xmax = (coordinate.X + radius) >= GameBoardController.Instance.GridScreenWidth ? GameBoardController.Instance.GridScreenWidth - 1 : coordinate.X + radius;
         int X = UnityEngine.Random.Range(Xmin, Xmax);
 
         int Ymin = (coordinate.Y - radius) < 0 ? 0 : coordinate.Y - radius;
-        int Ymax = (coordinate.Y + radius) > GameBoardController.Instance.GridScreenHeight ? GameBoardController.Instance.GridScreenHeight : coordinate.Y + radius;
+        int Ymax = (coordinate.Y + radius) >= GameBoardController.Instance.GridScreenHeight ? GameBoardController.Instance.GridScreenHeight - 1 : coordinate.Y + radius;
 
         int Y = UnityEngine.Random.Range(Ymin, Ymax);
 
         return new GridCoordinate(X, Y);
     }
 
+    private void AddHealthToLowestAdjacentBrick(BrickController brick, HashSet<GridCoordinate> adjacentCoordinate )
+    {
+        int lowestHP = 0;
+        GridCoordinate lowestCoord = new GridCoordinate(0,0);
+        foreach (GridCoordinate coord in adjacentCoordinate)
+        {
+            if (GameBoardController.Instance.Grid[coord.X, coord.Y]?.Data.Hp < lowestHP && coord != brick.Data.BrickCoordinate)
+            {
+                lowestHP = GameBoardController.Instance.Grid[coord.X, coord.Y].Data.Hp;
+                lowestCoord = coord;
+            }
+        }
+        GameBoardController.Instance.Grid[lowestCoord.X, lowestCoord.Y].Data.Hp += brick.Data.Hp;
+    }
+    #endregion
     public void DecreaseHP(Collision2D col)
     {
         // if (Data.Id == 3 && Data.Type == ObjectType.Brickie)
@@ -190,10 +207,13 @@ public class BrickController : MonoBehaviour
         for (int i = 0; i < GameBoardController.Instance.BrickControllers.Count; i++)
         {
             BrickController otherBrick = GameBoardController.Instance.BrickControllers[i];
-            float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, brick.Data.BrickCoordinate);
-            if (distance > 0 && distance < Mathf.Sqrt(5))
+            if (otherBrick.Data.Type == ObjectType.Brickie)
             {
-                otherBrick.DecreasHpByValue((int)(otherBrick.Data.maxHp / 2));
+                float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, brick.Data.BrickCoordinate);
+                if (distance > 0 && distance < Mathf.Sqrt(5))
+                {
+                    otherBrick.DecreasHpByValue((int)(otherBrick.Data.maxHp / 2));
+                }
             }
         }
     }
@@ -269,5 +289,14 @@ public class BrickController : MonoBehaviour
         Vector3 oriPosition = ori1.transform.position;
         transform.position = new Vector3(oriPosition.x + _moveDistance * Data.BrickCoordinate.X, oriPosition.y + _moveDistance * Data.BrickCoordinate.Y);
         _view.transform.localScale = new Vector3(0.68f,0.68f,0.68f);
+    }
+
+    public void SetScenePositionBasedOnGridCoordinate()
+    {
+        GameObject ori1 = GameBoardController.Instance.BrickOri1;
+        Vector3 oriPosition = ori1.transform.position;
+        transform.position = new Vector3(oriPosition.x + _moveDistance * Data.BrickCoordinate.X,    
+                                         oriPosition.y + _moveDistance * Data.BrickCoordinate.Y);
+        gameObject.SetActive(true);
     }
 }

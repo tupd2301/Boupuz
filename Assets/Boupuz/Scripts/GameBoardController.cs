@@ -107,12 +107,19 @@ public class GameBoardController : MonoBehaviour
         }
     }
 
-    public void UpdateBrickCoordinate(BrickController brick)
+    public void UpdateBrickCoordinateBySpeed(BrickController brick)
     {
         // update coordinate
         brick.Data.BrickCoordinate.X += (int)(brick.Data.Direction[0] * brick.Data.Speed);
         brick.Data.BrickCoordinate.Y += (int)(brick.Data.Direction[1] * brick.Data.Speed);
     }
+
+    // public void UpdateBrickCoordinateByValue(BrickController brick, GridCoordinate newCoordinate)
+    // {
+    //     // update coordinate
+    //     brick.Data.BrickCoordinate = newCoordinate;
+        
+    // }
 
     public bool CheckLose(BrickController brick)
     {
@@ -128,6 +135,7 @@ public class GameBoardController : MonoBehaviour
     public void MoveAll()
     {
         StopAllCoroutines();
+        List<BrickController> movableObjects = new List<BrickController>();
         for (int i = 0; i < _brickControllers.Count; i++)
         {
             // TODO: if not blocked or frozen, move
@@ -135,13 +143,14 @@ public class GameBoardController : MonoBehaviour
             {
                 if (!_brickControllers[i].Data.isFreeze && !CheckBlockingObject(_brickControllers[i]))
                 {
-                    StartCoroutine(_brickControllers[i].Move(1));
+                    movableObjects.Add(_brickControllers[i]);
+                    //StartCoroutine(_brickControllers[i].Move(1));
                     if(!CheckLose(_brickControllers[i])){
-                        UpdateBrickCoordinate(_brickControllers[i]);
+                        UpdateBrickCoordinateBySpeed(_brickControllers[i]);
                     }
                     else
                     {
-                        SceneManager.LoadScene("GameplayTest");
+                        SceneManager.LoadScene("GameplayTest 2");
                     }
                 }
                 else if (_brickControllers[i].Data.isFreeze)
@@ -156,6 +165,11 @@ public class GameBoardController : MonoBehaviour
             }
         }
         UpdateGrid();
+
+        for (int i = 0; i < movableObjects.Count; i++)
+        {
+            StartCoroutine(movableObjects[i].Move(1));
+        }
     }
 
     public bool CheckBlockingObject(BrickController brick) //return true if is blocked
