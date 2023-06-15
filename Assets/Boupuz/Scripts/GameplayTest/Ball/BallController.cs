@@ -80,6 +80,8 @@ public class BallController : MonoBehaviour
             _balls[i].transform.position = new Vector3(_xFirstBall, GunPosition.y, 0);
             _listBallModel[i].IsRunning = false;
         }
+        UIManager.Instance.UpdateTotalBall(_totalBall);
+
     }
 
     public IEnumerator BallShooting(Vector2 direction)

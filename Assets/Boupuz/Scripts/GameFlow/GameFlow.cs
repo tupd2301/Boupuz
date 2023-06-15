@@ -48,7 +48,7 @@ public class GameFlow : MonoBehaviour
         {
             if (_laser != null)
             {
-                _laser.SetPosition(Joystick.transform.position);
+                _laser.SetPosition(_ballController.Gun.transform.position);
                 _laser.SetActive(false);
             }
             Joystick.transform.position = new Vector3(BallController.Instance.GunPosition.x, BallController.Instance.GunPosition.y, Joystick.transform.position.z);

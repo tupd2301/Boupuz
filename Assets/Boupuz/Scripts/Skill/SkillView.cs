@@ -20,13 +20,21 @@ public class SkillView : MonoBehaviour
     [SerializeField] private List<int> _idSlots = new List<int>();
     [SerializeField] private List<int> _levelSlots = new List<int>();
 
+    private void Awake()
+    {
+        _idSlots.Add(0);
+        _idSlots.Add(0);
+        _idSlots.Add(0);
+        _levelSlots.Add(0);
+        _levelSlots.Add(0);
+        _levelSlots.Add(0);
+    }
+
     public void Submit()
     {
         if (_skillChosing != 0)
         {
             SkillController.Instance.UpdateSkill(_idSlots[_skillChosing - 1],_levelSlots[_skillChosing-1]);
-            _idSlots = new List<int>();
-            _levelSlots = new List<int>();
         }
     }
 
@@ -57,7 +65,7 @@ public class SkillView : MonoBehaviour
         _skillNames[slot].text = name;
         _skillLevels[slot].text = "Lv." + level;
         _skillEffects[slot].text = effect;
-        _idSlots.Add(id);
-        _levelSlots.Add(level);
+        _idSlots[slot-1] = id;
+        _levelSlots[slot-1] = level;
     }
 }

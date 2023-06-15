@@ -18,6 +18,8 @@ public class LevelData : MonoBehaviour
     [SerializeField] private int _numCoins;
     public int numCoins { get {return _numCoins;}}
 
+    private int levelSelect;
+
     public LevelData()
     {
         LevelID = -1;
@@ -41,8 +43,9 @@ public class LevelData : MonoBehaviour
     public void AddCandies(int value)
     {
         _numCandies += value;
-        if (_numCandies % 5 == 0)
+        if (_numCandies % 5 == 0 && levelSelect <_numCandies)
         {
+            levelSelect = _numCandies;
             GameFlow.Instance.SelectSkill = true;
         }
     }

@@ -94,6 +94,7 @@ public class SkillController : MonoBehaviour
 
     public void UpdateSkill(int id, int level)
     {
+        Debug.Log("Skill:" + id + ":" + level);
         SkillData skillData = new SkillData();
         skillData.Id = id;
         skillData.Level = level;
@@ -111,6 +112,13 @@ public class SkillController : MonoBehaviour
                 break;
             default:
                 break;
+        }
+        for (int i = 0; i < _skills.Count; i++)
+        {
+            if(_skills[i].Id == id)
+            {
+                _skills.RemoveAt(i);
+            }
         }
         _skills.Add(skillData);
         _view.gameObject.SetActive(false);
