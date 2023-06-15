@@ -50,6 +50,7 @@ public class SkillController : MonoBehaviour
 
     public void ShowUISkill()
     {
+        _view.gameObject.SetActive(true);
         List<Skill> skills = new List<Skill>();
         skills = RandomSkill(skills);
         Skill skill1 = skills[0];
@@ -93,6 +94,9 @@ public class SkillController : MonoBehaviour
 
     public void UpdateSkill(int id, int level)
     {
+        SkillData skillData = new SkillData();
+        skillData.Id = id;
+        skillData.Level = level;
         switch (id)
         {
             case 0: //+Bou
@@ -108,5 +112,8 @@ public class SkillController : MonoBehaviour
             default:
                 break;
         }
+        _skills.Add(skillData);
+        _view.gameObject.SetActive(false);
+        GameFlow.Instance.canShoot = true;
     }
 }
