@@ -15,7 +15,10 @@ public class GameFlow : MonoBehaviour
 
     public float timeCount = 0;
 
+    private bool _selectSkill = false;
+
     public FixedJoystick Joystick { get => _joystick; set => _joystick = value; }
+    public bool SelectSkill { get => _selectSkill; set => _selectSkill = value; }
 
     void Start()
     {
@@ -55,7 +58,6 @@ public class GameFlow : MonoBehaviour
             Debug.LogError("GameFlow can not see Joystick");
         }
         DontDestroyOnLoad(this);
-        SkillController.Instance.ShowUISkill();
     }
 
     public void ChangePositionJoystick(float x)
@@ -82,6 +84,12 @@ public class GameFlow : MonoBehaviour
         if (_ballController.isShooted)
         {
             _ballController.BallRunning();
+        }
+        if (canShoot && _selectSkill)
+        {
+            SkillController.Instance.ShowUISkill();
+            _selectSkill = false;
+            canShoot = false;
         }
     }
 }

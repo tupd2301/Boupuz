@@ -41,6 +41,10 @@ public class LevelData : MonoBehaviour
     public void AddCandies(int value)
     {
         _numCandies += value;
+        if (_numCandies % 5 == 0)
+        {
+            GameFlow.Instance.SelectSkill = true;
+        }
     }
 
     public void AddCoins(int value)
