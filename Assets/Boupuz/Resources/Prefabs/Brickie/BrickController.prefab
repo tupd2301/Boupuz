@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: -1812392949
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3460751, g: 0.75023526, b: 0.9528302, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 69b5957c1bae44efd899c3a0cf921387, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -565,14 +565,13 @@ MonoBehaviour:
   BrickCoordinate:
     X: 0
     Y: 4
-  BrickSize: 
   maxHp: 0
   Hp: 0
   Atk: 0
-  LvFreeze: 0
   Speed: 0
   Direction: {x: 0, y: -2, z: 0}
   isFreeze: 0
+  LvFreeze: 0
   isBurn: 0
   movable: 0
   hasCandy: 0
