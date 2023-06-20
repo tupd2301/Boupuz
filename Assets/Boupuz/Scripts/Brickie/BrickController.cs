@@ -63,6 +63,14 @@ public class BrickController : MonoBehaviour
         }
     }
 
+    public void OnCollisionStay2D(Collision2D col)
+    {
+        if(col.gameObject.CompareTag("Ball") && Data.BrickCoordinate.Y < 11)
+        {
+            BallController.Instance.BallThroughBrickies(col.gameObject);
+        }
+    }
+
     public void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Ball") && Data.BrickCoordinate.Y < 11)
