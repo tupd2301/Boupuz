@@ -129,6 +129,7 @@ public class GameBoardController : MonoBehaviour
         {
             Debug.Log("Lose");
             GameFlow.Instance.canShoot = false;
+            UIManager.Instance.LoadLoseUI();
             return true;
         }
         return false;

@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text _numCoinText;
 
     [SerializeField] private Text _levelCheat;
+    [SerializeField] private GameObject _winUI;
+    [SerializeField] private GameObject _loseUI;
 
     private int _level = 1;
 
@@ -74,6 +76,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void LoadWinUI()
+    {
+        _winUI.SetActive(true);
+    }
+
+    public void LoadLoseUI()
+    {
+        _loseUI.SetActive(true);
+    }
+
+    public void OnSceneHome()
+    {
+        SceneManager.LoadScene("Home", LoadSceneMode.Single);
+    }
+
     public void UpdateTotalBall(int totalBall)
     {
         _totalBall.text = "x " + totalBall;
@@ -81,12 +98,15 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        LoadUI("Home");
-        _levelCheat.text = _level.ToString();
         if(SceneManager.GetActiveScene().name != "Home")
         {
             UpdateDestroyedBricksUI();
             UpdateCoinUI();
+        }
+        else
+        {
+            LoadUI("Home");
+            _levelCheat.text = _level.ToString();
         }
     }
 

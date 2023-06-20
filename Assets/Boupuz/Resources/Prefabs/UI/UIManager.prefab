@@ -7899,6 +7899,8 @@ MonoBehaviour:
   _numCandyText: {fileID: 7260275635199029937}
   _numCoinText: {fileID: 961674601694746743}
   _levelCheat: {fileID: 1735431523}
+  _winUI: {fileID: 7747126388772294955}
+  _loseUI: {fileID: 7399075677512278003}
 --- !u!1 &1609751529445655633
 GameObject:
   m_ObjectHideFlags: 0
@@ -26662,6 +26664,7 @@ GameObject:
   - component: {fileID: 1483705812691363655}
   - component: {fileID: 5510628308149896388}
   - component: {fileID: 4734070933961561984}
+  - component: {fileID: 652687478}
   m_Layer: 5
   m_Name: LoseUI
   m_TagString: Untagged
@@ -26729,6 +26732,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &652687478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7399075677512278003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1609751529393097309}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: OnSceneHome
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7400924461501706443
 GameObject:
   m_ObjectHideFlags: 0
@@ -27957,6 +27989,7 @@ GameObject:
   - component: {fileID: 6745648920618142132}
   - component: {fileID: 9047857165158886967}
   - component: {fileID: 4913736432180860123}
+  - component: {fileID: 305099822}
   m_Layer: 5
   m_Name: WinUI
   m_TagString: Untagged
@@ -28024,6 +28057,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &305099822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7747126388772294955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1609751529393097309}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: OnSceneHome
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7771374458068893434
 GameObject:
   m_ObjectHideFlags: 0
