@@ -157,10 +157,14 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         {
             Debug.Log("Up");
             Vector2 direction = handle.anchoredPosition - Vector2.zero;
-            GameFlow.Instance.Shoot(direction);
-            input = Vector2.zero;
-            handle.anchoredPosition = Vector2.zero;
-            GameFlow.Instance._laser.SetActive(false);
+            if (direction != Vector2.zero)
+            {
+                GameFlow.Instance.canShoot = false;
+                GameFlow.Instance.Shoot(direction);
+                input = Vector2.zero;
+                handle.anchoredPosition = Vector2.zero;
+                GameFlow.Instance._laser.SetActive(false);
+            }
 
         }
     }

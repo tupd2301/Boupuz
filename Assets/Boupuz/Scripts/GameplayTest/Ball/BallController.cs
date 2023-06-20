@@ -94,7 +94,6 @@ public class BallController : MonoBehaviour
         isEndRound = false;
         isShooted = true;
         _countBallRunnning = 0;
-        GameFlow.Instance.canShoot = false;
         GameFlow.Instance.timeScale = 1;
         float x = _xFirstBall;
         if (_speedToShoot > 0)
