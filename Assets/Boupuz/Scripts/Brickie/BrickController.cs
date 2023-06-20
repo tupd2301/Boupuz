@@ -272,6 +272,8 @@ public class BrickController : MonoBehaviour
         if (isFreeze <= data.CanFreeze)
         {
             _data.isFreeze = true;
+            _data.LvFreeze = 2;
+            _view.EnableChildGraphic();
         }
     }
 
