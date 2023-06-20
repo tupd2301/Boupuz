@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameBoardController : MonoBehaviour
 {
@@ -49,6 +50,7 @@ public class GameBoardController : MonoBehaviour
 
     void Start()
     {
+        _brickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
         InitGrid();
         
     }
