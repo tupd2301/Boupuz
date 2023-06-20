@@ -174,7 +174,7 @@ public class BallController : MonoBehaviour
             GameFlow.Instance.timeScale = 1;
             GameBoardController.Instance.MoveAll();
             RemoveBalls();
-            AddBall(1);
+            //AddBall(1);
             CalculateBalls();
             UIManager.Instance.UpdateTotalBall(_totalBall);
             GameFlow.Instance.canShoot = true;
