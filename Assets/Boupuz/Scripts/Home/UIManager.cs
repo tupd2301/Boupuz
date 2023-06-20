@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -17,6 +18,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text _numCandyText;
     [SerializeField] private Text _numCoinText;
 
+    [SerializeField] private Text _levelCheat;
+
+    private int _level = 1;
+
     public List<Character> ListCharacter { get => _listCharacter; set => _listCharacter = value; }
 
     private void Awake()
@@ -24,8 +29,29 @@ public class UIManager : MonoBehaviour
         UIManager.Instance = this;
     }
 
+    public void MinusLevel()
+    {
+        _level -= 1;
+        if (_level < 1)
+            _level = 1;
+        _levelCheat.text = _level.ToString();
+    }
+    public void AddLevel()
+    {
+        _level += 1;
+        if (_level > 99)
+            _level = 99;
+        _levelCheat.text = _level.ToString();
+    }
+
     public void LoadUI(string name)
     {
+        if(name == "Play")
+        {
+            PlayerPrefs.SetInt("LevelID", _level);
+            SceneManager.LoadScene("GameplayTest 2", LoadSceneMode.Single);
+            return;
+        }
         for (int i = 0; i < _listUI.Count; i++)
         {
             if(_listNavigator[i].Parent.name != name)
@@ -56,8 +82,12 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         LoadUI("Home");
-        UpdateDestroyedBricksUI();
-        UpdateCoinUI();
+        _levelCheat.text = _level.ToString();
+        if(SceneManager.GetActiveScene().name != "Home")
+        {
+            UpdateDestroyedBricksUI();
+            UpdateCoinUI();
+        }
     }
 
     public void UpdateDestroyedBricksUI()
