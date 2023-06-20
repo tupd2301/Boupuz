@@ -20,6 +20,7 @@ public class BallController : MonoBehaviour
     public int AddDamageBySkill { get => _addDamageBySkill; set => _addDamageBySkill = value; }
     public int AddBallBySkill { get => _addBallBySkill; set => _addBallBySkill = value; }
     public float AddFreezeBySkill { get => _addFreezeBySkill; set => _addFreezeBySkill = value; }
+    public int StartBall { get => _startBall; set => _startBall = value; }
 
     [SerializeField] private float _speedToShoot;
     [SerializeField] private float _speedToRun;
@@ -27,6 +28,7 @@ public class BallController : MonoBehaviour
     [SerializeField] private Vector3 _gunPosition;
     [SerializeField] private Vector2 _direction;
     [SerializeField] private int _countBallRunnning;
+    [SerializeField]private int _startBall;
 
     private int _addBall;
     public bool isShooted;
