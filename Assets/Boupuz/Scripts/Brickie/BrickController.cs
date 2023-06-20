@@ -75,8 +75,11 @@ public class BrickController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Ball") && Data.BrickCoordinate.Y < 11)
         {
-            
-            BallReflect(col);
+
+            if (!gameObject.CompareTag("Item"))
+            {
+                BallReflect(col);
+            }
             DecreaseHP(col);
             
             if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
