@@ -98,14 +98,7 @@ public class BrickController : MonoBehaviour
                 if (Data.Hp <= 0)
                 {
                     RemoveBrick();
-                    if (!gameObject.CompareTag("Item"))
-                    {
-                        GameBoardController.Instance.UpdateDestroyedBricks();
-                    }
-                    if (Data.hasCandy)
-                    {
-                        GameBoardController.Instance.UpdateCandy(1);
-                    }
+                    
 
 
                     if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
@@ -239,6 +232,7 @@ public class BrickController : MonoBehaviour
         if (Data.Hp <= value)
         {
             RemoveBrick();
+            
         }
         else
         {
@@ -251,7 +245,14 @@ public class BrickController : MonoBehaviour
     {
         gameObject.SetActive(false);
         GameBoardController.Instance.BrickControllers.Remove(this);
-
+        if (!gameObject.CompareTag("Item"))
+        {
+            GameBoardController.Instance.UpdateDestroyedBricks();
+        }
+        if (Data.hasCandy)
+        {
+            GameBoardController.Instance.UpdateCandy(1);
+        }
     }
 
     public void DecreaseAdjacentBrickHealth(BrickController brick)
