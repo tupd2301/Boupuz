@@ -275,7 +275,7 @@ public class BrickController : MonoBehaviour
                     if (distance > 0f && distance < Mathf.Sqrt(4))
                     {
                         //Debug.Log(Mathf.CeilToInt(2.5f));
-                        otherBrick.DecreasHpByValue(Mathf.CeilToInt(otherBrick.Data.Hp / 2));
+                        otherBrick.DecreasHpByValue(Mathf.CeilToInt(otherBrick.Data.Hp / 2f));
                     }
                 }
             }
