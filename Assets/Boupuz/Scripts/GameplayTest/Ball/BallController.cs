@@ -157,7 +157,6 @@ public class BallController : MonoBehaviour
                 if (_listBallModel[i].IsRunning)
                 {
                     Vector3 direction = _listBallModel[i].Direction;
-                    //_balls[i].transform.Translate(direction.normalized * _speedToRun * 0.01f * GameFlow.Instance.timeScale);
                     _balls[i].transform.position = Vector3.MoveTowards(_balls[i].transform.position, (direction.normalized + _balls[i].transform.position), 0.01f * SpeedToRun);
                     if (_balls[i].transform.position.y < GunPosition.y && _balls[i].transform.position.x != _xFirstBall)
                     {
