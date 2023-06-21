@@ -38,7 +38,7 @@ public class BallController : MonoBehaviour
 
     [SerializeField] private float _timeCheckLoop = 5;
     private List<Vector3> _listDirectionRegister;
-    private float _timeRunning = 0;
+    [SerializeField]private float _timeRunning = 0;
 
     [SerializeField] private int _addDamageBySkill;
     [SerializeField] private int _addBallBySkill;
@@ -144,13 +144,23 @@ public class BallController : MonoBehaviour
 
     public void CheckLoop()
     {
-
+        for (int i = 0; i < _balls.Count; i++)
+        {
+            if (_listBallModel[i].IsRunning)
+            {
+                Vector3 direction = Vector3.down;
+                _listBallModel[i].Direction = direction;
+            }
+        }
     }
 
     public void BallRunning()
     {
-        _timeRunning += 1 / 60 * GameFlow.Instance.timeScale;
-        if (_timeRunning == _timeCheckLoop)
+        if (!GameFlow.Instance.canShoot)
+        {
+            _timeRunning += 1f / 60f;
+        }
+        if (_timeRunning >= _timeCheckLoop)
         {
             CheckLoop();
         }

@@ -129,6 +129,12 @@ public class BrickController : MonoBehaviour
                 col.gameObject.GetComponentInChildren<TrailRenderer>().Clear();
 
             }
+            else if (gameObject.CompareTag("Trampoline"))
+            {
+                Vector3 direction = new Vector3(UnityEngine.Random.Range(-180f, 180f), UnityEngine.Random.Range(-180f, 180f), 0).normalized;
+                col.gameObject.GetComponent<BallModel>().Direction = direction;
+                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 5*0.01f * BallController.Instance.SpeedToRun);
+            }
         }
         else if (col.gameObject.CompareTag("Trampoline"))
         {
