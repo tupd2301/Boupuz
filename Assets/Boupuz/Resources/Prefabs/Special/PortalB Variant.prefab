@@ -111,7 +111,12 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Portal
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8741076295938774346, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: _collider
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6028300500882632922, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
 --- !u!1 &464705768481674334 stripped
 GameObject:
@@ -131,3 +136,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _otherPortal: {fileID: 0}
+--- !u!1 &2017071744142055518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8086973390344421784, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+  m_PrefabInstance: {fileID: 7765515704686909894}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &7176699502404373854
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017071744142055518}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.49999997
