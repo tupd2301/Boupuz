@@ -15,7 +15,7 @@ public struct GridCoordinate
 
     public static float Distance(GridCoordinate c1, GridCoordinate c2)
     {
-        float distance = Mathf.Abs(Mathf.Pow(c1.X - c2.X, 2) + Mathf.Pow(c1.Y - c2.Y, 2));
+        float distance = Mathf.Sqrt(Mathf.Pow(c1.X - c2.X, 2) + Mathf.Pow(c1.Y - c2.Y, 2));
                                                 
         return distance;
     }

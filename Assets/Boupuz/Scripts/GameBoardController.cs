@@ -12,6 +12,9 @@ public class GameBoardController : MonoBehaviour
     private List<BrickController> _brickControllers = new List<BrickController>();
     public List<BrickController> BrickControllers { get { return _brickControllers; } }
 
+    private List<BrickController> _removedBrick = new List<BrickController>();
+    public List<BrickController> RemovedBrick { get { return _removedBrick; } }
+
     [SerializeField]
     private int _gridWidth, _gridHeight;
     [SerializeField]
@@ -89,6 +92,13 @@ public class GameBoardController : MonoBehaviour
 
     public void UpdateGrid()
     {
+
+        for (int i = 0; i < _removedBrick.Count; i++)
+        {
+            _brickControllers.Remove(_removedBrick[i]);
+        }
+        _removedBrick = new List<BrickController>();
+
         _grid = new BrickController[_gridWidth, _gridHeight];
         for (int brickIndex = 0; brickIndex < _brickControllers.Count; brickIndex++)
         {
@@ -141,8 +151,7 @@ public class GameBoardController : MonoBehaviour
         List<BrickController> movableObjects = new List<BrickController>();
         for (int i = 0; i < _brickControllers.Count; i++)
         {
-            // TODO: if not blocked or frozen, move
-            if (_brickControllers[i].Data.movable)
+            if (_brickControllers[i].Data.movable && _brickControllers[i].gameObject.activeInHierarchy)
             {
                 if (!_brickControllers[i].Data.isFreeze && !CheckBlockingObject(_brickControllers[i]))
                 {

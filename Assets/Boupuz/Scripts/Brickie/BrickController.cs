@@ -232,6 +232,7 @@ public class BrickController : MonoBehaviour
 
     public void DecreasHpByValue(int value)
     {
+
         if (Data.Hp <= value)
         {
             RemoveBrick();
@@ -247,7 +248,8 @@ public class BrickController : MonoBehaviour
     public void RemoveBrick()
     {
         gameObject.SetActive(false);
-        GameBoardController.Instance.BrickControllers.Remove(this);
+        //GameBoardController.Instance.BrickControllers.Remove(this);
+        GameBoardController.Instance.RemovedBrick.Add(this);
         if (!gameObject.CompareTag("Item"))
         {
             GameBoardController.Instance.UpdateDestroyedBricks();
@@ -260,7 +262,6 @@ public class BrickController : MonoBehaviour
 
     public void DecreaseAdjacentBrickHealth(BrickController brick)
     {
-        //Debug.Log("hello");
         for (int i = 0; i < GameBoardController.Instance.BrickControllers.Count; i++)
         {
             BrickController otherBrick = GameBoardController.Instance.BrickControllers[i];
@@ -268,10 +269,13 @@ public class BrickController : MonoBehaviour
             {
                 if (otherBrick.Data.Type == ObjectType.Brickie)
                 {
+                    
+
                     float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, brick.Data.BrickCoordinate);
-                    if (distance > 0 && distance < Mathf.Sqrt(5))
+                    if (distance > 0f && distance < Mathf.Sqrt(4))
                     {
-                        otherBrick.DecreasHpByValue((int)(otherBrick.Data.maxHp / 2));
+                        //Debug.Log(Mathf.CeilToInt(2.5f));
+                        otherBrick.DecreasHpByValue(Mathf.CeilToInt(otherBrick.Data.Hp / 2));
                     }
                 }
             }
@@ -288,7 +292,7 @@ public class BrickController : MonoBehaviour
                 if (otherBrick.Data.Type == ObjectType.Brickie)
                 {
                     float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, brick.Data.BrickCoordinate);
-                    if (distance > 0 && distance < Mathf.Sqrt(5))
+                    if (distance > 0 && distance < Mathf.Sqrt(4))
                     {
                         otherBrick.Data.isFreeze = true;
                         otherBrick.Data.LvFreeze = 2;
