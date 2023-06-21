@@ -98,8 +98,10 @@ public class BrickController : MonoBehaviour
                 if (Data.Hp <= 0)
                 {
                     RemoveBrick();
-
-                    GameBoardController.Instance.UpdateDestroyedBricks();
+                    if (!gameObject.CompareTag("Item"))
+                    {
+                        GameBoardController.Instance.UpdateDestroyedBricks();
+                    }
                     if (Data.hasCandy)
                     {
                         GameBoardController.Instance.UpdateCandy(1);
