@@ -34,6 +34,7 @@ public class BallController : MonoBehaviour
     public bool isShooted;
     public bool isEndRound;
     private float _xFirstBall = 0;
+    private bool _firstBall = false;
 
     [SerializeField] private float _timeCheckLoop = 5;
     private List<Vector3> _listDirectionRegister;
@@ -93,6 +94,7 @@ public class BallController : MonoBehaviour
         _timeRunning = 0;
         isEndRound = false;
         isShooted = true;
+        _firstBall = false;
         _countBallRunnning = 0;
         GameFlow.Instance.timeScale = 1;
         float x = _xFirstBall;
@@ -131,8 +133,9 @@ public class BallController : MonoBehaviour
 
     public void SetUpFirstBallReturned(float x)
     {
-        if (CountBallRunnning == TotalBall)
+        if (!_firstBall)
         {
+            _firstBall = true;
             GameFlow.Instance.ChangePositionJoystick(x);
             _xFirstBall = x;
             Debug.Log("huyeah");
@@ -141,6 +144,7 @@ public class BallController : MonoBehaviour
 
     public void CheckLoop()
     {
+
     }
 
     public void BallRunning()
