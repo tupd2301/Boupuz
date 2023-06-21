@@ -162,6 +162,7 @@ public class BallController : MonoBehaviour
         }
         if (_timeRunning >= _timeCheckLoop)
         {
+            _timeRunning = 0;
             CheckLoop();
         }
         if (SpeedToRun > 0)
