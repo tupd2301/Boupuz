@@ -29,14 +29,14 @@ public class BlockTest : MonoBehaviour
                 {
                     Debug.Log("yub");
                     coll.transform.position = _listPosition[index];
-                    BallController.Instance.CheckContact(_listContact[index], coll.gameObject);
+                    BallController.Instance.CheckContact(_listContact[index], coll.gameObject, true);
                 }
                 else
                 {
                     _listDirection.Add(direction);
                     _listPosition.Add(coll.transform.position);
                     _listContact.Add(coll.contacts[0]);
-                    BallController.Instance.CheckContact(coll.contacts[0], coll.gameObject);
+                    BallController.Instance.CheckContact(coll.contacts[0], coll.gameObject, true);
                 }
             }
             else
@@ -44,7 +44,7 @@ public class BlockTest : MonoBehaviour
                 _listDirection.Add(direction);
                 _listPosition.Add(coll.transform.position);
                 _listContact.Add(coll.contacts[0]);
-                BallController.Instance.CheckContact(coll.contacts[0], coll.gameObject);
+                BallController.Instance.CheckContact(coll.contacts[0], coll.gameObject, true);
             }
         }
     }

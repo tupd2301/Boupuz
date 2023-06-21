@@ -48,6 +48,7 @@ public class BrickController : MonoBehaviour
 
     public IEnumerator Move(float duration)
     {
+        GameFlow.Instance.canShoot = false;
         for (int s = 0; s < Data.Speed; s++)
         {
             Vector3 startPos = transform.localPosition;
@@ -61,6 +62,8 @@ public class BrickController : MonoBehaviour
             transform.localPosition = endPos;
             SetScenePositionBasedOnGridCoordinate();
         }
+        yield return new WaitForSeconds(duration);
+        GameFlow.Instance.canShoot = true;
     }
 
     public void OnCollisionStay2D(Collision2D col)
@@ -323,14 +326,14 @@ public class BrickController : MonoBehaviour
                 {
                     //Debug.Log("yub");
                     col.transform.position = _listPosition[index];
-                    BallController.Instance.CheckContact(_listContact[index], col.gameObject);
+                    BallController.Instance.CheckContact(_listContact[index], col.gameObject, false);
                 }
                 else
                 {
                     _listDirection.Add(direction);
                     _listPosition.Add(col.transform.position);
                     _listContact.Add(col.contacts[0]);
-                    BallController.Instance.CheckContact(col.contacts[0], col.gameObject);
+                    BallController.Instance.CheckContact(col.contacts[0], col.gameObject, false);
                 }
             }
             else
@@ -338,7 +341,7 @@ public class BrickController : MonoBehaviour
                 _listDirection.Add(direction);
                 _listPosition.Add(col.transform.position);
                 _listContact.Add(col.contacts[0]);
-                BallController.Instance.CheckContact(col.contacts[0], col.gameObject);
+                BallController.Instance.CheckContact(col.contacts[0], col.gameObject, false);
             }
         }
     }

@@ -28,7 +28,7 @@ public class BallController : MonoBehaviour
     [SerializeField] private Vector3 _gunPosition;
     [SerializeField] private Vector2 _direction;
     [SerializeField] private int _countBallRunnning;
-    [SerializeField]private int _startBall;
+    [SerializeField] private int _startBall;
 
     private int _addBall;
     public bool isShooted;
@@ -38,7 +38,7 @@ public class BallController : MonoBehaviour
 
     [SerializeField] private float _timeCheckLoop = 5;
     private List<Vector3> _listDirectionRegister;
-    [SerializeField]private float _timeRunning = 0;
+    [SerializeField] private float _timeRunning = 0;
 
     [SerializeField] private int _addDamageBySkill;
     [SerializeField] private int _addBallBySkill;
@@ -59,7 +59,7 @@ public class BallController : MonoBehaviour
     }
     public void GetBall(int amount)
     {
-        
+
         TotalBall = amount;
         _balls.AddRange(PoolManager.Instance.GetObjects("Ball", amount, transform));
         for (int i = 0; i < amount; i++)
@@ -108,18 +108,21 @@ public class BallController : MonoBehaviour
                 _balls[i].transform.position = new Vector3(x, GunPosition.y, 0);
                 _listBallModel[i].IsRunning = true;
                 _listBallModel[i].ImpactTime = 0;
-                _listBallModel[i].Damage = _addDamageBySkill+1;
+                _listBallModel[i].Damage = _addDamageBySkill + 1;
                 _listBallModel[i].CanFreeze = _addFreezeBySkill;
                 _countBallRunnning += 1;
-                UIManager.Instance.UpdateTotalBall(_totalBall-_countBallRunnning);
+                UIManager.Instance.UpdateTotalBall(_totalBall - _countBallRunnning);
                 yield return new WaitForSeconds(_speedToShoot * GameFlow.Instance.timeScale);
             }
         }
     }
 
-    public void CheckContact(ContactPoint2D contact, GameObject ball)
+    public void CheckContact(ContactPoint2D contact, GameObject ball, bool isWall)
     {
-        Debug.Log("pos:");
+        if (!isWall)
+        {
+            _timeRunning = 0;
+        }
         Vector3 direction = Vector3.Reflect(ball.GetComponent<BallModel>().Direction, contact.normal);
         ball.GetComponent<BallModel>().Direction = direction;
         ball.GetComponent<BallModel>().ImpactTime += 1;
@@ -179,7 +182,7 @@ public class BallController : MonoBehaviour
                         CountBallRunnning--;
                         _balls[i].transform.position = new Vector3(_xFirstBall, GunPosition.y, 0) * GameFlow.Instance.timeScale;
                         _listBallModel[i].IsRunning = false;
-                        UIManager.Instance.UpdateTotalBall(_totalBall-CountBallRunnning);
+                        UIManager.Instance.UpdateTotalBall(_totalBall - CountBallRunnning);
                     }
                 }
             }
@@ -192,10 +195,12 @@ public class BallController : MonoBehaviour
             GameFlow.Instance.timeScale = 1;
             GameBoardController.Instance.MoveAll();
             RemoveBalls();
-            //AddBall(1);
+
+            if(_totalBall < 1)
+                AddBall(1);
+
             CalculateBalls();
             UIManager.Instance.UpdateTotalBall(_totalBall);
-            GameFlow.Instance.canShoot = true;
         }
     }
 

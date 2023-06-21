@@ -72,7 +72,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (GameFlow.Instance.canShoot)
+        if (GameFlow.Instance.canShoot && GameFlow.Instance._laser.LaserGraphic.activeInHierarchy)
         {
             cam = null;
             if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
@@ -153,7 +153,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public virtual void OnPointerUp(PointerEventData eventData)
     {
-        if (GameFlow.Instance.canShoot)
+        if (GameFlow.Instance.canShoot && GameFlow.Instance._laser.LaserGraphic.activeInHierarchy)
         {
             Debug.Log("Up");
             Vector2 direction = handle.anchoredPosition - Vector2.zero;

@@ -7,6 +7,8 @@ public class Laser : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private GameObject _laserGraphic;
 
+    public GameObject LaserGraphic { get => _laserGraphic; set => _laserGraphic = value; }
+
     public void SetPosition(Vector2 position)
     {
         transform.position = position;
@@ -14,7 +16,7 @@ public class Laser : MonoBehaviour
 
     public void SetActive(bool isActive)
     {
-        _laserGraphic.SetActive(isActive);
+        LaserGraphic.SetActive(isActive);
     }
 
     //public void ChnageDirection(Vector2 direction)
@@ -39,11 +41,11 @@ public class Laser : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction, 20f, _layerMask);
         if (hit.collider == null)
         {
-            _laserGraphic.GetComponent<SpriteRenderer>().size = new Vector2(50,0.25f);
+            LaserGraphic.GetComponent<SpriteRenderer>().size = new Vector2(50,0.25f);
         }
         else
         {
-            _laserGraphic.GetComponent<SpriteRenderer>().size = new Vector2(hit.distance*2, 0.25f);
+            LaserGraphic.GetComponent<SpriteRenderer>().size = new Vector2(hit.distance*2, 0.25f);
         }
     }
 }
