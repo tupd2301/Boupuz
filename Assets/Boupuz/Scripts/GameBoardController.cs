@@ -151,6 +151,18 @@ public class GameBoardController : MonoBehaviour
         List<BrickController> movableObjects = new List<BrickController>();
         for (int i = 0; i < _brickControllers.Count; i++)
         {
+            if (_brickControllers[i].Data.Type == ObjectType.Item)
+            {
+                if (_brickControllers[i].Data.Id == 2 || _brickControllers[i].Data.Id == 3) // if laser
+                {
+                    if (_brickControllers[i].gameObject.GetComponent<LaserItem>().isTouched)
+                    {
+                        _brickControllers[i].gameObject.SetActive(false);
+                        _removedBrick.Add(_brickControllers[i]);
+                    }
+                }
+
+            }
             if (_brickControllers[i].Data.movable && _brickControllers[i].gameObject.activeInHierarchy)
             {
                 if (!_brickControllers[i].Data.isFreeze && !CheckBlockingObject(_brickControllers[i]))
@@ -182,6 +194,7 @@ public class GameBoardController : MonoBehaviour
                     }
                 }
             }
+            
         }
         UpdateGrid();
 
