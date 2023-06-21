@@ -91,7 +91,7 @@ public class BrickData : MonoBehaviour
     public ObjectType Type;
     public GridCoordinate BrickCoordinate;
     //public List<int> BrickSize;
-    public int maxHp;
+    //public int maxHp;
     public int Hp;
     public int Atk;
     public int Speed;
@@ -100,6 +100,7 @@ public class BrickData : MonoBehaviour
     public int LvFreeze;
     public bool isBurn;
     public bool movable;
+    public bool isBlocked;
     public bool hasCandy;
     //public int numBallEat;
 

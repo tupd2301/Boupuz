@@ -289,13 +289,13 @@ public class BrickController : MonoBehaviour
             BrickController otherBrick = GameBoardController.Instance.BrickControllers[i];
             if (otherBrick.Data.BrickCoordinate.Y < GameBoardController.Instance.GridScreenHeight)
             {
-                if (otherBrick.Data.Type == ObjectType.Brickie)
+                if (otherBrick.Data.Type == ObjectType.Brickie && otherBrick.Data.Id != 2)
                 {
                     float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, brick.Data.BrickCoordinate);
                     if (distance > 0 && distance < Mathf.Sqrt(4))
                     {
                         otherBrick.Data.isFreeze = true;
-                        otherBrick.Data.LvFreeze = 2;
+                        otherBrick.Data.LvFreeze = 3;
                         otherBrick.View.EnableChildGraphic();
                     }
                 }

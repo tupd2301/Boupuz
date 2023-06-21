@@ -173,6 +173,12 @@ public class GameBoardController : MonoBehaviour
                     {
                         _brickControllers[i].Data.isFreeze = false;
                         _brickControllers[i].View.DisableChildGraphic();
+                        movableObjects.Add(_brickControllers[i]);
+                        if(!CheckLose(_brickControllers[i]))
+                        {
+                            UpdateBrickCoordinateBySpeed(_brickControllers[i]);
+                            CheckLose(_brickControllers[i]);
+                        }
                     }
                 }
             }
@@ -192,17 +198,22 @@ public class GameBoardController : MonoBehaviour
         try{
             if (_grid[nextCoordinate.X,nextCoordinate.Y] != null)
             {
-                return _grid[nextCoordinate.X,nextCoordinate.Y].Data.isFreeze; //|| !Grid[nextCoordinate.X,nextCoordinate.Y].Data.movable;
+                if (_grid[nextCoordinate.X,nextCoordinate.Y].Data.isFreeze || _grid[nextCoordinate.X,nextCoordinate.Y].Data.isBlocked)
+                {
+                    brick.Data.isBlocked = true;
+                    return true;
+                }
             }
+           
+            brick.Data.isBlocked = false;
+        
             return false;
         }
         catch
         {
-            Debug.Log(brick.gameObject.name);
-            Debug.Log(brick.Data.BrickCoordinate.Y);
-            Debug.Log(nextCoordinate.Y);
+            return false;
         }
-        return false;
+        
         
     }
 
