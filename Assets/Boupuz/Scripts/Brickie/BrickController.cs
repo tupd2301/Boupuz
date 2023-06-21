@@ -16,7 +16,7 @@ public class BrickController : MonoBehaviour
         }
     }
 
-    public BrickData Data {get {return _data;}}
+    public BrickData Data { get { return _data; } }
     [SerializeField]
     private BrickData _data;
 
@@ -46,14 +46,14 @@ public class BrickController : MonoBehaviour
         SetUpPositionAndSize();
     }
 
-    public IEnumerator Move(float duration) 
+    public IEnumerator Move(float duration)
     {
         for (int s = 0; s < Data.Speed; s++)
         {
             Vector3 startPos = transform.localPosition;
             Vector3 endPos = startPos + Data.Direction * _moveDistance;
             //Debug.Log("Collider bounds: " + _collider.bounds.size);
-            for (float elasped = 0; elasped < duration; elasped += Time.deltaTime) 
+            for (float elasped = 0; elasped < duration; elasped += Time.deltaTime)
             {
                 transform.localPosition = Vector3.Lerp(startPos, endPos, elasped / duration);
                 yield return null;
@@ -65,7 +65,7 @@ public class BrickController : MonoBehaviour
 
     public void OnCollisionStay2D(Collision2D col)
     {
-        if(col.gameObject.CompareTag("Ball") && Data.BrickCoordinate.Y < 11)
+        if (col.gameObject.CompareTag("Ball") && Data.BrickCoordinate.Y < 11)
         {
             BallController.Instance.BallThroughBrickies(col.gameObject);
         }
@@ -75,47 +75,59 @@ public class BrickController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Ball") && Data.BrickCoordinate.Y < 11)
         {
-
-            if (!gameObject.CompareTag("Item"))
+            if (gameObject.CompareTag("Block")||gameObject.CompareTag("Item"))
             {
-                BallReflect(col);
-            }
-            DecreaseHP(col);
-            
-            if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
-            {
-                // Disable ball
-                Debug.Log("Starvy ate 1 ball");
-                col.gameObject.SetActive(false);
-                //BallController.Instance.TotalBall -= 1;
-                BallController.Instance.AddListRemoveBall(col.gameObject);
-                // Total number ball -= 1
-                
-            }
-
-            // When brick health <= 0, disable it and activate its unique ability
-            if ( Data.Hp <= 0)
-            {
-                RemoveBrick();
-                
-                GameBoardController.Instance.UpdateDestroyedBricks();
-                if (Data.hasCandy)
+                if (!gameObject.CompareTag("Item"))
                 {
-                    GameBoardController.Instance.UpdateCandy(1);
+                    BallReflect(col);
                 }
-                
+                DecreaseHP(col);
 
                 if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
                 {
-                    DecreaseAdjacentBrickHealth(this);
-                    //RemoveBrick();
+                    // Disable ball
+                    Debug.Log("Starvy ate 1 ball");
+                    col.gameObject.SetActive(false);
+                    //BallController.Instance.TotalBall -= 1;
+                    BallController.Instance.AddListRemoveBall(col.gameObject);
+                    // Total number ball -= 1
+
                 }
-                else if (Data.Id == 2 && Data.Type == ObjectType.Brickie) // if icy
+
+                // When brick health <= 0, disable it and activate its unique ability
+                if (Data.Hp <= 0)
                 {
-                    FreezeAdjacentBrick(this);
+                    RemoveBrick();
+                    if (!gameObject.CompareTag("Item"))
+                    {
+                        GameBoardController.Instance.UpdateDestroyedBricks();
+                    }
+                    if (Data.hasCandy)
+                    {
+                        GameBoardController.Instance.UpdateCandy(1);
+                    }
+
+
+                    if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
+                    {
+                        DecreaseAdjacentBrickHealth(this);
+                        //RemoveBrick();
+                    }
+                    else if (Data.Id == 2 && Data.Type == ObjectType.Brickie) // if icy
+                    {
+                        FreezeAdjacentBrick(this);
+                    }
+
+
                 }
-                
-                
+            }
+            else if (gameObject.CompareTag("Portal"))
+            {
+                col.transform.position = gameObject.GetComponent<Portals>().otherPortal.transform.position;
+                Vector3 direction = col.gameObject.GetComponentInChildren<BallModel>().Direction;
+                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 5*0.01f * BallController.Instance.SpeedToRun);
+                col.gameObject.GetComponentInChildren<TrailRenderer>().Clear();
+
             }
         }
         else if (col.gameObject.CompareTag("Trampoline"))
@@ -130,26 +142,26 @@ public class BrickController : MonoBehaviour
         else if (col.gameObject.CompareTag("Portal"))
         {
             gameObject.SetActive(false);
-            BrickController otherPortal =  col.gameObject.GetComponent<Portals>().otherPortal;
+            BrickController otherPortal = col.gameObject.GetComponent<Portals>().otherPortal;
             GridCoordinate newCoordinate = otherPortal.Data.BrickCoordinate + Data.Direction;
             if (newCoordinate.X >= 0 && newCoordinate.X < GameBoardController.Instance.GridScreenWidth &&
                 newCoordinate.Y >= 0 && newCoordinate.Y < GameBoardController.Instance.GridScreenHeight)
+            {
+                if (GameBoardController.Instance.Grid[newCoordinate.X, newCoordinate.Y] == null)
                 {
-                    if (GameBoardController.Instance.Grid[newCoordinate.X, newCoordinate.Y] == null)
-                    {
-                        Data.BrickCoordinate = newCoordinate;
-                    }
-                    else
-                    {
-                        // add health 
-                        GameBoardController.Instance.Grid[newCoordinate.X, newCoordinate.Y].Data.Hp += Data.Hp;
-                    }
+                    Data.BrickCoordinate = newCoordinate;
                 }
+                else
+                {
+                    // add health 
+                    GameBoardController.Instance.Grid[newCoordinate.X, newCoordinate.Y].Data.Hp += Data.Hp;
+                }
+            }
             else
             {
                 Debug.Log("Portal: new coordinate is invalid");
             }
-            
+
         }
     }
     #region Trampoline
@@ -163,7 +175,7 @@ public class BrickController : MonoBehaviour
             if (listCoordinate.Count > 9)
             {
                 AddHealthToLowestAdjacentBrick(brick, listCoordinate);
-                return new GridCoordinate(-1,-1);
+                return new GridCoordinate(-1, -1);
             }
 
             newCoordinate = GetRandomAdjacentGridCoordinate(brick.Data.BrickCoordinate, 1);
@@ -185,10 +197,10 @@ public class BrickController : MonoBehaviour
         return new GridCoordinate(X, Y);
     }
 
-    private void AddHealthToLowestAdjacentBrick(BrickController brick, HashSet<GridCoordinate> adjacentCoordinate )
+    private void AddHealthToLowestAdjacentBrick(BrickController brick, HashSet<GridCoordinate> adjacentCoordinate)
     {
         int lowestHP = 0;
-        GridCoordinate lowestCoord = new GridCoordinate(0,0);
+        GridCoordinate lowestCoord = new GridCoordinate(0, 0);
         foreach (GridCoordinate coord in adjacentCoordinate)
         {
             if (GameBoardController.Instance.Grid[coord.X, coord.Y]?.Data.Hp < lowestHP && coord != brick.Data.BrickCoordinate)
@@ -212,7 +224,7 @@ public class BrickController : MonoBehaviour
         // }
 
         Data.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
-        
+
         _view.DisplayHealth();
     }
 
@@ -233,7 +245,7 @@ public class BrickController : MonoBehaviour
     {
         gameObject.SetActive(false);
         GameBoardController.Instance.BrickControllers.Remove(this);
-        
+
     }
 
     public void DecreaseAdjacentBrickHealth(BrickController brick)
@@ -328,17 +340,17 @@ public class BrickController : MonoBehaviour
     {
         GameObject ori1 = GameBoardController.Instance.BrickOri1;
         GameObject ori2 = GameBoardController.Instance.BrickOri2;
-        _moveDistance = Vector3.Distance(ori1.transform.position,ori2.transform.position);
+        _moveDistance = Vector3.Distance(ori1.transform.position, ori2.transform.position);
         Vector3 oriPosition = ori1.transform.position;
         transform.position = new Vector3(oriPosition.x + _moveDistance * Data.BrickCoordinate.X, oriPosition.y + _moveDistance * Data.BrickCoordinate.Y);
-        _view.transform.localScale = new Vector3(0.68f,0.68f,0.68f);
+        _view.transform.localScale = new Vector3(0.68f, 0.68f, 0.68f);
     }
 
     public void SetScenePositionBasedOnGridCoordinate()
     {
         GameObject ori1 = GameBoardController.Instance.BrickOri1;
         Vector3 oriPosition = ori1.transform.position;
-        transform.position = new Vector3(oriPosition.x + _moveDistance * Data.BrickCoordinate.X,    
+        transform.position = new Vector3(oriPosition.x + _moveDistance * Data.BrickCoordinate.X,
                                          oriPosition.y + _moveDistance * Data.BrickCoordinate.Y);
         gameObject.SetActive(true);
     }

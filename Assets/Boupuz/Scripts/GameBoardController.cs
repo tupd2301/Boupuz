@@ -65,7 +65,7 @@ public class GameBoardController : MonoBehaviour
     public void InitGrid()
     {
         Debug.Log("Number of brick: " + _brickControllers.Count.ToString());
-        LevelData.GetTotalBricks(_brickControllers.Count);
+        LevelData.GetTotalBricks(_brickControllers.Where(brick=>brick.CompareTag("Block")).Count());
         _grid = new BrickController[_gridWidth, _gridHeight];
         for (int brickIndex = 0; brickIndex < _brickControllers.Count; brickIndex++)
         {
