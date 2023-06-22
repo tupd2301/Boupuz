@@ -226,7 +226,7 @@ public class BrickController : MonoBehaviour
         // }
 
         Data.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
-
+        _view.FlashingRed();
         _view.DisplayHealth();
     }
 
@@ -242,6 +242,7 @@ public class BrickController : MonoBehaviour
         {
             Data.Hp -= value;
         }
+        _view.FlashingRed();
         _view.DisplayHealth();
     }
 
@@ -253,6 +254,13 @@ public class BrickController : MonoBehaviour
         if (!gameObject.CompareTag("Item"))
         {
             GameBoardController.Instance.UpdateDestroyedBricks();
+        }
+        else
+        {
+            if (Data.Id == 6 && Data.Type == ObjectType.Brickie)
+            {
+                GameBoardController.Instance.UpdateCollectedCake();
+            }
         }
         if (Data.hasCandy)
         {

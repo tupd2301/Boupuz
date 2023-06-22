@@ -15869,12 +15869,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6978632080076613100}
   m_Layer: 5
-  m_Name: Win condition
+  m_Name: Win condition puzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6978632080076613100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15882,14 +15882,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3128155586099538799}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3414362672919196423}
   - {fileID: 4476370791862448064}
-  m_Father: {fileID: 892714932658585881}
+  m_Father: {fileID: 9218967394032814220}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -18110,7 +18110,7 @@ RectTransform:
   - {fileID: 1300957766483909740}
   - {fileID: 1916390132549736904}
   m_Father: {fileID: 9218967394032814220}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -18780,9 +18780,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1512090056533036010}
-  - {fileID: 6978632080076613100}
   - {fileID: 2588643496700990110}
-  - {fileID: 7154995370480627914}
   m_Father: {fileID: 7203965724131896506}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20465,8 +20463,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6013626864776620879}
+  - {fileID: 6978632080076613100}
   - {fileID: 7216773287175638196}
   - {fileID: 1680971111242211477}
+  - {fileID: 7154995370480627914}
   - {fileID: 3439435870908083528}
   m_Father: {fileID: 7203965724131896506}
   m_RootOrder: 0
@@ -25117,12 +25117,12 @@ GameObject:
   - component: {fileID: 3672521043927630392}
   - component: {fileID: 4842173726012734037}
   m_Layer: 5
-  m_Name: CandyUI
+  m_Name: TurnsUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7154995370480627914
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25130,15 +25130,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6220295066827481658}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5665258747913188356}
   - {fileID: 5540694494621686245}
-  m_Father: {fileID: 892714932658585881}
-  m_RootOrder: 3
+  m_Father: {fileID: 9218967394032814220}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -29467,7 +29467,7 @@ RectTransform:
   m_Children:
   - {fileID: 7776777236000240081}
   m_Father: {fileID: 9218967394032814220}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -30761,7 +30761,7 @@ RectTransform:
   - {fileID: 1013842013454682858}
   - {fileID: 4360406821301949447}
   m_Father: {fileID: 9218967394032814220}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -33294,7 +33294,7 @@ RectTransform:
   m_Children:
   - {fileID: 1119816059621357960}
   m_Father: {fileID: 892714932658585881}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}

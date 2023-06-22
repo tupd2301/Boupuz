@@ -31,6 +31,7 @@ public class GameBoardController : MonoBehaviour
     public BrickController[,] Grid { get {return _grid;}}
 
     public LevelData LevelData { get; private set; }
+    public LevelInfo LevelInfo { get; private set; }
 
     public GameObject BrickOri1 { get => _brickOri1; set => _brickOri1 = value; }
     public GameObject BrickOri2 { get => _brickOri2; set => _brickOri2 = value; }
@@ -53,6 +54,35 @@ public class GameBoardController : MonoBehaviour
 
     void Start()
     {
+        int levelID = PlayerPrefs.GetInt("LevelID", 1);
+        var resource = Resources.Load("Level" + levelID.ToString());
+        
+        if (resource)
+        {   
+            var level = resource as GameObject;
+            Instantiate(level, Vector3.zero, Quaternion.identity, transform);
+        }
+        else
+        {
+            Debug.Log("--------------Error loading level------------------");
+        }
+        LevelInfo = GetComponentInChildren<LevelInfo>();
+        Debug.Log(LevelInfo.levelType);
+
+        if (LevelInfo.levelType == LevelInfo.LevelType.Action)
+        {
+            // UI
+
+        }
+        else if (LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
+        {
+            // UI
+            //
+            LevelData.TotalTurn = LevelInfo.LevelTurn;
+            LevelData.CurrentTurn = LevelData.TotalTurn;
+        }
+
+
         _brickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
         InitGrid();
         
@@ -69,6 +99,7 @@ public class GameBoardController : MonoBehaviour
     {
         Debug.Log("Number of brick: " + _brickControllers.Count.ToString());
         LevelData.GetTotalBricks(_brickControllers.Where(brick=>brick.CompareTag("Block")).Count());
+        LevelData.GetTotalCakes(_brickControllers.Where(brick=>brick.Data.Id == 6 && brick.Data.Type == ObjectType.Brickie).Count());
         _grid = new BrickController[_gridWidth, _gridHeight];
         for (int brickIndex = 0; brickIndex < _brickControllers.Count; brickIndex++)
         {
@@ -135,6 +166,7 @@ public class GameBoardController : MonoBehaviour
 
     public bool CheckLose(BrickController brick)
     {
+        
         if((brick.Data.BrickCoordinate.Y<brick.Data.Speed || brick.Data.BrickCoordinate.Y<1)&&brick.gameObject.CompareTag("Block"))
         {
             Debug.Log("Lose");
@@ -142,6 +174,7 @@ public class GameBoardController : MonoBehaviour
             UIManager.Instance.LoadLoseUI();
             return true;
         }
+        
         return false;
     }
 
@@ -234,11 +267,30 @@ public class GameBoardController : MonoBehaviour
     {
         LevelData.UpdateDestroyedBricks();
         UIManager.Instance.UpdateDestroyedBricksUI();
+
+        if (LevelData.totalBricks == LevelData.destroyedBricks)
+        {
+            //Win
+            GameFlow.Instance.canShoot = false;
+            UIManager.Instance.LoadWinUI();
+        }
     }
 
     public void UpdateCandy(int value)
     {
         LevelData.AddCandies(value);
         UIManager.Instance.UpdateCandyUI();
+    }
+
+    public void UpdateCollectedCake()
+    {
+        LevelData.UpdateCollectedCake();
+
+        if (LevelData.CollectedCake == LevelData.TotalCake)
+        {
+            //Win
+            GameFlow.Instance.canShoot = false;
+            UIManager.Instance.LoadWinUI();
+        }
     }
 }

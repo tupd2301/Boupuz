@@ -193,7 +193,22 @@ public class BallController : MonoBehaviour
             isEndRound = true;
             StopAllCoroutines();
             GameFlow.Instance.timeScale = 1;
-            GameBoardController.Instance.MoveAll();
+            if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
+            {
+                GameBoardController.Instance.MoveAll();
+            }
+            else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
+            {
+                GameBoardController.Instance.LevelData.DecreaseTurn(1);
+                GameFlow.Instance.canShoot = true;
+                if (GameBoardController.Instance.LevelData.CurrentTurn <= 0 &&
+                    GameBoardController.Instance.LevelData.CollectedCake < GameBoardController.Instance.LevelData.TotalCake)
+                {
+                    GameFlow.Instance.canShoot = false;
+                    UIManager.Instance.LoadLoseUI();
+                }
+            }
+            
             RemoveBalls();
 
             if(_totalBall < 1)

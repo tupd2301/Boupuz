@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,17 +7,27 @@ public class LevelData : MonoBehaviour
     public int LevelID { get; private set; }
     public int maxBallNumber  { get; private set; }
     public int currentBallNumber { get; private set; }
-    public int numTurn { get; private set; }
-    public int currentTurn { get; private set; }
+    [SerializeField]
+    private int _totalTurn;
+    public int TotalTurn { get => _totalTurn; set => _totalTurn = value; }
+    [SerializeField]
+    private int _currentTurn;
+    public int CurrentTurn { get => _currentTurn; set => _currentTurn = value; }
     public int ballDamage { get; private set; }
     [SerializeField] private int _totalBricks;
     public int totalBricks { get {return _totalBricks;}}
     [SerializeField] private int _destroyedBricks;
     public int destroyedBricks { get {return _destroyedBricks;}}
+    [SerializeField] private int _totalCake;
+    public int TotalCake { get {return _totalCake;}}
+    [SerializeField] private int _collectedCake;
+    public int CollectedCake { get {return _collectedCake;}}
     [SerializeField] private int _numCandies;
     public int numCandies { get {return _numCandies;}}
     [SerializeField] private int _numCoins;
     public int numCoins { get {return _numCoins;}}
+
+    
 
     private int levelSelect;
 
@@ -40,6 +51,11 @@ public class LevelData : MonoBehaviour
         _totalBricks = value;
     }
 
+    public void GetTotalCakes(int value)
+    {
+        _totalCake = value;
+    }
+
     public void AddCandies(int value)
     {
         _numCandies += value;
@@ -55,4 +71,13 @@ public class LevelData : MonoBehaviour
         _numCoins += value;
     }
 
+    public void DecreaseTurn(int value)
+    {
+        CurrentTurn -= value;
+    }
+
+    public void UpdateCollectedCake()
+    {
+        _collectedCake += 1;
+    }
 }

@@ -46,4 +46,9 @@ public class BrickView : MonoBehaviour
     {
         _childGraphic.enabled = false;
     }
+
+    public void FlashingRed()
+    {
+        _animator.Play("FlashingRed");
+    }
 }
