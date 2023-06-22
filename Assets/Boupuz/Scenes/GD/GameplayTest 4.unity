@@ -1863,11 +1863,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3818671813279012272, guid: 1dfa716f9ffb44246be3d144aa2ada8f, type: 3}
       propertyPath: _speedToRun
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3818671813279012272, guid: 1dfa716f9ffb44246be3d144aa2ada8f, type: 3}
       propertyPath: _timeCheckLoop
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4289844065916276257, guid: 1dfa716f9ffb44246be3d144aa2ada8f, type: 3}
       propertyPath: m_Name
@@ -4335,27 +4335,27 @@ Transform:
   - {fileID: 1759218923}
   - {fileID: 627450212}
   - {fileID: 455592513}
+  - {fileID: 190748044}
   - {fileID: 598029769}
   - {fileID: 884947453}
+  - {fileID: 191155313}
   - {fileID: 382011201}
   - {fileID: 24590766}
-  - {fileID: 850700069}
-  - {fileID: 1098675345}
-  - {fileID: 1778371401}
-  - {fileID: 972116024}
-  - {fileID: 377272572}
   - {fileID: 803273071}
-  - {fileID: 571365892}
-  - {fileID: 254017756}
-  - {fileID: 1881747865}
-  - {fileID: 155227257}
-  - {fileID: 191155313}
-  - {fileID: 190748044}
-  - {fileID: 1672696957}
-  - {fileID: 1998497564}
-  - {fileID: 1873670899}
+  - {fileID: 850700069}
   - {fileID: 1351028826}
+  - {fileID: 1098675345}
+  - {fileID: 254017756}
+  - {fileID: 1672696957}
+  - {fileID: 1778371401}
   - {fileID: 1780470993}
+  - {fileID: 972116024}
+  - {fileID: 1873670899}
+  - {fileID: 377272572}
+  - {fileID: 1881747865}
+  - {fileID: 571365892}
+  - {fileID: 1998497564}
+  - {fileID: 155227257}
   m_Father: {fileID: 342982376}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
