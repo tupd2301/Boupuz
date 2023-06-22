@@ -55,7 +55,7 @@ public class GameBoardController : MonoBehaviour
     void Start()
     {
         int levelID = PlayerPrefs.GetInt("LevelID", 1);
-        var resource = Resources.Load("/Levels/Level" + levelID.ToString());
+        var resource = Resources.Load("Levels/Level" + levelID.ToString());
         
         if (resource)
         {   

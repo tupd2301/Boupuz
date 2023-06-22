@@ -58,7 +58,10 @@ MonoBehaviour:
   isShooted: 0
   isEndRound: 0
   _timeCheckLoop: 10
+  _timeShoot: 0
   _timeRunning: 0
   _addDamageBySkill: 0
   _addBallBySkill: 0
   _addFreezeBySkill: 0
+  _speedUp: 10
+  _timeSpeedUp: 30
