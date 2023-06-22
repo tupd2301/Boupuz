@@ -181,9 +181,10 @@ public class BallController : MonoBehaviour
                 {
                     Vector3 direction = _listBallModel[i].Direction;
                     _balls[i].transform.position = Vector3.MoveTowards(_balls[i].transform.position, (direction.normalized + _balls[i].transform.position), 0.01f * (_timeShoot>=_timeSpeedUp? _speedUp: SpeedToRun));
-                    if (_balls[i].transform.position.y < GunPosition.y && _balls[i].transform.position.x != _xFirstBall)
+                    if (_balls[i].transform.position.y < GunPosition.y)
                     {
-                        SetUpFirstBallReturned(_balls[i].transform.position.x);
+                        if(_balls[i].transform.position.x != _xFirstBall)
+                            SetUpFirstBallReturned(_balls[i].transform.position.x);
                         CountBallRunnning--;
                         _balls[i].transform.position = new Vector3(_xFirstBall, GunPosition.y, 0) * GameFlow.Instance.timeScale;
                         _listBallModel[i].IsRunning = false;
@@ -197,8 +198,9 @@ public class BallController : MonoBehaviour
             _timeShoot = 0;
             _timeRunning = 0;
             isEndRound = true;
-            StopAllCoroutines();
+            //StopAllCoroutines();
             GameFlow.Instance.timeScale = 1;
+            GameFlow.Instance.canShoot = true;
             if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
             {
                 isShooted = false;

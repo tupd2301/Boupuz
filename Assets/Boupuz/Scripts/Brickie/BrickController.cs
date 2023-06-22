@@ -66,7 +66,7 @@ public class BrickController : MonoBehaviour
             transform.localPosition = endPos;
             SetScenePositionBasedOnGridCoordinate();
         }
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(0.3f);
         GameFlow.Instance.canShoot = true;
     }
 
@@ -125,7 +125,7 @@ public class BrickController : MonoBehaviour
             {
                 col.transform.position = gameObject.GetComponent<Portals>().otherPortal.transform.position;
                 Vector3 direction = col.gameObject.GetComponentInChildren<BallModel>().Direction;
-                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 5*0.01f * BallController.Instance.SpeedToRun);
+                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 3.3f*0.01f * 8);
                 col.gameObject.GetComponentInChildren<TrailRenderer>().Clear();
 
             }
@@ -133,7 +133,7 @@ public class BrickController : MonoBehaviour
             {
                 Vector3 direction = new Vector3(UnityEngine.Random.Range(-180f, 180f), UnityEngine.Random.Range(-180f, 180f), 0).normalized;
                 col.gameObject.GetComponent<BallModel>().Direction = direction;
-                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 5*0.01f * BallController.Instance.SpeedToRun);
+                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 3f*0.01f * 8);
             }
         }
         else if (col.gameObject.CompareTag("Trampoline"))
@@ -236,7 +236,6 @@ public class BrickController : MonoBehaviour
 
     public void DecreasHpByValue(int value)
     {
-
         if (Data.Hp <= value)
         {
             RemoveBrick();
@@ -372,6 +371,10 @@ public class BrickController : MonoBehaviour
         transform.position = new Vector3(oriPosition.x + _moveDistance * Data.BrickCoordinate.X, oriPosition.y + _moveDistance * Data.BrickCoordinate.Y);
         float ratio = _moveDistance / 0.7291666f;
         _view.transform.localScale = new Vector3(0.68f, 0.68f, 0.68f)*ratio;
+        if (gameObject.CompareTag("Trampoline") || gameObject.CompareTag("Portal"))
+        {
+            _view.transform.localScale = new Vector3(0.68f, 0.68f, 0.68f) / 1.5f *ratio;
+        }
         _ratio = ratio;
     }
 

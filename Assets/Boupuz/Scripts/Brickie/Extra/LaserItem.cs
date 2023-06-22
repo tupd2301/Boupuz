@@ -18,13 +18,19 @@ public class LaserItem : MonoBehaviour
         rowIndex = _brick.Data.BrickCoordinate.Y;
     }
 
+    public void UpdateIndex()
+    {
+        colIndex = _brick.Data.BrickCoordinate.X;
+        rowIndex = _brick.Data.BrickCoordinate.Y;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Ball"))
         {
             //StopCoroutine(SummonLaser());
             _isTouched = true;
-            
+            UpdateIndex();
             StartCoroutine(SummonLaser());
             if (_brick.Data.Id == 2)
             {
@@ -76,11 +82,14 @@ public class LaserItem : MonoBehaviour
         {
             try 
             {
+                Debug.Log("row2");
                 BrickController otherBrick = GameBoardController.Instance.Grid[i, rowIndex];
                 if (otherBrick.gameObject.activeInHierarchy)
-                {    
+                {
+                    Debug.Log("row1");
                     if (otherBrick.Data.Id != 1 && otherBrick.Data.Type == ObjectType.Brickie)
                     {
+                        Debug.Log("row");
                         otherBrick.DecreasHpByValue(1);
                     }
                 }
