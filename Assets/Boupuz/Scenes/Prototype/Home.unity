@@ -290,7 +290,7 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1609751528786797964, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+    - target: {fileID: 1609751528556645556, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -341,6 +341,10 @@ PrefabInstance:
     - target: {fileID: 1609751529393097308, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: m_Name
       value: UIManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609751529669191583, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1609751530193925815, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: m_Camera

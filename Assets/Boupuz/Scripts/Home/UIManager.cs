@@ -17,6 +17,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text _destroyedBricksText;
     [SerializeField] private Text _numCandyText;
     [SerializeField] private Text _numCoinText;
+    [SerializeField] private Image _coinImage;
+    [SerializeField] private Image _candyImage;
+    [SerializeField] private Text _turnText;
+    [SerializeField] private Text _cakeText;
+    [SerializeField] private Image _cakeImage;
+    [SerializeField] private Image _turnImage;
 
     [SerializeField] private Text _levelCheat;
     [SerializeField] private GameObject _winUI;
@@ -30,6 +36,7 @@ public class UIManager : MonoBehaviour
     {
         UIManager.Instance = this;
     }
+
 
     public void MinusLevel()
     {
@@ -102,6 +109,8 @@ public class UIManager : MonoBehaviour
         {
             UpdateDestroyedBricksUI();
             UpdateCoinUI();
+            UpdateCakeUI();
+            UpdateTurnUI();
         }
         else
         {
@@ -124,6 +133,25 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UpdateCakeUI()
+    {
+        if (GameBoardController.Instance != null)
+        {
+            string totalCakes = GameBoardController.Instance.LevelData.TotalCake.ToString();
+            string collectedCake = GameBoardController.Instance.LevelData.CollectedCake.ToString();
+            _cakeText.text = collectedCake + "/" + totalCakes;
+        }
+        else
+        {
+            Debug.Log("GameBoardController is null");
+        }
+    }
+
+    public void UpdateTurnUI()
+    {
+        _turnText.text = GameBoardController.Instance.LevelData.CurrentTurn.ToString();
+    }
+
     public void UpdateCandyUI()
     {
         _numCandyText.text = GameBoardController.Instance.LevelData.numCandies.ToString();
@@ -132,5 +160,25 @@ public class UIManager : MonoBehaviour
     public void UpdateCoinUI()
     {
         _numCoinText.text = GameBoardController.Instance.LevelData.numCoins.ToString();
+    }
+
+    public void SetUpTopUI()
+    {
+        _coinImage.enabled = true;
+        _numCoinText.enabled = true;
+        if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
+        {
+            _numCandyText.enabled = true;
+            _destroyedBricksText.enabled = true;
+            
+            _candyImage.enabled = true;
+        }
+        else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
+        {
+            _turnText.enabled = true;
+            _turnImage.enabled = true;
+            _cakeText.enabled = true;
+            _cakeImage.enabled = true;
+        }
     }
 }
