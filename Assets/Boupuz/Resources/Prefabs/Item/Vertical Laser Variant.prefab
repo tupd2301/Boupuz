@@ -199,6 +199,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vertical Laser Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8455915155383301967, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
     - target: {fileID: 8741076295938774346, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: _collider
       value: 
@@ -245,6 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _laser: {fileID: 6781177818183613969}
+  _isTouched: 0
 --- !u!4 &9015121848808736871 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7210874724018135934, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
