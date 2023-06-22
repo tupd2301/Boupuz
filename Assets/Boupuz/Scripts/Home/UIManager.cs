@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -125,7 +126,8 @@ public class UIManager : MonoBehaviour
         {
             string totalBricks = GameBoardController.Instance.LevelData.totalBricks.ToString();
             string destroyedBricks = GameBoardController.Instance.LevelData.destroyedBricks.ToString();
-            _destroyedBricksText.text = destroyedBricks + "/" + totalBricks;
+            int destroyBricks = GameBoardController.Instance.LevelData.totalBricks - GameBoardController.Instance.BrickControllers.Where(brick=>brick.CompareTag("Block")).Count();
+            _destroyedBricksText.text = destroyBricks + "/" + totalBricks;
         }
         else
         {

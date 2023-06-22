@@ -239,7 +239,6 @@ public class BrickController : MonoBehaviour
         if (Data.Hp <= value)
         {
             RemoveBrick();
-            
         }
         else
         {

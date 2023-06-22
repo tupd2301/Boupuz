@@ -10,7 +10,7 @@ public class GameBoardController : MonoBehaviour
     public static GameBoardController Instance { get; private set; }
     [SerializeField]
     private List<BrickController> _brickControllers = new List<BrickController>();
-    public List<BrickController> BrickControllers { get { return _brickControllers; } }
+    //public List<BrickController> BrickControllers { get { return _brickControllers; } }
 
     private List<BrickController> _removedBrick = new List<BrickController>();
     public List<BrickController> RemovedBrick { get { return _removedBrick; } }
@@ -37,6 +37,7 @@ public class GameBoardController : MonoBehaviour
 
     public GameObject BrickOri1 { get => _brickOri1; set => _brickOri1 = value; }
     public GameObject BrickOri2 { get => _brickOri2; set => _brickOri2 = value; }
+    public List<BrickController> BrickControllers { get => _brickControllers; set => _brickControllers = value; }
 
     void Awake()
     {
@@ -85,7 +86,7 @@ public class GameBoardController : MonoBehaviour
         }
         UIManager.Instance.SetUpTopUI();
 
-        _brickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
+        BrickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
         InitGrid();
         
     }
@@ -99,13 +100,13 @@ public class GameBoardController : MonoBehaviour
 
     public void InitGrid()
     {
-        Debug.Log("Number of brick: " + _brickControllers.Count.ToString());
-        LevelData.GetTotalBricks(_brickControllers.Where(brick=>brick.CompareTag("Block")).Count());
-        LevelData.GetTotalCakes(_brickControllers.Where(brick=>brick.Data.Id == 6 && brick.Data.Type == ObjectType.Brickie).Count());
+        Debug.Log("Number of brick: " + BrickControllers.Count.ToString());
+        LevelData.GetTotalBricks(BrickControllers.Where(brick=>brick.CompareTag("Block")).Count());
+        LevelData.GetTotalCakes(BrickControllers.Where(brick=>brick.Data.Id == 6 && brick.Data.Type == ObjectType.Brickie).Count());
         _grid = new BrickController[_gridWidth, _gridHeight];
-        for (int brickIndex = 0; brickIndex < _brickControllers.Count; brickIndex++)
+        for (int brickIndex = 0; brickIndex < BrickControllers.Count; brickIndex++)
         {
-            BrickController newBrick = _brickControllers[brickIndex];
+            BrickController newBrick = BrickControllers[brickIndex];
             if (newBrick?.Data.BrickCoordinate.X < _gridWidth && newBrick?.Data.BrickCoordinate.Y < _gridHeight)
             {
                 if (_grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] == null)
@@ -120,7 +121,7 @@ public class GameBoardController : MonoBehaviour
                 }
             }
         }
-        ScaleWall(_brickControllers[0].Ratio);
+        ScaleWall(BrickControllers[0].Ratio);
         
     }
 
@@ -137,14 +138,14 @@ public class GameBoardController : MonoBehaviour
 
         for (int i = 0; i < _removedBrick.Count; i++)
         {
-            _brickControllers.Remove(_removedBrick[i]);
+            BrickControllers.Remove(_removedBrick[i]);
         }
         _removedBrick = new List<BrickController>();
 
         _grid = new BrickController[_gridWidth, _gridHeight];
-        for (int brickIndex = 0; brickIndex < _brickControllers.Count; brickIndex++)
+        for (int brickIndex = 0; brickIndex < BrickControllers.Count; brickIndex++)
         {
-            BrickController newBrick = _brickControllers[brickIndex];
+            BrickController newBrick = BrickControllers[brickIndex];
             if (newBrick?.Data.BrickCoordinate.X < _gridWidth && newBrick?.Data.BrickCoordinate.Y < _gridHeight)
             {
                 if (_grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] == null)
@@ -193,47 +194,47 @@ public class GameBoardController : MonoBehaviour
     {
         StopAllCoroutines();
         List<BrickController> movableObjects = new List<BrickController>();
-        for (int i = 0; i < _brickControllers.Count; i++)
+        for (int i = 0; i < BrickControllers.Count; i++)
         {
-            if (_brickControllers[i].Data.Type == ObjectType.Item)
+            if (BrickControllers[i].Data.Type == ObjectType.Item)
             {
-                if (_brickControllers[i].Data.Id == 2 || _brickControllers[i].Data.Id == 3) // if laser
+                if (BrickControllers[i].Data.Id == 2 || BrickControllers[i].Data.Id == 3) // if laser
                 {
-                    if (_brickControllers[i].gameObject.GetComponent<LaserItem>().isTouched)
+                    if (BrickControllers[i].gameObject.GetComponent<LaserItem>().isTouched)
                     {
-                        _brickControllers[i].gameObject.SetActive(false);
-                        _removedBrick.Add(_brickControllers[i]);
+                        BrickControllers[i].gameObject.SetActive(false);
+                        _removedBrick.Add(BrickControllers[i]);
                     }
                 }
 
             }
-            if (_brickControllers[i].Data.movable && _brickControllers[i].gameObject.activeInHierarchy)
+            if (BrickControllers[i].Data.movable && BrickControllers[i].gameObject.activeInHierarchy)
             {
-                if (!_brickControllers[i].Data.isFreeze && !CheckBlockingObject(_brickControllers[i]))
+                if (!BrickControllers[i].Data.isFreeze && !CheckBlockingObject(BrickControllers[i]))
                 {
-                    movableObjects.Add(_brickControllers[i]);
+                    movableObjects.Add(BrickControllers[i]);
                     //StartCoroutine(_brickControllers[i].Move(1));
-                    if(!CheckLose(_brickControllers[i])){
-                        UpdateBrickCoordinateBySpeed(_brickControllers[i]);
-                        CheckLose(_brickControllers[i]);
+                    if(!CheckLose(BrickControllers[i])){
+                        UpdateBrickCoordinateBySpeed(BrickControllers[i]);
+                        CheckLose(BrickControllers[i]);
                     }
                     else
                     {
                         //SceneManager.LoadScene("GameplayTest 2");
                     }
                 }
-                else if (_brickControllers[i].Data.isFreeze)
+                else if (BrickControllers[i].Data.isFreeze)
                 {
-                    _brickControllers[i].Data.LvFreeze -= 1;
-                    if (_brickControllers[i].Data.LvFreeze == 0)
+                    BrickControllers[i].Data.LvFreeze -= 1;
+                    if (BrickControllers[i].Data.LvFreeze == 0)
                     {
-                        _brickControllers[i].Data.isFreeze = false;
-                        _brickControllers[i].View.DisableChildGraphic();
-                        movableObjects.Add(_brickControllers[i]);
-                        if(!CheckLose(_brickControllers[i]))
+                        BrickControllers[i].Data.isFreeze = false;
+                        BrickControllers[i].View.DisableChildGraphic();
+                        movableObjects.Add(BrickControllers[i]);
+                        if(!CheckLose(BrickControllers[i]))
                         {
-                            UpdateBrickCoordinateBySpeed(_brickControllers[i]);
-                            CheckLose(_brickControllers[i]);
+                            UpdateBrickCoordinateBySpeed(BrickControllers[i]);
+                            CheckLose(BrickControllers[i]);
                         }
                     }
                 }
