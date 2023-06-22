@@ -9,4 +9,9 @@ public class Wall : MonoBehaviour
     {
         transform.position = _position.position;
     }
+
+    public void Scale(float ratio)
+    {
+        transform.localScale *= ratio;
+    }
 }

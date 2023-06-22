@@ -17,11 +17,15 @@ public class BrickController : MonoBehaviour
     }
 
     public BrickData Data { get { return _data; } }
+
+    public float Ratio { get => _ratio; set => _ratio = value; }
+
     [SerializeField]
     private BrickData _data;
 
     private int _boardWidth, _boardHeight;
     [SerializeField] private float _moveDistance;
+    [SerializeField] private float _ratio;
     [SerializeField]
     private Collider2D _collider;
 
@@ -363,9 +367,12 @@ public class BrickController : MonoBehaviour
         GameObject ori1 = GameBoardController.Instance.BrickOri1;
         GameObject ori2 = GameBoardController.Instance.BrickOri2;
         _moveDistance = Vector3.Distance(ori1.transform.position, ori2.transform.position);
+        //Debug.Log("distance:" + _moveDistance);//1920:1080 = 0.7291666
         Vector3 oriPosition = ori1.transform.position;
         transform.position = new Vector3(oriPosition.x + _moveDistance * Data.BrickCoordinate.X, oriPosition.y + _moveDistance * Data.BrickCoordinate.Y);
-        _view.transform.localScale = new Vector3(0.68f, 0.68f, 0.68f);
+        float ratio = _moveDistance / 0.7291666f;
+        _view.transform.localScale = new Vector3(0.68f, 0.68f, 0.68f)*ratio;
+        _ratio = ratio;
     }
 
     public void SetScenePositionBasedOnGridCoordinate()

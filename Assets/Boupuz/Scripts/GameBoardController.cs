@@ -33,6 +33,8 @@ public class GameBoardController : MonoBehaviour
     public LevelData LevelData { get; private set; }
     public LevelInfo LevelInfo { get; private set; }
 
+    [SerializeField] private List<Wall> _listWall;
+
     public GameObject BrickOri1 { get => _brickOri1; set => _brickOri1 = value; }
     public GameObject BrickOri2 { get => _brickOri2; set => _brickOri2 = value; }
 
@@ -118,7 +120,16 @@ public class GameBoardController : MonoBehaviour
                 }
             }
         }
+        ScaleWall(_brickControllers[0].Ratio);
         
+    }
+
+    public void ScaleWall(float ratio)
+    {
+        for (int i = 0; i < _listWall.Count; i++)
+        {
+            _listWall[i].Scale(ratio);
+        }
     }
 
     public void UpdateGrid()
