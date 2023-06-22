@@ -202,7 +202,7 @@ public class BallController : MonoBehaviour
             if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
             {
                 isShooted = false;
-            GameBoardController.Instance.MoveAll();
+                GameBoardController.Instance.MoveAll();
             }
             else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
             {
@@ -213,8 +213,10 @@ public class BallController : MonoBehaviour
                 {
                     GameFlow.Instance.canShoot = false;
                     UIManager.Instance.LoadLoseUI();
-                }
+                }   
             }
+
+            
             
             RemoveBalls();
 

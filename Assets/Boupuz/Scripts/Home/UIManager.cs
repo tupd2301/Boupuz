@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
         if(name == "Play")
         {
             PlayerPrefs.SetInt("LevelID", _level);
-            SceneManager.LoadScene("GameplayTest 2", LoadSceneMode.Single);
+            SceneManager.LoadScene("GamePlay", LoadSceneMode.Single);
             return;
         }
         for (int i = 0; i < _listUI.Count; i++)
