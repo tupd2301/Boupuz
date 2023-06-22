@@ -37,6 +37,7 @@ public class BallController : MonoBehaviour
     private bool _firstBall = false;
 
     [SerializeField] private float _timeCheckLoop = 5;
+    [SerializeField] private float _timeShoot = 0;
     private List<Vector3> _listDirectionRegister;
     [SerializeField] private float _timeRunning = 0;
 
@@ -44,6 +45,8 @@ public class BallController : MonoBehaviour
     [SerializeField] private int _addBallBySkill;
     [SerializeField] private float _addFreezeBySkill;
 
+    [SerializeField] private float _speedUp;
+    [SerializeField] private float _timeSpeedUp = 30;
     private void Awake()
     {
         BallController.Instance = this;
@@ -89,6 +92,7 @@ public class BallController : MonoBehaviour
 
     public IEnumerator BallShooting(Vector2 direction)
     {
+        _timeShoot= 0;
         _addBall = 0;
         _listRemove = new List<GameObject>();
         _timeRunning = 0;
@@ -159,6 +163,7 @@ public class BallController : MonoBehaviour
 
     public void BallRunning()
     {
+        _timeShoot += 1f / 60f;
         if (!GameFlow.Instance.canShoot)
         {
             _timeRunning += 1f / 60f;
@@ -175,7 +180,7 @@ public class BallController : MonoBehaviour
                 if (_listBallModel[i].IsRunning)
                 {
                     Vector3 direction = _listBallModel[i].Direction;
-                    _balls[i].transform.position = Vector3.MoveTowards(_balls[i].transform.position, (direction.normalized + _balls[i].transform.position), 0.01f * SpeedToRun);
+                    _balls[i].transform.position = Vector3.MoveTowards(_balls[i].transform.position, (direction.normalized + _balls[i].transform.position), 0.01f * (_timeShoot>=_timeSpeedUp? _speedUp: SpeedToRun));
                     if (_balls[i].transform.position.y < GunPosition.y && _balls[i].transform.position.x != _xFirstBall)
                     {
                         SetUpFirstBallReturned(_balls[i].transform.position.x);
@@ -189,13 +194,15 @@ public class BallController : MonoBehaviour
         }
         if (CountBallRunnning - _listRemove.Count <= 0 && !isEndRound) // Scale up speed by time
         {
+            _timeShoot = 0;
             _timeRunning = 0;
             isEndRound = true;
             StopAllCoroutines();
             GameFlow.Instance.timeScale = 1;
             if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
             {
-                GameBoardController.Instance.MoveAll();
+                isShooted = false;
+            GameBoardController.Instance.MoveAll();
             }
             else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
             {
