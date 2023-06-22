@@ -206,7 +206,7 @@ public class BallController : MonoBehaviour
             }
             else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
             {
-                GameBoardController.Instance.LevelData.DecreaseTurn(1);
+                GameBoardController.Instance.UpdateTurn();
                 GameFlow.Instance.canShoot = true;
                 if (GameBoardController.Instance.LevelData.CurrentTurn <= 0 &&
                     GameBoardController.Instance.LevelData.CollectedCake < GameBoardController.Instance.LevelData.TotalCake)

@@ -55,7 +55,7 @@ public class GameBoardController : MonoBehaviour
     void Start()
     {
         int levelID = PlayerPrefs.GetInt("LevelID", 1);
-        var resource = Resources.Load("Level" + levelID.ToString());
+        var resource = Resources.Load("/Levels/Level" + levelID.ToString());
         
         if (resource)
         {   
@@ -71,17 +71,17 @@ public class GameBoardController : MonoBehaviour
 
         if (LevelInfo.levelType == LevelInfo.LevelType.Action)
         {
-            // UI
+            
 
         }
         else if (LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
         {
-            // UI
+            
             //
             LevelData.TotalTurn = LevelInfo.LevelTurn;
             LevelData.CurrentTurn = LevelData.TotalTurn;
         }
-
+        UIManager.Instance.SetUpTopUI();
 
         _brickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
         InitGrid();
@@ -275,6 +275,11 @@ public class GameBoardController : MonoBehaviour
             UIManager.Instance.LoadWinUI();
         }
     }
+    public void UpdateTurn()
+    {
+        LevelData.DecreaseTurn(1);
+        UIManager.Instance.UpdateTurnUI();
+    }
 
     public void UpdateCandy(int value)
     {
@@ -285,7 +290,7 @@ public class GameBoardController : MonoBehaviour
     public void UpdateCollectedCake()
     {
         LevelData.UpdateCollectedCake();
-
+        UIManager.Instance.UpdateCakeUI();
         if (LevelData.CollectedCake == LevelData.TotalCake)
         {
             //Win
