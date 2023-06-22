@@ -48,16 +48,17 @@ MonoBehaviour:
   _listRemove: []
   _listBallModel: []
   _totalBall: 0
-  _speedToShoot: 0.2
-  _speedToRun: 15
+  _speedToShoot: 0.1
+  _speedToRun: 8
   _gun: {fileID: 0}
   _gunPosition: {x: 0, y: 0, z: 0}
   _direction: {x: 0, y: 0}
   _countBallRunnning: 0
-  _startBall: 2
+  _startBall: 1
   isShooted: 0
   isEndRound: 0
-  _timeCheckLoop: 5
+  _timeCheckLoop: 10
+  _timeRunning: 0
   _addDamageBySkill: 0
   _addBallBySkill: 0
   _addFreezeBySkill: 0
