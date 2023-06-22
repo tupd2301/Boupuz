@@ -6226,7 +6226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1609751528575606779
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6800,7 +6800,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1609751528786797965
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7374,7 +7374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1609751528952225407
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8180,6 +8180,12 @@ MonoBehaviour:
   _destroyedBricksText: {fileID: 4872871091484494504}
   _numCandyText: {fileID: 7260275635199029937}
   _numCoinText: {fileID: 961674601694746743}
+  _coinImage: {fileID: 0}
+  _candyImage: {fileID: 0}
+  _turnText: {fileID: 0}
+  _cakeText: {fileID: 0}
+  _cakeImage: {fileID: 0}
+  _turnImage: {fileID: 0}
   _levelCheat: {fileID: 1735431523}
   _winUI: {fileID: 7747126388772294955}
   _loseUI: {fileID: 7399075677512278003}
@@ -8853,7 +8859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1609751529816780730
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9860,7 +9866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1609751530134980847
 RectTransform:
   m_ObjectHideFlags: 0
