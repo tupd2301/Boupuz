@@ -53,10 +53,14 @@ public class LaserItem : MonoBehaviour
             try 
             {
                 BrickController otherBrick = GameBoardController.Instance.Grid[colIndex, i];
-                if (otherBrick.Data.Id != 1 && otherBrick.Data.Type == ObjectType.Brickie) // if starvy
+                if (otherBrick.gameObject.activeInHierarchy)
                 {
-                    otherBrick.DecreasHpByValue(1);
+                    if (otherBrick.Data.Id != 1 && otherBrick.Data.Type == ObjectType.Brickie) // if
+                    {
+                        otherBrick.DecreasHpByValue(1);
+                    }
                 }
+                
             }
             catch
             {
@@ -73,9 +77,12 @@ public class LaserItem : MonoBehaviour
             try 
             {
                 BrickController otherBrick = GameBoardController.Instance.Grid[i, rowIndex];
-                if (otherBrick.Data.Id != 1 && otherBrick.Data.Type == ObjectType.Brickie) // if starvy
-                {
-                    otherBrick.DecreasHpByValue(1);
+                if (otherBrick.gameObject.activeInHierarchy)
+                {    
+                    if (otherBrick.Data.Id != 1 && otherBrick.Data.Type == ObjectType.Brickie)
+                    {
+                        otherBrick.DecreasHpByValue(1);
+                    }
                 }
             }
             catch
