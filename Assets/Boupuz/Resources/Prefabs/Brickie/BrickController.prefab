@@ -215,7 +215,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 26195988f49424c3483c250db49394a7, type: 2}
+  - {fileID: -6639030058030612995, guid: 728b775f134f29b498e6aaef2c17ceb6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -259,8 +259,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 16
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 26195988f49424c3483c250db49394a7, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 26195988f49424c3483c250db49394a7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 728b775f134f29b498e6aaef2c17ceb6, type: 2}
+  m_sharedMaterial: {fileID: -6639030058030612995, guid: 728b775f134f29b498e6aaef2c17ceb6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.3
+  m_fontSize: 3.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -565,7 +565,6 @@ MonoBehaviour:
   BrickCoordinate:
     X: 0
     Y: 4
-  maxHp: 0
   Hp: 0
   Atk: 0
   Speed: 0
@@ -574,4 +573,5 @@ MonoBehaviour:
   LvFreeze: 0
   isBurn: 0
   movable: 0
+  isBlocked: 0
   hasCandy: 0
