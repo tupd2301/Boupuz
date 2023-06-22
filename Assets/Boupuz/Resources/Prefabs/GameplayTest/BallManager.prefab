@@ -49,11 +49,12 @@ MonoBehaviour:
   _listBallModel: []
   _totalBall: 0
   _speedToShoot: 0.2
-  _speedToRun: 10
+  _speedToRun: 15
   _gun: {fileID: 0}
   _gunPosition: {x: 0, y: 0, z: 0}
   _direction: {x: 0, y: 0}
   _countBallRunnning: 0
+  _startBall: 2
   isShooted: 0
   isEndRound: 0
   _timeCheckLoop: 5
