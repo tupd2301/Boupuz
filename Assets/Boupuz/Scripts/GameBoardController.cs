@@ -86,7 +86,8 @@ public class GameBoardController : MonoBehaviour
         }
         UIManager.Instance.SetUpTopUI();
 
-        BrickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
+        _brickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
+        _brickControllers = _brickControllers.OrderBy(b => b.Data.BrickCoordinate.Y).ToList();
         InitGrid();
         
     }
@@ -141,7 +142,7 @@ public class GameBoardController : MonoBehaviour
             BrickControllers.Remove(_removedBrick[i]);
         }
         _removedBrick = new List<BrickController>();
-
+        _brickControllers = _brickControllers.OrderBy(b => b.Data.BrickCoordinate.Y).ToList();
         _grid = new BrickController[_gridWidth, _gridHeight];
         for (int brickIndex = 0; brickIndex < BrickControllers.Count; brickIndex++)
         {
