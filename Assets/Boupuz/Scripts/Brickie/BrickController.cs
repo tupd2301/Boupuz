@@ -110,7 +110,7 @@ public class BrickController : MonoBehaviour
 
                     if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
                     {
-                        DecreaseAdjacentBrickHealth(this);
+                        DecreaseAdjacentBrickHealth();
                         //RemoveBrick();
                     }
                     else if (Data.Id == 2 && Data.Type == ObjectType.Brickie) // if icy
@@ -228,7 +228,7 @@ public class BrickController : MonoBehaviour
         // {
         //     DecreasHpByValue(1);
         // }
-        if (Data.Id == 3)
+        if (Data.Id == 3) //tanky
         {
             Data.Hp -= (col.gameObject.GetComponent<BallModel>().Damage - 1);
         }
@@ -236,6 +236,12 @@ public class BrickController : MonoBehaviour
         {
             Data.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
         }
+
+        if (Data.Id == 5 && Data.Type == ObjectType.Brickie) // if farty
+        {
+            DecreaseAdjacentBrickHealth();
+        }
+
         _view.FlashingRed();
         _view.DisplayHealth();
     }
@@ -249,9 +255,14 @@ public class BrickController : MonoBehaviour
         else
         {
             Data.Hp -= value;
+            _view.FlashingRed();
+            _view.DisplayHealth();
         }
-        _view.FlashingRed();
-        _view.DisplayHealth();
+        
+        if (Data.Id == 5 && Data.Type == ObjectType.Brickie) // if farty
+        {
+            DecreaseAdjacentBrickHealth();
+        }
     }
 
     public void RemoveBrick()
@@ -276,8 +287,9 @@ public class BrickController : MonoBehaviour
         }
     }
 
-    public void DecreaseAdjacentBrickHealth(BrickController brick)
+    public void DecreaseAdjacentBrickHealth()
     {
+
         for (int i = 0; i < GameBoardController.Instance.BrickControllers.Count; i++)
         {
             BrickController otherBrick = GameBoardController.Instance.BrickControllers[i];
@@ -285,13 +297,20 @@ public class BrickController : MonoBehaviour
             {
                 if (otherBrick.Data.Type == ObjectType.Brickie)
                 {
-                    
-
-                    float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, brick.Data.BrickCoordinate);
+                    float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, Data.BrickCoordinate);
                     if (distance > 0f && distance < Mathf.Sqrt(4))
                     {
-                        //Debug.Log(Mathf.CeilToInt(2.5f));
-                        otherBrick.DecreasHpByValue(Mathf.CeilToInt(otherBrick.Data.Hp / 2f));
+                        if (Data.Id == 5 && otherBrick.Data.Id != 5) // farty
+                        {
+                            Debug.Log("------------farty");
+                            otherBrick.DecreasHpByValue(1);
+                            
+                        }
+                        else if (Data.Id == 1) // starvy
+                        {
+                            otherBrick.DecreasHpByValue(Mathf.CeilToInt(otherBrick.Data.Hp / 2f));
+                        }
+                        
                     }
                 }
             }
