@@ -13,4 +13,8 @@ public class LevelInfo : MonoBehaviour
 
     public LevelType levelType;
     public int LevelTurn;
+    
+    [SerializeField]
+    private int _rewardCoins;
+    public int RewardCoins { get => _rewardCoins; set => _rewardCoins = value; }
 }

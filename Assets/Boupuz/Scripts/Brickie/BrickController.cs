@@ -167,9 +167,29 @@ public class BrickController : MonoBehaviour
             {
                 Debug.Log("Portal: new coordinate is invalid");
             }
-
+        }
+        else if (col.gameObject.CompareTag("MergeMachine"))
+        {
+            if (Data.Type == ObjectType.Brickie)
+            {
+                StartCoroutine(MergeMachine(col.gameObject));
+            }
         }
     }
+
+    #region MergeMachine
+    private IEnumerator MergeMachine(GameObject brick)
+    {
+        brick.GetComponent<MergeMachine>().HeldBrick = this;
+        yield return new WaitForEndOfFrame();
+        if (brick.GetComponent<MergeMachine>().otherMergeMachine.HeldBrick != null)
+        {
+            //BrickController brick = col.gameObject.GetComponent<MergeMachine>().otherMergeMachine.HeldBrick;
+            brick.GetComponent<MergeMachine>().Merge(); 
+        }
+    }
+    #endregion
+
     #region Trampoline
     private GridCoordinate RandomChangeBrickCoordinate(BrickController brick, int radius)
     {
@@ -218,6 +238,14 @@ public class BrickController : MonoBehaviour
         GameBoardController.Instance.Grid[lowestCoord.X, lowestCoord.Y].Data.Hp += brick.Data.Hp;
     }
     #endregion
+
+    #region HP
+    public void IncreaseHpByValue(int value)
+    {
+        Data.Hp += value;
+        _view.DisplayHealth();
+    }
+
     public void DecreaseHP(Collision2D col)
     {
         // if (Data.Id == 3 && Data.Type == ObjectType.Brickie)
@@ -264,6 +292,7 @@ public class BrickController : MonoBehaviour
             DecreaseAdjacentBrickHealth();
         }
     }
+    #endregion
 
     public void RemoveBrick()
     {
@@ -408,6 +437,10 @@ public class BrickController : MonoBehaviour
         Vector3 oriPosition = ori1.transform.position;
         transform.position = new Vector3(oriPosition.x + _moveDistance * Data.BrickCoordinate.X,
                                          oriPosition.y + _moveDistance * Data.BrickCoordinate.Y);
-        gameObject.SetActive(true);
+        if (!GameBoardController.Instance.RemovedBrick.Contains(this))
+        {
+            gameObject.SetActive(true);
+        }
+        
     }
 }

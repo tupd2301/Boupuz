@@ -149,15 +149,15 @@ public class GameBoardController : MonoBehaviour
             BrickController newBrick = BrickControllers[brickIndex];
             if (newBrick?.Data.BrickCoordinate.X < _gridWidth && newBrick?.Data.BrickCoordinate.Y < _gridHeight)
             {
-                if (_grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] == null)
+                if (_grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] == null ||
+                    !newBrick.gameObject.CompareTag("MergeMachine"))
                 {
                     _grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] = newBrick;
                     //newBrick.Initialize();
                 } 
                 else
                 {
-                    Debug.Log(newBrick.gameObject.name);
-                    Debug.Log("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK");
+                    Debug.Log("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK: " + newBrick.gameObject.name);
                 }
             }
         }
