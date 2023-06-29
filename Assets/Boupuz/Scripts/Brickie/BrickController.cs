@@ -228,8 +228,14 @@ public class BrickController : MonoBehaviour
         // {
         //     DecreasHpByValue(1);
         // }
-
-        Data.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
+        if (Data.Id == 3)
+        {
+            Data.Hp -= (col.gameObject.GetComponent<BallModel>().Damage - 1);
+        }
+        else
+        {
+            Data.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
+        }
         _view.FlashingRed();
         _view.DisplayHealth();
     }
