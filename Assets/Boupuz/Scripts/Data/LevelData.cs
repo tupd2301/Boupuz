@@ -13,7 +13,9 @@ public class LevelData : MonoBehaviour
     [SerializeField]
     private int _currentTurn;
     public int CurrentTurn { get => _currentTurn; set => _currentTurn = value; }
-    public int ballDamage { get; private set; }
+    [SerializeField]
+    private int _ballDamage;
+    public int BallDamage { get => _ballDamage; set => _ballDamage = value; }
     [SerializeField] private int _totalBricks;
     public int totalBricks { get {return _totalBricks;}}
     [SerializeField] private int _destroyedBricks;

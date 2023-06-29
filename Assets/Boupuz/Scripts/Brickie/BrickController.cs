@@ -230,11 +230,11 @@ public class BrickController : MonoBehaviour
         // }
         if (Data.Id == 3) //tanky
         {
-            Data.Hp -= (col.gameObject.GetComponent<BallModel>().Damage - 1);
+            Data.Hp -= (GameBoardController.Instance.LevelData.BallDamage - 1);
         }
         else
         {
-            Data.Hp -= col.gameObject.GetComponent<BallModel>().Damage;
+            Data.Hp -= GameBoardController.Instance.LevelData.BallDamage;
         }
 
         if (Data.Id == 5 && Data.Type == ObjectType.Brickie) // if farty
