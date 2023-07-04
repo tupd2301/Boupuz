@@ -201,22 +201,31 @@ public class BallController : MonoBehaviour
             //StopAllCoroutines();
             GameFlow.Instance.timeScale = 1;
             GameFlow.Instance.canShoot = true;
-            if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
+            if (GameBoardController.Instance.LevelInfo == null)
             {
                 isShooted = false;
                 GameBoardController.Instance.MoveAll();
             }
-            else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
+            else
             {
-                GameBoardController.Instance.UpdateTurn();
-                GameFlow.Instance.canShoot = true;
-                if (GameBoardController.Instance.LevelData.CurrentTurn <= 0 &&
-                    GameBoardController.Instance.LevelData.CollectedCake < GameBoardController.Instance.LevelData.TotalCake)
+                if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
                 {
-                    GameFlow.Instance.canShoot = false;
-                    UIManager.Instance.LoadLoseUI();
-                }   
+                    isShooted = false;
+                    GameBoardController.Instance.MoveAll();
+                }
+                else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
+                {
+                    GameBoardController.Instance.UpdateTurn();
+                    GameFlow.Instance.canShoot = true;
+                    if (GameBoardController.Instance.LevelData.CurrentTurn <= 0 &&
+                        GameBoardController.Instance.LevelData.CollectedCake < GameBoardController.Instance.LevelData.TotalCake)
+                    {
+                        GameFlow.Instance.canShoot = false;
+                        UIManager.Instance.LoadLoseUI();
+                    }   
+                }
             }
+            
 
             
             

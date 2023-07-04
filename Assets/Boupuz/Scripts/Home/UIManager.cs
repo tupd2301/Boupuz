@@ -170,19 +170,29 @@ public class UIManager : MonoBehaviour
     {
         _coinImage.enabled = true;
         _numCoinText.enabled = true;
-        if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
+        if (GameBoardController.Instance.LevelInfo == null)
         {
             _numCandyText.enabled = true;
-            _destroyedBricksText.enabled = true;
-            
-            _candyImage.enabled = true;
+                _destroyedBricksText.enabled = true;
+                
+                _candyImage.enabled = true;
         }
-        else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
+        else
         {
-            _turnText.enabled = true;
-            _turnImage.enabled = true;
-            _cakeText.enabled = true;
-            _cakeImage.enabled = true;
+            if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
+            {
+                _numCandyText.enabled = true;
+                _destroyedBricksText.enabled = true;
+                
+                _candyImage.enabled = true;
+            }
+            else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
+            {
+                _turnText.enabled = true;
+                _turnImage.enabled = true;
+                _cakeText.enabled = true;
+                _cakeImage.enabled = true;
+            }
         }
     }
     public void PauseGame()
