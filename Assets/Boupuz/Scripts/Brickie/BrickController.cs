@@ -33,6 +33,8 @@ public class BrickController : MonoBehaviour
     [SerializeField] private List<ContactPoint2D> _listContact;
     [SerializeField] private List<Vector2> _listPosition;
 
+    public static event Action OnBrickieRemoval;
+
     private void Awake()
     {
         _listContact = new List<ContactPoint2D>();
@@ -106,8 +108,6 @@ public class BrickController : MonoBehaviour
                 {
                     RemoveBrick();
                     
-
-
                     if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
                     {
                         DecreaseAdjacentBrickHealth();
@@ -301,7 +301,8 @@ public class BrickController : MonoBehaviour
         GameBoardController.Instance.RemovedBrick.Add(this);
         if (!gameObject.CompareTag("Item"))
         {
-            GameBoardController.Instance.UpdateDestroyedBricks();
+            //GameBoardController.Instance.UpdateDestroyedBricks();
+            OnBrickieRemoval?.Invoke();
         }
         else
         {
@@ -310,10 +311,10 @@ public class BrickController : MonoBehaviour
                 GameBoardController.Instance.UpdateCollectedCake();
             }
         }
-        if (Data.hasCandy)
-        {
-            GameBoardController.Instance.UpdateCandy(1);
-        }
+        // if (Data.hasCandy)
+        // {
+        //     GameBoardController.Instance.UpdateCandy(1);
+        // }
     }
 
     public void DecreaseAdjacentBrickHealth()
