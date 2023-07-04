@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _winUI;
     [SerializeField] private GameObject _loseUI;
 
+    [SerializeField] private PauseGame _pauseUI;
+
     private int _level = 1;
 
     public List<Character> ListCharacter { get => _listCharacter; set => _listCharacter = value; }
@@ -182,5 +184,57 @@ public class UIManager : MonoBehaviour
             _cakeText.enabled = true;
             _cakeImage.enabled = true;
         }
+    }
+    public void PauseGame()
+    {
+        ShowPauseUI();
+        if(Time.timeScale == 0)
+        {
+            UnpauseGame();
+            return;
+        }
+        Time.timeScale = 0;
+    }
+
+    public void UnpauseGame()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void ShowPauseUI()
+    {
+        if (!_pauseUI.IsPause)
+        {
+            _pauseUI.IsPause = true;
+            _pauseUI.Background.color = new Color32(0,0,0,110);
+            GameFlow.Instance.canShoot = false;
+            for (int i = 0; i < _pauseUI.ListOption.Count; i++)
+            {
+                _pauseUI.ListOption[i].transform.localPosition = new Vector3(0, 150 + i * 130, 0);
+                //StartCoroutine(PauseUIMoving());
+            }
+        }
+        else
+        {
+            _pauseUI.IsPause = false;
+            _pauseUI.Background.color = new Color32(0, 0, 0, 0);
+            GameFlow.Instance.canShoot = true;
+            for (int i = 0; i < _pauseUI.ListOption.Count; i++)
+            {
+                _pauseUI.ListOption[i].transform.localPosition = Vector3.zero;
+            }
+        }
+    }
+
+    IEnumerator PauseUIMoving()
+    {
+        if (!_pauseUI.IsPause)
+        {
+            for (int i = 0; i < _pauseUI.ListOption.Count; i++)
+            {
+                _pauseUI.ListOption[i].transform.localPosition = Vector3.MoveTowards(_pauseUI.ListOption[i].transform.localPosition, new Vector3(0, 150 + i * 130, 0),0.01f*3);
+            }
+        }
+        yield return 0;
     }
 }
