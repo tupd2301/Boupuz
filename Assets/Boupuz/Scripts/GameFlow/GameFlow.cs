@@ -80,16 +80,16 @@ public class GameFlow : MonoBehaviour
     void FixedUpdate()
     {
         //SpeedUp(2,1.5f);
-        //SpeedUp(5,2f);
+        //SpeedUp(5,2f);s
         if (_ballController.isShooted)
         {
             _ballController.BallRunning();
         }
-        if (canShoot && _selectSkill)
-        {
-            SkillController.Instance.ShowUISkill();
-            _selectSkill = false;
-            canShoot = false;
-        }
+        //if (canShoot && _selectSkill)
+        //{
+        //    SkillController.Instance.ShowUISkill();
+        //    _selectSkill = false;
+        //    canShoot = false;
+        //}
     }
 }

@@ -298,6 +298,8 @@ public class BrickController : MonoBehaviour
     {
         gameObject.SetActive(false);
         //GameBoardController.Instance.BrickControllers.Remove(this);
+        GameObject deathEffect = Instantiate(GameBoardController.Instance.deathAnim, transform.position, Quaternion.identity, GameBoardController.Instance.transform);
+        deathEffect.GetComponentsInChildren<ParticleSystem>().ToList().ForEach(a => a.Play());
         GameBoardController.Instance.RemovedBrick.Add(this);
         if (!gameObject.CompareTag("Item"))
         {
