@@ -55,6 +55,13 @@ public class BrickController : MonoBehaviour
     public IEnumerator Move(float duration)
     {
         GameFlow.Instance.canShoot = false;
+        if (gameObject.CompareTag("BounceUpward"))
+        {
+            if (gameObject.GetComponent<BounceUpward>().Touched)
+            {
+                RemoveBrick();
+            }
+        }
         for (int s = 0; s < Data.Speed; s++)
         {
             Vector3 startPos = transform.localPosition;
@@ -84,7 +91,7 @@ public class BrickController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Ball") && Data.BrickCoordinate.Y < 11)
         {
-            if (gameObject.CompareTag("Block")||gameObject.CompareTag("Item"))
+            if (gameObject.CompareTag("Block") || gameObject.CompareTag("Item"))
             {
                 if (!gameObject.CompareTag("Item"))
                 {
@@ -107,7 +114,7 @@ public class BrickController : MonoBehaviour
                 if (Data.Hp <= 0)
                 {
                     RemoveBrick();
-                    
+
                     if (Data.Id == 1 && Data.Type == ObjectType.Brickie) // if starvy
                     {
                         DecreaseAdjacentBrickHealth();
@@ -125,7 +132,7 @@ public class BrickController : MonoBehaviour
             {
                 col.transform.position = gameObject.GetComponent<Portals>().otherPortal.transform.position;
                 Vector3 direction = col.gameObject.GetComponentInChildren<BallModel>().Direction;
-                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 3.3f*0.01f * 8);
+                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 3.3f * 0.01f * 8);
                 col.gameObject.GetComponentInChildren<TrailRenderer>().Clear();
 
             }
@@ -133,7 +140,14 @@ public class BrickController : MonoBehaviour
             {
                 Vector3 direction = new Vector3(UnityEngine.Random.Range(-180f, 180f), UnityEngine.Random.Range(-180f, 180f), 0).normalized;
                 col.gameObject.GetComponent<BallModel>().Direction = direction;
-                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 3f*0.01f * 8);
+                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 3f * 0.01f * 8);
+            }
+            else if (gameObject.CompareTag("BounceUpward"))
+            {
+                gameObject.GetComponent<BounceUpward>().Touched = true;
+                Vector3 direction = new Vector3(UnityEngine.Random.Range(15f, 165f), UnityEngine.Random.Range(15f, 165f), 0).normalized;
+                col.gameObject.GetComponent<BallModel>().Direction = direction;
+                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 3f * 0.01f * 8);
             }
         }
         else if (col.gameObject.CompareTag("Trampoline"))
@@ -185,7 +199,7 @@ public class BrickController : MonoBehaviour
         if (brick.GetComponent<MergeMachine>().otherMergeMachine.HeldBrick != null)
         {
             //BrickController brick = col.gameObject.GetComponent<MergeMachine>().otherMergeMachine.HeldBrick;
-            brick.GetComponent<MergeMachine>().Merge(); 
+            brick.GetComponent<MergeMachine>().Merge();
         }
     }
     #endregion
@@ -286,7 +300,7 @@ public class BrickController : MonoBehaviour
             _view.FlashingRed();
             _view.DisplayHealth();
         }
-        
+
         if (Data.Id == 5 && Data.Type == ObjectType.Brickie) // if farty
         {
             DecreaseAdjacentBrickHealth();
@@ -336,13 +350,13 @@ public class BrickController : MonoBehaviour
                         {
                             Debug.Log("------------farty");
                             otherBrick.DecreasHpByValue(1);
-                            
+
                         }
                         else if (Data.Id == 1) // starvy
                         {
                             otherBrick.DecreasHpByValue(Mathf.CeilToInt(otherBrick.Data.Hp / 2f));
                         }
-                        
+
                     }
                 }
             }
@@ -426,10 +440,10 @@ public class BrickController : MonoBehaviour
         Vector3 oriPosition = ori1.transform.position;
         transform.position = new Vector3(oriPosition.x + _moveDistance * Data.BrickCoordinate.X, oriPosition.y + _moveDistance * Data.BrickCoordinate.Y);
         float ratio = _moveDistance / 0.7291666f;
-        _view.transform.localScale = new Vector3(0.68f, 0.68f, 0.68f)*ratio;
+        _view.transform.localScale = new Vector3(0.68f, 0.68f, 0.68f) * ratio;
         if (gameObject.CompareTag("Trampoline") || gameObject.CompareTag("Portal"))
         {
-            _view.transform.localScale = new Vector3(0.68f, 0.68f, 0.68f) / 1.5f *ratio;
+            _view.transform.localScale = new Vector3(0.68f, 0.68f, 0.68f) / 1.5f * ratio;
         }
         _ratio = ratio;
     }
@@ -444,6 +458,6 @@ public class BrickController : MonoBehaviour
         {
             gameObject.SetActive(true);
         }
-        
+
     }
 }

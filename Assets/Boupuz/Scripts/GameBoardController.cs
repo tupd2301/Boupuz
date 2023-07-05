@@ -38,7 +38,7 @@ public class GameBoardController : MonoBehaviour
     public GameObject BrickOri1 { get => _brickOri1; set => _brickOri1 = value; }
     public GameObject BrickOri2 { get => _brickOri2; set => _brickOri2 = value; }
     public List<BrickController> BrickControllers { get => _brickControllers; set => _brickControllers = value; }
-
+    [SerializeField] private bool _playTest;
     public GameObject deathAnim;
 
 
@@ -60,11 +60,34 @@ public class GameBoardController : MonoBehaviour
 
     void Start()
     {
+        if (!_playTest)
+        {
+            LoadLevelPrefab();
+        }
+        //Debug.Log(LevelInfo.levelType);
+        BrickController.OnBrickieRemoval += UpdateDestroyedBricks;
+
+        UIManager.Instance.SetUpTopUI();
+
+        _brickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
+        _brickControllers = _brickControllers.OrderBy(b => b.Data.BrickCoordinate.Y).ToList();
+        InitGrid();
+
+    }
+
+    /* 4x4 GRID
+    [(0,0) (1,0) (2,0) (3,0)
+     (0,1) (1,1) (2,1) (3,1)
+     (0,2) (1,2) (2,2) (3,2)
+     (0,3) (1,3) (2,3) (3,3)]
+    */
+    private void LoadLevelPrefab()
+    {
         int levelID = PlayerPrefs.GetInt("LevelID", 1);
         var resource = Resources.Load("Levels/Level" + levelID.ToString());
-        
+
         if (resource)
-        {   
+        {
             var level = resource as GameObject;
             Instantiate(level, Vector3.zero, Quaternion.identity, transform);
         }
@@ -77,12 +100,12 @@ public class GameBoardController : MonoBehaviour
 
         if (LevelInfo.levelType == LevelInfo.LevelType.Action)
         {
-            
+
 
         }
         else if (LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
         {
-            
+
             //
             LevelData.TotalTurn = LevelInfo.LevelTurn;
             LevelData.CurrentTurn = LevelData.TotalTurn;
@@ -92,8 +115,9 @@ public class GameBoardController : MonoBehaviour
         _brickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
         _brickControllers = _brickControllers.OrderBy(b => b.Data.BrickCoordinate.Y).ToList();
         InitGrid();
-        
+
     }
+
 
     /* 4x4 GRID
     [(0,0) (1,0) (2,0) (3,0)

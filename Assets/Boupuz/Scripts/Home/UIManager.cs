@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _turnImage;
 
     [SerializeField] private Text _levelCheat;
+    [SerializeField] private Text _levelText;
     [SerializeField] private GameObject _winUI;
     [SerializeField] private GameObject _loseUI;
 
@@ -58,7 +59,7 @@ public class UIManager : MonoBehaviour
 
     public void LoadUI(string name)
     {
-        if(name == "Play")
+        if (name == "Play")
         {
             PlayerPrefs.SetInt("LevelID", _level);
             SceneManager.LoadScene("GamePlay", LoadSceneMode.Single);
@@ -66,19 +67,19 @@ public class UIManager : MonoBehaviour
         }
         for (int i = 0; i < _listUI.Count; i++)
         {
-            if(_listNavigator[i].Parent.name != name)
+            if (_listNavigator[i].Parent.name != name)
             {
                 Debug.Log("ok");
                 _listNavigator[i].Parent.transform.localScale = Vector3.one;
             }
-            if(_listUI[i].name != name + "Layout")
+            if (_listUI[i].name != name + "Layout")
             {
-                _listUI[i].transform.localPosition = new Vector3(1200,0,0);
+                _listUI[i].transform.localPosition = new Vector3(1200, 0, 0);
             }
             else
             {
                 _listUI[i].transform.localPosition = Vector3.zero;
-                if(name == "Character")
+                if (name == "Character")
                 {
                     _characterUI.ShowUI(0);
                 }
@@ -108,7 +109,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        if(SceneManager.GetActiveScene().name != "Home")
+        if (SceneManager.GetActiveScene().name != "Home")
         {
             UpdateDestroyedBricksUI();
             UpdateCoinUI();
@@ -128,7 +129,7 @@ public class UIManager : MonoBehaviour
         {
             string totalBricks = GameBoardController.Instance.LevelData.totalBricks.ToString();
             string destroyedBricks = GameBoardController.Instance.LevelData.destroyedBricks.ToString();
-            int destroyBricks = GameBoardController.Instance.LevelData.totalBricks - GameBoardController.Instance.BrickControllers.Where(brick=>brick.CompareTag("Block") && brick.gameObject.activeInHierarchy).Count();
+            int destroyBricks = GameBoardController.Instance.LevelData.totalBricks - GameBoardController.Instance.BrickControllers.Where(brick => brick.CompareTag("Block") && brick.gameObject.activeInHierarchy).Count();
             _destroyedBricksText.text = destroyBricks + "/" + totalBricks;
         }
         else
@@ -170,25 +171,36 @@ public class UIManager : MonoBehaviour
     {
         _coinImage.enabled = true;
         _numCoinText.enabled = true;
-        if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
+        _levelText.enabled = true;
+        _levelText.text = "Lv. " + PlayerPrefs.GetInt("LevelID");
+        if (GameBoardController.Instance.LevelInfo == null)
         {
-            _numCandyText.enabled = true;
+            _levelText.text = "Lv. Test" ;
             _destroyedBricksText.enabled = true;
-            
-            _candyImage.enabled = true;
         }
-        else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
+        else
         {
-            _turnText.enabled = true;
-            _turnImage.enabled = true;
-            _cakeText.enabled = true;
-            _cakeImage.enabled = true;
+
+            if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
+            {
+                _numCandyText.enabled = true;
+                _destroyedBricksText.enabled = true;
+
+                _candyImage.enabled = true;
+            }
+            else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
+            {
+                _turnText.enabled = true;
+                _turnImage.enabled = true;
+                _cakeText.enabled = true;
+                _cakeImage.enabled = true;
+            }
         }
     }
     public void PauseGame()
     {
         ShowPauseUI();
-        if(Time.timeScale == 0)
+        if (Time.timeScale == 0)
         {
             UnpauseGame();
             return;
@@ -206,7 +218,7 @@ public class UIManager : MonoBehaviour
         if (!_pauseUI.IsPause)
         {
             _pauseUI.IsPause = true;
-            _pauseUI.Background.color = new Color32(0,0,0,110);
+            _pauseUI.Background.color = new Color32(0, 0, 0, 110);
             GameFlow.Instance.canShoot = false;
             for (int i = 0; i < _pauseUI.ListOption.Count; i++)
             {
@@ -232,7 +244,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < _pauseUI.ListOption.Count; i++)
             {
-                _pauseUI.ListOption[i].transform.localPosition = Vector3.MoveTowards(_pauseUI.ListOption[i].transform.localPosition, new Vector3(0, 150 + i * 130, 0),0.01f*3);
+                _pauseUI.ListOption[i].transform.localPosition = Vector3.MoveTowards(_pauseUI.ListOption[i].transform.localPosition, new Vector3(0, 150 + i * 130, 0), 0.01f * 3);
             }
         }
         yield return 0;
