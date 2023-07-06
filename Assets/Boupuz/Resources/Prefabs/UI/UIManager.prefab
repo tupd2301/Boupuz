@@ -4783,7 +4783,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0b0ab16ef989e4c67a10f0cc05ba248a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f83faa6c700307a4888237dda218b7f8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8297,6 +8297,9 @@ MonoBehaviour:
   _cakeText: {fileID: 0}
   _cakeImage: {fileID: 0}
   _turnImage: {fileID: 0}
+  _optionIcon: {fileID: 7639915330358849634}
+  _pauseImage: {fileID: 21300000, guid: 564d293e87f5fb841a2905bdc7382b06, type: 3}
+  _unpauseImage: {fileID: 21300000, guid: dfbd6dc3f8e30644a93d8be60a1692af, type: 3}
   _levelCheat: {fileID: 1735431523}
   _levelText: {fileID: 0}
   _winUI: {fileID: 7747126388772294955}
@@ -16320,7 +16323,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3145485726930858004}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -16939,7 +16942,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3336222571091911874}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -27392,7 +27395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 88f09c4d5716143dcbda84a9812a31d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 564d293e87f5fb841a2905bdc7382b06, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -28151,7 +28154,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6947934890735732241}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

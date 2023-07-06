@@ -25,6 +25,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _cakeImage;
     [SerializeField] private Image _turnImage;
 
+    [SerializeField] private Image _optionIcon;
+    [SerializeField] private Sprite _pauseImage;
+    [SerializeField] private Sprite _unpauseImage;
+
     [SerializeField] private Text _levelCheat;
     [SerializeField] private Text _levelText;
     [SerializeField] private GameObject _winUI;
@@ -229,6 +233,7 @@ public class UIManager : MonoBehaviour
                 _pauseUI.ListOption[i].transform.localPosition = new Vector3(0, 150 + i * 130, 0);
                 //StartCoroutine(PauseUIMoving());
             }
+            _optionIcon.sprite = _unpauseImage;
         }
         else
         {
@@ -239,6 +244,8 @@ public class UIManager : MonoBehaviour
             {
                 _pauseUI.ListOption[i].transform.localPosition = Vector3.zero;
             }
+            _optionIcon.sprite = _pauseImage;
+
         }
     }
 
