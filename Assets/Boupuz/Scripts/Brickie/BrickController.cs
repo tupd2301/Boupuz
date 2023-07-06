@@ -291,6 +291,11 @@ public class BrickController : MonoBehaviour
 
     public void DecreasHpByValue(int value)
     {
+        if (Data.Id == 3)
+        {
+            value -= 1;
+        }
+
         if (Data.Hp <= value)
         {
             RemoveBrick();
