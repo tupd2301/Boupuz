@@ -57,7 +57,7 @@ public class GameFlow : MonoBehaviour
         {
             Debug.LogError("GameFlow can not see Joystick");
         }
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
 
     public void ChangePositionJoystick(float x)

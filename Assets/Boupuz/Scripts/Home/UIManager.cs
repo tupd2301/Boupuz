@@ -63,6 +63,7 @@ public class UIManager : MonoBehaviour
 
     public void LoadUI(string name)
     {
+        UnpauseGame();
         if (name == "Play")
         {
             PlayerPrefs.SetInt("LevelID", _level);

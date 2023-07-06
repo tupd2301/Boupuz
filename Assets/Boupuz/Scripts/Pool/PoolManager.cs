@@ -31,7 +31,7 @@ public class PoolManager : MonoBehaviour
                 }
             }
         }
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
 
     public List<GameObject> CreateObjects(GameObject prefab, Transform parent, int amount)
