@@ -263,35 +263,32 @@ public class BrickController : MonoBehaviour
 
     public void DecreaseHP(Collision2D col)
     {
-        // if (Data.Id == 3 && Data.Type == ObjectType.Brickie)
-        // {
-        //     DecreasHpByValue(col.gameObject.GetComponent<BallModel>().Damage - 1);
-        // }
-        // else
-        // {
-        //     DecreasHpByValue(1);
-        // }
         if (Data.Id == 3) //tanky
         {
             Data.Hp -= (GameBoardController.Instance.LevelData.BallDamage - 1);
+            if ((GameBoardController.Instance.LevelData.BallDamage - 1) > 0)
+            {
+                _view.FlashingRed(); 
+            }
         }
         else
         {
             Data.Hp -= GameBoardController.Instance.LevelData.BallDamage;
+
+            if (Data.Id == 5 && Data.Type == ObjectType.Brickie) // if farty
+            {
+                DecreaseAdjacentBrickHealth();
+            }
+
+            _view.FlashingRed(); 
         }
 
-        if (Data.Id == 5 && Data.Type == ObjectType.Brickie) // if farty
-        {
-            DecreaseAdjacentBrickHealth();
-        }
-
-        _view.FlashingRed();
         _view.DisplayHealth();
     }
 
     public void DecreasHpByValue(int value)
     {
-        if (Data.Id == 3)
+        if (Data.Id == 3) // if tanky, reduce 1 damage
         {
             value -= 1;
         }
@@ -303,7 +300,10 @@ public class BrickController : MonoBehaviour
         else
         {
             Data.Hp -= value;
-            _view.FlashingRed();
+            if (value > 0) // no flashing red when damgage is 0
+            {
+                _view.FlashingRed(); 
+            }
             _view.DisplayHealth();
         }
 
