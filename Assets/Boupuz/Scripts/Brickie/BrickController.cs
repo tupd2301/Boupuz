@@ -174,7 +174,8 @@ public class BrickController : MonoBehaviour
                 else
                 {
                     // add health 
-                    GameBoardController.Instance.Grid[newCoordinate.X, newCoordinate.Y].Data.Hp += Data.Hp;
+                    GameBoardController.Instance.Grid[newCoordinate.X, newCoordinate.Y].IncreaseHpByValue(Data.Hp);
+                    RemoveBrick();
                 }
             }
             else
