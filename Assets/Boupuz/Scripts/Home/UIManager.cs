@@ -119,6 +119,10 @@ public class UIManager : MonoBehaviour
         else
         {
             LoadUI("Home");
+            if (PlayerPrefs.HasKey("LevelID"))
+            {
+                _level = PlayerPrefs.GetInt("LevelID");
+            }
             _levelCheat.text = _level.ToString();
         }
     }
