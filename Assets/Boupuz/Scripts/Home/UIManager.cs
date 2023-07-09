@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text _cakeText;
     [SerializeField] private Image _cakeImage;
     [SerializeField] private Image _turnImage;
+    [SerializeField] private Text _plusOne;
 
     [SerializeField] private Image _optionIcon;
     [SerializeField] private Sprite _pauseImage;
@@ -130,6 +131,8 @@ public class UIManager : MonoBehaviour
             }
             _levelCheat.text = _level.ToString();
         }
+
+        BrickController.OnBrickieRemoval += DisplayPlusOne;
     }
 
     public void UpdateDestroyedBricksUI()
@@ -261,4 +264,18 @@ public class UIManager : MonoBehaviour
         }
         yield return 0;
     }
+
+    public void DisplayPlusOne()
+    {
+        StartCoroutine(DisplayPlusOneCoroutine());
+    }
+
+    IEnumerator DisplayPlusOneCoroutine()
+    {
+        _plusOne.enabled = false;
+        _plusOne.enabled = true;
+        yield return new WaitForSeconds(0.3f);
+        _plusOne.enabled = false;
+    }
+    
 }
