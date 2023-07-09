@@ -18,8 +18,8 @@ public class BrickView : MonoBehaviour
     [SerializeField]
     private BrickData _brickData;
     
-    private float _size;
-    private int _boardWidth, _boardHeight;
+    //private float _size;
+    //private int _boardWidth, _boardHeight;
 
 
     public void Setup()
@@ -28,7 +28,9 @@ public class BrickView : MonoBehaviour
         // Set sprite
         //_spriteRenderer.sprite = _mainGraphic;
         // Display health
+        
         DisplayHealth();
+        ChangeHealthTextColorBasedOnHealth();
     }
 
     public void DisplayHealth()
@@ -50,5 +52,39 @@ public class BrickView : MonoBehaviour
     public void FlashingRed()
     {
         _animator.Play("FlashingRed");
+    }
+
+    public void ChangeHealthTextColor(Color color)
+    {
+        _health.color = color;
+    }
+
+    public void ChangeHealthTextColorBasedOnHealth()
+    {
+        //Color lightYellow = new Color(255, 255, 204);
+        //Color earthYellow = new Color(225, 169, 95);
+        //Color orange = new Color(255, 153, 0);
+        Debug.Log("--------------color");
+        switch(_brickData.Hp)
+        {
+            case int n when (n <= 9):
+                ChangeHealthTextColor(Color.white);
+                break;
+            case int n when (n > 9 && n <= 19):
+                ChangeHealthTextColor(new Color32(255, 255, 102, 255));
+                break;
+            case int n when (n > 19 && n <= 29):
+                ChangeHealthTextColor(new Color32(225, 169, 95, 255));
+                break;
+            case int n when (n > 29 && n <= 39):
+                ChangeHealthTextColor(new Color32(255, 153, 0, 255));
+                break;
+            case int n when (n > 39 && n <= 49):
+                ChangeHealthTextColor(new Color32(255, 71, 26, 255));
+                break;
+            case int n when (n > 49):
+                ChangeHealthTextColor(Color.red);
+                break;
+        }
     }
 }

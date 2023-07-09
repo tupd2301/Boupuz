@@ -282,7 +282,7 @@ public class BrickController : MonoBehaviour
 
             _view.FlashingRed(); 
         }
-
+        _view.ChangeHealthTextColorBasedOnHealth();
         _view.DisplayHealth();
     }
 
@@ -304,6 +304,7 @@ public class BrickController : MonoBehaviour
             {
                 _view.FlashingRed(); 
             }
+            _view.ChangeHealthTextColorBasedOnHealth();
             _view.DisplayHealth();
         }
 
