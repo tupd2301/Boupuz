@@ -141,7 +141,7 @@ public class BrickController : MonoBehaviour
                 Vector3 direction = new Vector3(UnityEngine.Random.Range(-180f, 180f), UnityEngine.Random.Range(-180f, 180f), 0).normalized;
                 col.gameObject.GetComponent<BallModel>().Direction = direction;
                 col.gameObject.transform.position = gameObject.transform.position;
-                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 3f * 0.01f * 8);
+                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 2.6f * 0.01f * 8);
             }
             else if (gameObject.CompareTag("BounceUpward"))
             {
@@ -149,7 +149,7 @@ public class BrickController : MonoBehaviour
                 Vector3 direction = new Vector3(UnityEngine.Random.Range(15f, 165f), UnityEngine.Random.Range(15f, 165f), 0).normalized;
                 col.gameObject.GetComponent<BallModel>().Direction = direction;
                 col.gameObject.transform.position = gameObject.transform.position;
-                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 3f * 0.01f * 8);
+                col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 2.6f * 0.01f * 8);
             }
         }
         else if (col.gameObject.CompareTag("Trampoline"))
@@ -412,7 +412,7 @@ public class BrickController : MonoBehaviour
         FreezeBySkill(col.gameObject.GetComponent<BallModel>());
         if (Data.BrickCoordinate.Y < 11)
         {
-            if (_listDirection.Where(a => a == direction).Count() > 0)
+            if (_listDirection.Where(a => a == direction).Count() > 0 && _listPosition.Where(a => a == new Vector2(col.transform.position.x, col.transform.position.y)).Count() > 0)
             {
                 int index = _listDirection.IndexOf(direction);
                 float distance = Vector3.Distance(col.transform.position, _listPosition[index]);

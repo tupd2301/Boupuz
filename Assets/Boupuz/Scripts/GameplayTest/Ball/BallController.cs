@@ -123,6 +123,7 @@ public class BallController : MonoBehaviour
 
     public void CheckContact(ContactPoint2D contact, GameObject ball, bool isWall)
     {
+        Debug.Log("touched");
         if (!isWall)
         {
             _timeRunning = 0;

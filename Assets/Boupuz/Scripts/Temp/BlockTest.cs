@@ -21,7 +21,7 @@ public class BlockTest : MonoBehaviour
         if (coll.gameObject.CompareTag("Ball"))
         {
             Vector3 direction = coll.gameObject.GetComponent<BallModel>().Direction;
-            if (_listDirection.Where(a => a == direction).Count() > 0)
+            if (_listDirection.Where(a => a == direction).Count() > 0 && _listPosition.Where(a=>a == new Vector2(coll.transform.position.x, coll.transform.position.y)).Count()>0)
             {
                 int index = _listDirection.IndexOf(direction);
                 float distance = Vector3.Distance(coll.transform.position, _listPosition[index]);
