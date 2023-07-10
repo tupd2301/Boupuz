@@ -140,6 +140,7 @@ public class BrickController : MonoBehaviour
             {
                 Vector3 direction = new Vector3(UnityEngine.Random.Range(-180f, 180f), UnityEngine.Random.Range(-180f, 180f), 0).normalized;
                 col.gameObject.GetComponent<BallModel>().Direction = direction;
+                col.gameObject.transform.position = gameObject.transform.position;
                 col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 3f * 0.01f * 8);
             }
             else if (gameObject.CompareTag("BounceUpward"))
@@ -147,6 +148,7 @@ public class BrickController : MonoBehaviour
                 gameObject.GetComponent<BounceUpward>().Touched = true;
                 Vector3 direction = new Vector3(UnityEngine.Random.Range(15f, 165f), UnityEngine.Random.Range(15f, 165f), 0).normalized;
                 col.gameObject.GetComponent<BallModel>().Direction = direction;
+                col.gameObject.transform.position = gameObject.transform.position;
                 col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 3f * 0.01f * 8);
             }
         }

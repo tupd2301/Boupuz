@@ -121,6 +121,7 @@ public class UIManager : MonoBehaviour
             UpdateCoinUI();
             UpdateCakeUI();
             UpdateTurnUI();
+            BrickController.OnBrickieRemoval += DisplayPlusOne;
         }
         else
         {
@@ -132,7 +133,6 @@ public class UIManager : MonoBehaviour
             _levelCheat.text = _level.ToString();
         }
 
-        BrickController.OnBrickieRemoval += DisplayPlusOne;
     }
 
     public void UpdateDestroyedBricksUI()
