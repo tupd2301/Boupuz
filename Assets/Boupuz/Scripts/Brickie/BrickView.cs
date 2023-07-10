@@ -64,7 +64,7 @@ public class BrickView : MonoBehaviour
         //Color lightYellow = new Color(255, 255, 204);
         //Color earthYellow = new Color(225, 169, 95);
         //Color orange = new Color(255, 153, 0);
-        Debug.Log("--------------color");
+        //Debug.Log("--------------color");
         switch(_brickData.Hp)
         {
             case int n when (n <= 9):

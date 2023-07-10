@@ -144,8 +144,8 @@ public class GameBoardController : MonoBehaviour
                 } 
                 else
                 {
-                    Debug.Log(newBrick.gameObject.name);
-                    Debug.Log("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK");
+                    Debug.LogError("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK: " + newBrick.gameObject.name + " " + _grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y].name);
+
                 }
             }
         }
@@ -184,7 +184,7 @@ public class GameBoardController : MonoBehaviour
                 } 
                 else
                 {
-                    Debug.Log("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK: " + newBrick.gameObject.name);
+                    Debug.Log("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK: " + newBrick.gameObject.name + " " + _grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y].name);
                 }
             }
         }

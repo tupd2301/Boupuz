@@ -24,6 +24,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1361159576040732970, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: Speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361159576040732970, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: movable
       value: 1
       objectReference: {fileID: 0}
@@ -53,15 +57,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3314086927972503842, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.6384902
       objectReference: {fileID: 0}
     - target: {fileID: 3314086927972503842, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.8384489
       objectReference: {fileID: 0}
     - target: {fileID: 3314086927972503842, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3314086927972503842, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -69,15 +73,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3314086927972503842, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3314086927972503842, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3314086927972503842, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3314086927972503842, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -171,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 241b10b9c52c84716a0ba9dedf0d5910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turnExist: 0
+  _turnExist: 1
   _touched: 0
 --- !u!1 &4175445749657816252 stripped
 GameObject:
