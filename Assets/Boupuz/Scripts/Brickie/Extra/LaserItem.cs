@@ -82,14 +82,14 @@ public class LaserItem : MonoBehaviour
         {
             try 
             {
-                Debug.Log("row2");
+                //Debug.Log("row2");
                 BrickController otherBrick = GameBoardController.Instance.Grid[i, rowIndex];
                 if (otherBrick.gameObject.activeInHierarchy)
                 {
-                    Debug.Log("row1");
+                    //Debug.Log("row1");
                     if (otherBrick.Data.Id != 1 && otherBrick.Data.Type == ObjectType.Brickie)
                     {
-                        Debug.Log("row");
+                        //Debug.Log("row");
                         otherBrick.DecreasHpByValue(1);
                     }
                 }

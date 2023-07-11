@@ -140,9 +140,9 @@ public class UIManager : MonoBehaviour
         if (GameBoardController.Instance != null)
         {
             string totalBricks = GameBoardController.Instance.LevelData.totalBricks.ToString();
-            string destroyedBricks = GameBoardController.Instance.LevelData.destroyedBricks.ToString();
-            int destroyBricks = GameBoardController.Instance.LevelData.totalBricks - GameBoardController.Instance.BrickControllers.Where(brick => brick.CompareTag("Block") && brick.gameObject.activeInHierarchy).Count();
-            _destroyedBricksText.text = destroyBricks + "/" + totalBricks;
+            string destroyedBricks = GameBoardController.Instance.LevelData.DestroyedBricks.ToString();
+            //int destroyBricks = GameBoardController.Instance.LevelData.totalBricks - GameBoardController.Instance.BrickControllers.Where(brick => brick.CompareTag("Block") && brick.gameObject.activeInHierarchy).Count();
+            _destroyedBricksText.text = destroyedBricks + "/" + totalBricks;
         }
         else
         {
@@ -276,6 +276,12 @@ public class UIManager : MonoBehaviour
         _plusOne.enabled = true;
         yield return new WaitForSeconds(0.3f);
         _plusOne.enabled = false;
+    }
+
+    void OnDestroy()
+    {
+        //Debug.Log("-------------Gameboardcontroller destroyed");
+        BrickController.OnBrickieRemoval -= DisplayPlusOne;
     }
     
 }

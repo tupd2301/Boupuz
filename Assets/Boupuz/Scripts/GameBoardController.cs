@@ -58,6 +58,11 @@ public class GameBoardController : MonoBehaviour
         //PlayerPrefs.SetInt("coins", 9999);
     }
 
+    void OnEnable()
+    {
+        BrickController.OnBrickieRemoval += UpdateDestroyedBricks;
+    }
+
     void Start()
     {
         if (!_playTest)
@@ -65,7 +70,7 @@ public class GameBoardController : MonoBehaviour
             LoadLevelPrefab();
         }
         //Debug.Log(LevelInfo.levelType);
-        BrickController.OnBrickieRemoval += UpdateDestroyedBricks;
+        
 
         UIManager.Instance.SetUpTopUI();
 
@@ -307,9 +312,9 @@ public class GameBoardController : MonoBehaviour
     {
         LevelData.UpdateDestroyedBricks();
         UIManager.Instance.UpdateDestroyedBricksUI();
-        int destroyBricks = LevelData.totalBricks - BrickControllers.Where(brick => brick.CompareTag("Block") && brick.gameObject.activeInHierarchy).Count();
-
-        if (LevelData.totalBricks == destroyBricks)
+        //int destroyBricks = LevelData.totalBricks - BrickControllers.Where(brick => brick.CompareTag("Block") && brick.gameObject.activeInHierarchy).Count();
+        
+        if (LevelData.totalBricks == LevelData.DestroyedBricks)
         {
             //Win
             GameFlow.Instance.canShoot = false;
@@ -338,5 +343,11 @@ public class GameBoardController : MonoBehaviour
             GameFlow.Instance.canShoot = false;
             UIManager.Instance.LoadWinUI();
         }
+    }
+
+    void OnDestroy()
+    {
+        Debug.Log("-------------Gameboardcontroller destroyed");
+        BrickController.OnBrickieRemoval -= UpdateDestroyedBricks;
     }
 }

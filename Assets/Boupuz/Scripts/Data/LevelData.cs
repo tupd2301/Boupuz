@@ -19,7 +19,7 @@ public class LevelData : MonoBehaviour
     [SerializeField] private int _totalBricks;
     public int totalBricks { get {return _totalBricks;}}
     [SerializeField] private int _destroyedBricks;
-    public int destroyedBricks { get {return _destroyedBricks;}}
+    //public int destroyedBricks { get {return DestroyedBricks;}}
     [SerializeField] private int _totalCake;
     public int TotalCake { get {return _totalCake;}}
     [SerializeField] private int _collectedCake;
@@ -29,7 +29,7 @@ public class LevelData : MonoBehaviour
     [SerializeField] private int _numCoins;
     public int numCoins { get {return _numCoins;}}
 
-    
+    public int DestroyedBricks { get => _destroyedBricks; set => _destroyedBricks = value; }
 
     private int levelSelect;
 
@@ -37,7 +37,7 @@ public class LevelData : MonoBehaviour
     {
         LevelID = -1;
         _totalBricks = 0;
-        _destroyedBricks = 0;
+        DestroyedBricks = 0;
         _numCandies = 0;
         //_numCoins = PlayerPrefs.GetInt("coins");
         _numCoins = 9999;
@@ -45,7 +45,7 @@ public class LevelData : MonoBehaviour
 
     public void UpdateDestroyedBricks()
     {
-        _destroyedBricks += 1;
+        DestroyedBricks += 1;
     }
 
     public void GetTotalBricks(int value)
