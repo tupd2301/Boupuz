@@ -103,6 +103,7 @@ public class BrickController : MonoBehaviour
                 {
                     // Disable ball
                     Debug.Log("Starvy ate 1 ball");
+                    _view.StarvyAnim();
                     col.gameObject.SetActive(false);
                     //BallController.Instance.TotalBall -= 1;
                     BallController.Instance.AddListRemoveBall(col.gameObject);
@@ -331,10 +332,10 @@ public class BrickController : MonoBehaviour
         }
         else
         {
-            if (Data.Id == 6 && Data.Type == ObjectType.Brickie)
-            {
-                GameBoardController.Instance.UpdateCollectedCake();
-            }
+            // if (Data.Id == 6 && Data.Type == ObjectType.Brickie)
+            // {
+            //     GameBoardController.Instance.UpdateCollectedCake();
+            // }
         }
         // if (Data.hasCandy)
         // {

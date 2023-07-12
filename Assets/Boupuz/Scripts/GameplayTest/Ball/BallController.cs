@@ -209,22 +209,24 @@ public class BallController : MonoBehaviour
             }
             else
             {
-                if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
-                {
-                    isShooted = false;
-                    GameBoardController.Instance.MoveAll();
-                }
-                else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
-                {
-                    GameBoardController.Instance.UpdateTurn();
-                    GameFlow.Instance.canShoot = true;
-                    if (GameBoardController.Instance.LevelData.CurrentTurn <= 0 &&
-                        GameBoardController.Instance.LevelData.CollectedCake < GameBoardController.Instance.LevelData.TotalCake)
-                    {
-                        GameFlow.Instance.canShoot = false;
-                        UIManager.Instance.LoadLoseUI();
-                    }   
-                }
+                isShooted = false;
+                GameBoardController.Instance.MoveAll();
+                // if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
+                // {
+                //     isShooted = false;
+                //     GameBoardController.Instance.MoveAll();
+                // }
+                // else if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
+                // {
+                //     GameBoardController.Instance.UpdateTurn();
+                //     GameFlow.Instance.canShoot = true;
+                //     if (GameBoardController.Instance.LevelData.CurrentTurn <= 0 &&
+                //         GameBoardController.Instance.LevelData.CollectedCake < GameBoardController.Instance.LevelData.TotalCake)
+                //     {
+                //         GameFlow.Instance.canShoot = false;
+                //         UIManager.Instance.LoadLoseUI();
+                //     }   
+                // }
             }
             
 
