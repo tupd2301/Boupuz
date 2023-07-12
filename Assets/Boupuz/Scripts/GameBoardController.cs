@@ -39,6 +39,7 @@ public class GameBoardController : MonoBehaviour
     public GameObject BrickOri2 { get => _brickOri2; set => _brickOri2 = value; }
     public List<BrickController> BrickControllers { get => _brickControllers; set => _brickControllers = value; }
     [SerializeField] private bool _playTest;
+    [SerializeField] private bool _enableItemSpawner;
     public GameObject deathAnim;
 
 
@@ -76,16 +77,83 @@ public class GameBoardController : MonoBehaviour
 
         _brickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
         _brickControllers = _brickControllers.OrderBy(b => b.Data.BrickCoordinate.Y).ToList();
-        InitGrid();
 
+        InitGrid();
+        SpawnItems();
     }
 
-    /* 4x4 GRID
-    [(0,0) (1,0) (2,0) (3,0)
-     (0,1) (1,1) (2,1) (3,1)
-     (0,2) (1,2) (2,2) (3,2)
-     (0,3) (1,3) (2,3) (3,3)]
-    */
+    private List<BrickController> LoadItemPrefab(string path)
+    {
+        List<BrickController> items = new List<BrickController>();
+        for (int i = 0; i < LevelInfo.NumAddItem; i ++)
+        {
+            var resource = Resources.Load(path);
+            if (resource)
+            {
+                var itemPrefab = resource as GameObject;
+                //Debug.Log(itemPrefab);
+                BrickController item = Instantiate(itemPrefab.GetComponent<BrickController>(), Vector3.zero, Quaternion.identity, transform);
+                items.Add(item);
+            }
+            else
+            {
+                Debug.Log("------------error loading item prefab");
+            }
+        }
+        return items;
+    }
+
+    private void SpawnItemRandomly(List<BrickController> items, List<GridCoordinate> emptyCoord)
+    {
+        var random = new System.Random();
+        int index = random.Next(emptyCoord.Count);
+        BrickController item = items[0];
+        item.Data.BrickCoordinate = emptyCoord[index];
+        items.RemoveAt(0);
+        _grid[emptyCoord[index].X, emptyCoord[index].Y] = item;
+        _brickControllers.Add(item);
+        item.Initialize();
+        emptyCoord.Remove(emptyCoord[index]);
+}
+
+    private void SpawnItems()
+    {
+        if (_enableItemSpawner)
+        {
+            int Ymin = _brickControllers[0].Data.BrickCoordinate.Y;
+            int Ymax = _brickControllers[_brickControllers.Count-1].Data.BrickCoordinate.Y;
+
+            List<BrickController> addItems = LoadItemPrefab("Prefabs/Item/ItemAdd");
+            List<BrickController> damageItems = LoadItemPrefab("Prefabs/Item/GainDamage");
+            
+
+            for (int Y = Ymin; Y <= Ymax; Y++)
+            {
+                List<GridCoordinate> emptyCoord = new List<GridCoordinate>();
+                for (int X = 0; X < _gridWidth; X++)
+                {
+                    if (_grid[X, Y] == null)
+                    {
+                        emptyCoord.Add(new GridCoordinate(X,Y));
+                    }
+                }
+                if (emptyCoord.Count > 0)
+                {
+                    if (Y % 2 == 0 && addItems.Count > 0)
+                    {
+                        SpawnItemRandomly(addItems, emptyCoord);
+                    }
+                    else if (Y % 5 == 0 && damageItems.Count > 0)
+                    {
+                        SpawnItemRandomly(damageItems, emptyCoord);
+                    }
+                }
+            }
+            _brickControllers = _brickControllers.OrderBy(b => b.Data.BrickCoordinate.Y).ToList();
+        }
+    }
+
+
     private void LoadLevelPrefab()
     {
         int levelID = PlayerPrefs.GetInt("LevelID", 1);
@@ -101,20 +169,20 @@ public class GameBoardController : MonoBehaviour
             Debug.Log("--------------Error loading level------------------");
         }
         LevelInfo = GetComponentInChildren<LevelInfo>();
-        Debug.Log(LevelInfo.levelType);
+        //Debug.Log(LevelInfo.levelType);
 
-        if (LevelInfo.levelType == LevelInfo.LevelType.Action)
-        {
+        // if (LevelInfo.levelType == LevelInfo.LevelType.Action)
+        // {
 
 
-        }
-        else if (LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
-        {
+        // }
+        // else if (LevelInfo.levelType == LevelInfo.LevelType.Puzzle)
+        // {
 
-            //
-            LevelData.TotalTurn = LevelInfo.LevelTurn;
-            LevelData.CurrentTurn = LevelData.TotalTurn;
-        }
+        //     //
+        //     LevelData.TotalTurn = LevelInfo.LevelTurn;
+        //     LevelData.CurrentTurn = LevelData.TotalTurn;
+        // }
         UIManager.Instance.SetUpTopUI();
 
         _brickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
@@ -123,13 +191,6 @@ public class GameBoardController : MonoBehaviour
 
     }
 
-
-    /* 4x4 GRID
-    [(0,0) (1,0) (2,0) (3,0)
-     (0,1) (1,1) (2,1) (3,1)
-     (0,2) (1,2) (2,2) (3,2)
-     (0,3) (1,3) (2,3) (3,3)]
-    */
 
     public void InitGrid()
     {
@@ -321,29 +382,29 @@ public class GameBoardController : MonoBehaviour
             UIManager.Instance.LoadWinUI();
         }
     }
-    public void UpdateTurn()
-    {
-        LevelData.DecreaseTurn(1);
-        UIManager.Instance.UpdateTurnUI();
-    }
+    // public void UpdateTurn()
+    // {
+    //     LevelData.DecreaseTurn(1);
+    //     UIManager.Instance.UpdateTurnUI();
+    // }
 
-    public void UpdateCandy(int value)
-    {
-        LevelData.AddCandies(value);
-        UIManager.Instance.UpdateCandyUI();
-    }
+    // public void UpdateCandy(int value)
+    // {
+    //     LevelData.AddCandies(value);
+    //     UIManager.Instance.UpdateCandyUI();
+    // }
 
-    public void UpdateCollectedCake()
-    {
-        LevelData.UpdateCollectedCake();
-        UIManager.Instance.UpdateCakeUI();
-        if (LevelData.CollectedCake == LevelData.TotalCake)
-        {
-            //Win
-            GameFlow.Instance.canShoot = false;
-            UIManager.Instance.LoadWinUI();
-        }
-    }
+    // public void UpdateCollectedCake()
+    // {
+    //     LevelData.UpdateCollectedCake();
+    //     UIManager.Instance.UpdateCakeUI();
+    //     if (LevelData.CollectedCake == LevelData.TotalCake)
+    //     {
+    //         //Win
+    //         GameFlow.Instance.canShoot = false;
+    //         UIManager.Instance.LoadWinUI();
+    //     }
+    // }
 
     void OnDestroy()
     {

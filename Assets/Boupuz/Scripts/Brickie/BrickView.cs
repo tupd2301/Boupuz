@@ -54,6 +54,11 @@ public class BrickView : MonoBehaviour
         _animator.Play("FlashingRed");
     }
 
+    public void StarvyAnim()
+    {
+        _animator.Play("starvyeating");
+    }
+
     public void ChangeHealthTextColor(Color color)
     {
         _health.color = color;

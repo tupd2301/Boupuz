@@ -49,9 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a017b588e572c16499af06772acb4c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelType: 1
-  LevelTurn: 0
   _rewardCoins: 0
+  _numAddItem: 2
+  _numDamageItem: 2
 --- !u!1001 &57291577841950257
 PrefabInstance:
   m_ObjectHideFlags: 0
