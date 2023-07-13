@@ -46,7 +46,7 @@ public class SoundManager : MonoBehaviour
         {
             case "shooting": _shooting.Play(); break;
             case "contact": _BrickContact.Play(); break;
-            case "wall": _BrickContact.Play(); break;
+            case "wall": _WallContact.Play(); break;
             default: break;
         }
     }

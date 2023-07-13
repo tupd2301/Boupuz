@@ -328,10 +328,6 @@ public class BrickController : MonoBehaviour
             //GameBoardController.Instance.UpdateDestroyedBricks();
             OnBrickieRemoval?.Invoke();
         }
-        if (Data.Id == 5 && Data.Type == ObjectType.Brickie)
-        {
-            _view.FartyDie();
-        }
         if (Data.Id == 1 && Data.Type == ObjectType.Brickie)
         {
             _view.StarvyDie();
@@ -354,6 +350,7 @@ public class BrickController : MonoBehaviour
 
     public void DecreaseAdjacentBrickHealth()
     {
+        _view.FartyDie();
 
         for (int i = 0; i < GameBoardController.Instance.BrickControllers.Count; i++)
         {
