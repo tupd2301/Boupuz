@@ -116,6 +116,7 @@ public class BallController : MonoBehaviour
                 _listBallModel[i].CanFreeze = _addFreezeBySkill;
                 _countBallRunnning += 1;
                 UIManager.Instance.UpdateTotalBall(_totalBall - _countBallRunnning);
+                SoundManager.Instance.PlaySFX("shooting");
                 yield return new WaitForSeconds(_speedToShoot * GameFlow.Instance.timeScale);
             }
         }
@@ -124,6 +125,7 @@ public class BallController : MonoBehaviour
     public void CheckContact(ContactPoint2D contact, GameObject ball, bool isWall)
     {
         //Debug.Log("touched");
+        SoundManager.Instance.PlaySFX("contact");
         if (!isWall)
         {
             _timeRunning = 0;
