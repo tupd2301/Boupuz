@@ -18,12 +18,15 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         SoundManager.Instance = this;
+    }
+    private void Start()
+    {
         GetMuteInfo();
     }
 
     void GetMuteInfo()
     {
-        if (PlayerPrefs.GetInt("MuteSFX") != -1 && PlayerPrefs.GetInt("MuteBGM") != -1)
+        if (PlayerPrefs.GetInt("MuteSFX") == -1 && PlayerPrefs.GetInt("MuteBGM") == -1)
         {
             PlayerPrefs.SetInt("MuteSFX", 0);
             PlayerPrefs.SetInt("MuteBGM", 0);
@@ -31,6 +34,8 @@ public class SoundManager : MonoBehaviour
         _isMuteSFX = PlayerPrefs.GetInt("MuteSFX") == 0 ? false : true;
         _isMuteBGM = PlayerPrefs.GetInt("MuteBGM") == 0 ? false : true;
         PlayBGM();
+        UIManager.Instance.UpdateUIBGM(_isMuteBGM);
+        UIManager.Instance.UpdateUISFX(_isMuteSFX);
     }
 
     public void PlaySFX(string name)
@@ -57,11 +62,13 @@ public class SoundManager : MonoBehaviour
         _isMuteBGM = !_isMuteBGM;
         PlayerPrefs.SetInt("MuteBGM", _isMuteBGM ? 1: 0);
         PlayBGM();
+        UIManager.Instance.UpdateUIBGM(_isMuteBGM);
     }
     public void MuteSFX()
     {
         _isMuteSFX = !_isMuteSFX;
         PlayerPrefs.SetInt("MuteSFX", _isMuteSFX ? 1 : 0);
+        UIManager.Instance.UpdateUISFX(_isMuteSFX);
     }
 
     public void PlayBGM()

@@ -413,7 +413,7 @@ public class BrickController : MonoBehaviour
     public void BallReflect(Collision2D col)
     {
         Vector3 direction = col.gameObject.GetComponent<BallModel>().Direction;
-
+        SoundManager.Instance.PlaySFX("contact");
         FreezeBySkill(col.gameObject.GetComponent<BallModel>());
         if (Data.BrickCoordinate.Y < 11)
         {

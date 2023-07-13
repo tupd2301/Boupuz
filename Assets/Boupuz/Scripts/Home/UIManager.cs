@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text _cakeText;
     [SerializeField] private Image _cakeImage;
     [SerializeField] private Image _turnImage;
+    [SerializeField] private Image _muteBGMHome;
     [SerializeField] private Text _plusOne;
 
     [SerializeField] private Image _optionIcon;
@@ -187,7 +188,7 @@ public class UIManager : MonoBehaviour
         _levelText.text = "Lv. " + PlayerPrefs.GetInt("LevelID");
         if (GameBoardController.Instance.LevelInfo == null)
         {
-            _levelText.text = "Lv. Test" ;
+            _levelText.text = "Lv. Test";
             _destroyedBricksText.enabled = true;
         }
         else
@@ -284,5 +285,35 @@ public class UIManager : MonoBehaviour
         //Debug.Log("-------------Gameboardcontroller destroyed");
         BrickController.OnBrickieRemoval -= DisplayPlusOne;
     }
-    
+    public void UpdateUISFX(bool isMute)
+    {
+        if (SceneManager.GetActiveScene().name != "Home")
+        {
+            if (!isMute)
+            {
+                _pauseUI.ListOption[2].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            }
+            else
+            {
+                _pauseUI.ListOption[2].GetComponent<Image>().color = new Color32(110, 110, 110, 255);
+            }
+        }
+    }
+    public void UpdateUIBGM(bool isMute)
+    {
+        if (!isMute)
+        {
+            if (SceneManager.GetActiveScene().name != "Home")
+                _pauseUI.ListOption[1].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            else
+                _muteBGMHome.color = new Color32(255, 255, 255, 255);
+        }
+        else
+        {
+            if (SceneManager.GetActiveScene().name != "Home")
+                _pauseUI.ListOption[1].GetComponent<Image>().color = new Color32(110, 110, 110, 255);
+            else
+                _muteBGMHome.color = new Color32(110, 110, 110, 255);
+        }
+    }
 }
