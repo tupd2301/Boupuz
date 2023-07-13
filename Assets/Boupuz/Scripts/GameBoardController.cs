@@ -373,9 +373,9 @@ public class GameBoardController : MonoBehaviour
     {
         LevelData.UpdateDestroyedBricks();
         UIManager.Instance.UpdateDestroyedBricksUI();
-        //int destroyBricks = LevelData.totalBricks - BrickControllers.Where(brick => brick.CompareTag("Block") && brick.gameObject.activeInHierarchy).Count();
+        int destroyBricks = LevelData.totalBricks - BrickControllers.Where(brick => brick.CompareTag("Block") && brick.gameObject.activeInHierarchy).Count();
         
-        if (LevelData.totalBricks == LevelData.DestroyedBricks)
+        if (LevelData.totalBricks == /*LevelData.DestroyedBricks*/ destroyBricks)
         {
             //Win
             GameFlow.Instance.canShoot = false;
