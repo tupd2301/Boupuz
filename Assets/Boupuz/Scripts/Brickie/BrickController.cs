@@ -271,7 +271,7 @@ public class BrickController : MonoBehaviour
             Data.Hp -= (GameBoardController.Instance.LevelData.BallDamage - 1);
             if ((GameBoardController.Instance.LevelData.BallDamage - 1) > 0)
             {
-                _view.FlashingRed(); 
+                _view.FlashingRed();
             }
         }
         else
@@ -283,7 +283,7 @@ public class BrickController : MonoBehaviour
                 DecreaseAdjacentBrickHealth();
             }
 
-            _view.FlashingRed(); 
+            _view.FlashingRed();
         }
         _view.ChangeHealthTextColorBasedOnHealth();
         _view.DisplayHealth();
@@ -305,7 +305,7 @@ public class BrickController : MonoBehaviour
             Data.Hp -= value;
             if (value > 0) // no flashing red when damgage is 0
             {
-                _view.FlashingRed(); 
+                _view.FlashingRed();
             }
             _view.ChangeHealthTextColorBasedOnHealth();
             _view.DisplayHealth();
@@ -322,25 +322,30 @@ public class BrickController : MonoBehaviour
     {
         gameObject.SetActive(false);
         //GameBoardController.Instance.BrickControllers.Remove(this);
-        GameObject deathEffect = Instantiate(GameBoardController.Instance.deathAnim, transform.position, Quaternion.identity, GameBoardController.Instance.transform);
-        deathEffect.GetComponentsInChildren<ParticleSystem>().ToList().ForEach(a => a.Play());
         GameBoardController.Instance.RemovedBrick.Add(this);
         if (!gameObject.CompareTag("Item"))
         {
             //GameBoardController.Instance.UpdateDestroyedBricks();
             OnBrickieRemoval?.Invoke();
         }
-        else
+        if (Data.Id == 5 && Data.Type == ObjectType.Brickie)
         {
-            // if (Data.Id == 6 && Data.Type == ObjectType.Brickie)
-            // {
-            //     GameBoardController.Instance.UpdateCollectedCake();
-            // }
+            _view.FartyDie();
         }
-            if (Data.Id == 2 && Data.Type == ObjectType.Brickie) // if icy
-            {
-                FreezeAdjacentBrick(this);
-            }
+        if (Data.Id == 1 && Data.Type == ObjectType.Brickie)
+        {
+            _view.StarvyDie();
+        }
+        if (Data.Id == 2 && Data.Type == ObjectType.Brickie)
+        {
+            _view.IceDie();
+        }
+        GameObject deathEffect = Instantiate(GameBoardController.Instance.deathAnim, transform.position, Quaternion.identity, GameBoardController.Instance.transform);
+            deathEffect.GetComponentsInChildren<ParticleSystem>().ToList().ForEach(a => a.Play());
+        if (Data.Id == 2 && Data.Type == ObjectType.Brickie) // if icy
+        {
+            FreezeAdjacentBrick(this);
+        }
         // if (Data.hasCandy)
         // {
         //     GameBoardController.Instance.UpdateCandy(1);

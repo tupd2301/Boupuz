@@ -17,6 +17,9 @@ public class BrickView : MonoBehaviour
     private Animator _animator;
     [SerializeField]
     private BrickData _brickData;
+    [SerializeField]private ParticleSystem _fartyDieEffect;
+    [SerializeField]private ParticleSystem _iceDieEffect;
+    [SerializeField]private ParticleSystem _starvyDieEffect;
     
     //private float _size;
     //private int _boardWidth, _boardHeight;
@@ -54,6 +57,19 @@ public class BrickView : MonoBehaviour
         _animator.Play("FlashingRed");
     }
 
+    public void FartyDie()
+    {
+        Instantiate(_fartyDieEffect, this.transform.position , Quaternion.identity, GameBoardController.Instance.transform);
+    }
+    public void IceDie()
+    {
+        Instantiate(_iceDieEffect, this.transform.position, Quaternion.identity, GameBoardController.Instance.transform);
+    }
+
+    public void StarvyDie()
+    {
+        Instantiate(_starvyDieEffect, this.transform.position, Quaternion.identity, GameBoardController.Instance.transform);
+    }
     public void StarvyAnim()
     {
         _animator.Play("starvyeating");

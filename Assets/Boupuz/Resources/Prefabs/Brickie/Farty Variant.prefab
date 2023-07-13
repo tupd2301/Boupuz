@@ -83,6 +83,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4451323059744412634, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: _fartyDieEffect
+      value: 
+      objectReference: {fileID: 4819708294849300005, guid: 8b64057b7cc58db41a081b5bb59640df, type: 3}
     - target: {fileID: 6028300500882632922, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.9921875

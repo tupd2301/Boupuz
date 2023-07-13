@@ -157,6 +157,9 @@ MonoBehaviour:
   _health: {fileID: 8402786879242785148}
   _animator: {fileID: 8191443020903665310}
   _brickData: {fileID: 1361159576040732970}
+  _fartyDieEffect: {fileID: 4819708294849300005, guid: 8b64057b7cc58db41a081b5bb59640df, type: 3}
+  _iceDieEffect: {fileID: 3215631745939542242, guid: 08d07f45716b807478c404202c3b3a09, type: 3}
+  _starvyDieEffect: {fileID: 8614596003321314637, guid: 1d627aaad28c87645a4c1857ac56ead2, type: 3}
 --- !u!1 &5795087929524398967
 GameObject:
   m_ObjectHideFlags: 0
