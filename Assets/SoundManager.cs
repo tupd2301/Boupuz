@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance; 
     [SerializeField] private AudioSource _shooting;
     [SerializeField] private AudioSource _BrickContact;
+    [SerializeField] private AudioSource _WallContact;
     [SerializeField] private AudioSource _bGM;
     [SerializeField] private bool _isMuteBGM;
     [SerializeField] private bool _isMuteSFX;
@@ -45,6 +46,7 @@ public class SoundManager : MonoBehaviour
         {
             case "shooting": _shooting.Play(); break;
             case "contact": _BrickContact.Play(); break;
+            case "wall": _BrickContact.Play(); break;
             default: break;
         }
     }

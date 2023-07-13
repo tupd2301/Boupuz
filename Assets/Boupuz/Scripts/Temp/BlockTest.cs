@@ -20,6 +20,7 @@ public class BlockTest : MonoBehaviour
     {
         if (coll.gameObject.CompareTag("Ball"))
         {
+            SoundManager.Instance.PlaySFX("wall");
             Vector3 direction = coll.gameObject.GetComponent<BallModel>().Direction;
             if (_listDirection.Where(a => a == direction).Count() > 0 && _listPosition.Where(a=>a == new Vector2(coll.transform.position.x, coll.transform.position.y)).Count()>0)
             {
