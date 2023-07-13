@@ -360,7 +360,7 @@ public class BrickController : MonoBehaviour
                     float distance = GridCoordinate.Distance(otherBrick.Data.BrickCoordinate, Data.BrickCoordinate);
                     if (distance > 0f && distance < Mathf.Sqrt(4))
                     {
-                        if (Data.Id == 5 && otherBrick.Data.Id != 5) // farty
+                        if (Data.Id == 5 && otherBrick.Data.Id != 5 && otherBrick.Data.Id != 1) // farty
                         {
                             Debug.Log("------------farty");
                             otherBrick.DecreasHpByValue(1);
