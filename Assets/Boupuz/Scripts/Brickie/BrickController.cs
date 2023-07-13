@@ -337,6 +337,10 @@ public class BrickController : MonoBehaviour
             //     GameBoardController.Instance.UpdateCollectedCake();
             // }
         }
+            if (Data.Id == 2 && Data.Type == ObjectType.Brickie) // if icy
+            {
+                FreezeAdjacentBrick(this);
+            }
         // if (Data.hasCandy)
         // {
         //     GameBoardController.Instance.UpdateCandy(1);
