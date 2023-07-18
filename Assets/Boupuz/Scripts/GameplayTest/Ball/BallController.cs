@@ -132,6 +132,11 @@ public class BallController : MonoBehaviour
         Vector3 direction = Vector3.Reflect(ball.GetComponent<BallModel>().Direction, contact.normal);
         ball.GetComponent<BallModel>().Direction = direction;
         ball.GetComponent<BallModel>().ImpactTime += 1;
+        if(ball.GetComponent<BallModel>().ImpactTime >= 2)
+        {
+            AddListRemoveBall(ball);
+            ball.SetActive(false);
+        }
     }
 
     public void BallThroughBrickies(GameObject ball)

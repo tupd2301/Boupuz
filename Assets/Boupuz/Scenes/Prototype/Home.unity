@@ -469,10 +469,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shooting: {fileID: 0}
-  _BrickContact: {fileID: 0}
-  _WallContact: {fileID: 0}
+  _brickContact: {fileID: 0}
+  _wallContact: {fileID: 0}
   _uI: {fileID: 101933564}
   _bGM: {fileID: 377551288}
+  _die: {fileID: 0}
+  _starvyEating: {fileID: 0}
   _isMuteBGM: 0
   _isMuteSFX: 0
 --- !u!1 &1333202738
@@ -1010,6 +1012,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3666560947082454330, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1ee5cd102e0d0bd42b06caf7d2c0aed9, type: 3}
     - target: {fileID: 4226653226164675138, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -1054,6 +1060,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.627451
       objectReference: {fileID: 0}
+    - target: {fileID: 5041640879682520885, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1ee5cd102e0d0bd42b06caf7d2c0aed9, type: 3}
     - target: {fileID: 5078518023986862158, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: m_SizeDelta.x
       value: 118.33

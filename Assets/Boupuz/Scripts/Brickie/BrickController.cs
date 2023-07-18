@@ -354,8 +354,10 @@ public class BrickController : MonoBehaviour
 
     public void DecreaseAdjacentBrickHealth()
     {
-        _view.FartyDie();
-
+        if (Data.Id == 5 && Data.Type == ObjectType.Brickie)
+        {
+            _view.FartyDie();
+        }
         for (int i = 0; i < GameBoardController.Instance.BrickControllers.Count; i++)
         {
             BrickController otherBrick = GameBoardController.Instance.BrickControllers[i];
