@@ -107,6 +107,8 @@ public class BrickController : MonoBehaviour
                     col.gameObject.SetActive(false);
                     //BallController.Instance.TotalBall -= 1;
                     BallController.Instance.AddListRemoveBall(col.gameObject);
+                    SoundManager.Instance.PlaySFX("starvyEating");
+
                     // Total number ball -= 1
 
                 }
@@ -320,6 +322,8 @@ public class BrickController : MonoBehaviour
 
     public void RemoveBrick()
     {
+        SoundManager.Instance.PlaySFX("die");
+
         gameObject.SetActive(false);
         //GameBoardController.Instance.BrickControllers.Remove(this);
         GameBoardController.Instance.RemovedBrick.Add(this);

@@ -6,15 +6,18 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance; 
     [SerializeField] private AudioSource _shooting;
-    [SerializeField] private AudioSource _BrickContact;
-    [SerializeField] private AudioSource _WallContact;
+    [SerializeField] private AudioSource _brickContact;
+    [SerializeField] private AudioSource _wallContact;
+    [SerializeField] private AudioSource _uI;
     [SerializeField] private AudioSource _bGM;
+    [SerializeField] private AudioSource _die;
+    [SerializeField] private AudioSource _starvyEating;
     [SerializeField] private bool _isMuteBGM;
     [SerializeField] private bool _isMuteSFX;
 
     public AudioSource Shooting { get => _shooting; set => _shooting = value; }
-    public AudioSource BrickContact { get => _BrickContact; set => _BrickContact = value; }
     public AudioSource BGM { get => _bGM; set => _bGM = value; }
+    public AudioSource BrickContact { get => _brickContact; set => _brickContact = value; }
 
     private void Awake()
     {
@@ -45,8 +48,11 @@ public class SoundManager : MonoBehaviour
         switch (name)
         {
             case "shooting": _shooting.Play(); break;
-            case "contact": _BrickContact.Play(); break;
-            case "wall": _WallContact.Play(); break;
+            case "contact": _brickContact.Play(); break;
+            case "wall": _wallContact.Play(); break;
+            case "ui": _uI.Play(); break;
+            case "die": _die.Play(); break;
+            case "starvyEating": _starvyEating.Play(); break;
             default: break;
         }
     }
@@ -55,7 +61,7 @@ public class SoundManager : MonoBehaviour
         switch (name)
         {
             case "shooting": _shooting.Pause(); break;
-            case "contact": _BrickContact.Pause(); break;
+            case "contact": _brickContact.Pause(); break;
             default: break;
         }
     }
