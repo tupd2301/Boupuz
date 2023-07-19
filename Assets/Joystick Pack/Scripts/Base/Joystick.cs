@@ -153,20 +153,21 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public virtual void OnPointerUp(PointerEventData eventData)
     {
-        if (GameFlow.Instance.canShoot && GameFlow.Instance._laser.LaserGraphic.activeInHierarchy)
+        Vector2 direction = handle.anchoredPosition - Vector2.zero;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (GameFlow.Instance.canShoot && GameFlow.Instance._laser.LaserGraphic.activeInHierarchy && !((angle > 180 && angle < 360) || (angle < 0 && angle > -180)))
         {
             Debug.Log("Up");
-            Vector2 direction = handle.anchoredPosition - Vector2.zero;
             if (direction != Vector2.zero)
             {
                 GameFlow.Instance.canShoot = false;
                 GameFlow.Instance.Shoot(direction);
                 input = Vector2.zero;
                 handle.anchoredPosition = Vector2.zero;
-                GameFlow.Instance._laser.SetActive(false);
             }
 
         }
+                GameFlow.Instance._laser.SetActive(false);
     }
 
     protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)

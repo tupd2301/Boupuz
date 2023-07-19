@@ -6,8 +6,10 @@ public class Laser : MonoBehaviour
 {
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private GameObject _laserGraphic;
+    [SerializeField] private GameObject _subLaser;
 
     public GameObject LaserGraphic { get => _laserGraphic; set => _laserGraphic = value; }
+    public GameObject SubLaser { get => _subLaser; set => _subLaser = value; }
 
     public void SetPosition(Vector2 position)
     {
@@ -38,7 +40,7 @@ public class Laser : MonoBehaviour
     {
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.localRotation = Quaternion.Euler(0, 0, angle);
-        RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction, 20f, _layerMask);
+        RaycastHit2D hit = Physics2D.CircleCast(this.transform.position, 0.15f, direction, 10f, _layerMask);
         if (hit.collider == null)
         {
             LaserGraphic.GetComponent<SpriteRenderer>().size = new Vector2(50,0.25f);
@@ -46,6 +48,23 @@ public class Laser : MonoBehaviour
         else
         {
             LaserGraphic.GetComponent<SpriteRenderer>().size = new Vector2(hit.distance*2, 0.25f);
+            //AddLaserBooster(hit, direction);
+        }
+    }
+    public void AddLaserBooster(RaycastHit2D ray, Vector2 direction)
+    {
+        _subLaser.transform.parent.transform.position = ray.point;
+        direction = Vector2.Reflect(direction, ray.normal.normalized);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        _subLaser.transform.parent.transform.localRotation = Quaternion.Euler(0, 0, angle);
+        RaycastHit2D hit = Physics2D.Raycast(ray.point, direction, 10f, _layerMask);
+        if (hit.collider == null)
+        {
+            SubLaser.GetComponent<SpriteRenderer>().size = new Vector2(50, 0.25f);
+        }
+        else
+        {
+            SubLaser.GetComponent<SpriteRenderer>().size = new Vector2(hit.distance * 2, 0.25f);
         }
     }
 }

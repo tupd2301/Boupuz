@@ -475,6 +475,8 @@ MonoBehaviour:
   _bGM: {fileID: 377551288}
   _die: {fileID: 0}
   _starvyEating: {fileID: 0}
+  _portal: {fileID: 0}
+  _fart: {fileID: 0}
   _isMuteBGM: 0
   _isMuteSFX: 0
 --- !u!1 &1333202738
@@ -647,6 +649,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1534282948, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 36b0d13f16777554e9b2e6b2c8afbd07, type: 3}
+    - target: {fileID: 1908937889, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1908937893, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: m_Camera
       value: 
@@ -807,6 +817,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1609751529393097309, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: _homeSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f43971f83a5d63b4aaa5826025a96633, type: 3}
+    - target: {fileID: 1609751529393097309, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: _playButton
+      value: 
+      objectReference: {fileID: 1609751530374356079}
+    - target: {fileID: 1609751529393097309, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: _playSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 37d3fffa7d9d740489e4769cb521999c, type: 3}
     - target: {fileID: 1609751529393097309, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: _muteBGMHome
       value: 
@@ -1105,3 +1127,14 @@ PrefabInstance:
     - {fileID: 1609751530086506448, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
     - {fileID: 1609751528741941561, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+--- !u!114 &1609751530374356079 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6377357501661045272, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+  m_PrefabInstance: {fileID: 1609751530374356078}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

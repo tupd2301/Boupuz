@@ -25,6 +25,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _cakeImage;
     [SerializeField] private Image _turnImage;
     [SerializeField] private Image _muteBGMHome;
+    [SerializeField] private Image _playButton;
+    [SerializeField] private Sprite _homeSprite;
+    [SerializeField] private Sprite _playSprite;
     [SerializeField] private Text _plusOne;
 
     [SerializeField] private Image _optionIcon;
@@ -88,6 +91,19 @@ public class UIManager : MonoBehaviour
             {
                 _listNavigator[i].GetComponent<Image>().color = Color.white;
                 _listNavigator[i].Parent.GetComponent<RectTransform>().anchoredPosition = new Vector2(_listNavigator[i].Parent.GetComponent<RectTransform>().anchoredPosition.x, 55f);
+            }
+            if(_listNavigator[i].Parent.name == "Play")
+            {
+                if(_listNavigator[i].GetComponent<Image>().color == Color.white)
+                {
+                    _playButton.sprite = _playSprite;
+                    _playButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(5f, 35f);
+                }
+                else
+                {
+                    _playButton.sprite = _homeSprite;
+                    _playButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 35f);
+                }
             }
             if (_listUI[i].name != name + "Layout")
             {
