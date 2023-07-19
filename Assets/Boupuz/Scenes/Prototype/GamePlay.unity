@@ -2202,6 +2202,18 @@ MonoBehaviour:
   - _name: Ball
     _total: 200
     _prefab: {fileID: 166983573287715059, guid: 01ef6a33a1caf40f4b0bdd8ba9d6b6e3, type: 3}
+  - _name: FartyDie
+    _total: 50
+    _prefab: {fileID: 4176337140501250201, guid: 8b64057b7cc58db41a081b5bb59640df, type: 3}
+  - _name: StarvyDie
+    _total: 50
+    _prefab: {fileID: 908441539277061105, guid: 1d627aaad28c87645a4c1857ac56ead2, type: 3}
+  - _name: IceDie
+    _total: 50
+    _prefab: {fileID: 6320353068845373022, guid: 08d07f45716b807478c404202c3b3a09, type: 3}
+  - _name: DeathEffect
+    _total: 50
+    _prefab: {fileID: 1831413812366418387, guid: 0fc88e52f5b5e455baa1f721e35aa7fc, type: 3}
 --- !u!4 &1187420609
 Transform:
   m_ObjectHideFlags: 0

@@ -65,7 +65,6 @@ public class BrickView : MonoBehaviour
     {
         Instantiate(_iceDieEffect, this.transform.position, Quaternion.identity, GameBoardController.Instance.transform);
     }
-
     public void StarvyDie()
     {
         Instantiate(_starvyDieEffect, this.transform.position, Quaternion.identity, GameBoardController.Instance.transform);
