@@ -59,14 +59,20 @@ public class BrickView : MonoBehaviour
 
     public void FartyDie()
     {
+        SoundManager.Instance.PlaySFX("die");
+
         Instantiate(_fartyDieEffect, this.transform.position , Quaternion.identity, GameBoardController.Instance.transform);
     }
     public void IceDie()
     {
+        SoundManager.Instance.PlaySFX("die");
+
         Instantiate(_iceDieEffect, this.transform.position, Quaternion.identity, GameBoardController.Instance.transform);
     }
     public void StarvyDie()
     {
+        SoundManager.Instance.PlaySFX("die");
+
         Instantiate(_starvyDieEffect, this.transform.position, Quaternion.identity, GameBoardController.Instance.transform);
     }
     public void StarvyAnim()

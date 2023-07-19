@@ -322,7 +322,6 @@ public class BrickController : MonoBehaviour
 
     public void RemoveBrick()
     {
-        SoundManager.Instance.PlaySFX("die");
 
         gameObject.SetActive(false);
         //GameBoardController.Instance.BrickControllers.Remove(this);
