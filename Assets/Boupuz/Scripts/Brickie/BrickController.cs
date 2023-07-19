@@ -133,6 +133,8 @@ public class BrickController : MonoBehaviour
             }
             else if (gameObject.CompareTag("Portal"))
             {
+                SoundManager.Instance.PlaySFX("portal");
+
                 col.transform.position = gameObject.GetComponent<Portals>().otherPortal.transform.position;
                 Vector3 direction = col.gameObject.GetComponentInChildren<BallModel>().Direction;
                 col.gameObject.transform.position = Vector3.MoveTowards(col.transform.position, (direction.normalized + col.transform.position), 3.3f * 0.01f * 8);
@@ -166,6 +168,8 @@ public class BrickController : MonoBehaviour
         }
         else if (col.gameObject.CompareTag("Portal"))
         {
+            SoundManager.Instance.PlaySFX("portal");
+
             gameObject.SetActive(false);
             BrickController otherPortal = col.gameObject.GetComponent<Portals>().otherPortal;
             GridCoordinate newCoordinate = otherPortal.Data.BrickCoordinate + Data.Direction;
