@@ -287,6 +287,7 @@ public class GameBoardController : MonoBehaviour
     public void MoveAll()
     {
         StopAllCoroutines();
+        UpdateGrid();
         List<BrickController> movableObjects = new List<BrickController>();
         for (int i = 0; i < BrickControllers.Count; i++)
         {
@@ -335,7 +336,7 @@ public class GameBoardController : MonoBehaviour
             }
             
         }
-        UpdateGrid();
+        //UpdateGrid();
 
         for (int i = 0; i < movableObjects.Count; i++)
         {
