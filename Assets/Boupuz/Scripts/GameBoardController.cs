@@ -424,6 +424,7 @@ public class GameBoardController : MonoBehaviour
         else
         {
             _wallHp -= 1;
+            _wallBooster.GetComponentInChildren<ParticleSystem>().Play();
             _wallBooster.GetComponent<SpriteRenderer>().color = _listColorWallHp[_wallHp];
         }
     }
