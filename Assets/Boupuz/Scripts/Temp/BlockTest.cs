@@ -47,6 +47,12 @@ public class BlockTest : MonoBehaviour
                 _listContact.Add(coll.contacts[0]);
                 BallController.Instance.CheckContact(coll.contacts[0], coll.gameObject, true);
             }
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            if (name == "WallBooster" && ((angle>180 && angle<360) || (angle<0 && angle>-180)))
+            {
+                GameBoardController.Instance.WallBoosterContact();
+            }
         }
     }
 }

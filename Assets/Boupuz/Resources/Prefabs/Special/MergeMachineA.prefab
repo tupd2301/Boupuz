@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 833307735505825470, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 833307735505825470, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -30,6 +34,10 @@ PrefabInstance:
     - target: {fileID: 1361159576040732970, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: BrickCoordinate.Y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107670128694354791, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2107670128694354791, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_TagString
@@ -80,6 +88,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5795087929524398967, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5795087929524398967, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -108,12 +120,24 @@ PrefabInstance:
       value: MergeMachineA
       objectReference: {fileID: 0}
     - target: {fileID: 7905594212609445272, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7905594212609445272, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_TagString
       value: MergeMachine
       objectReference: {fileID: 0}
     - target: {fileID: 8086973390344421784, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8086973390344421784, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: m_TagString
       value: Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455915155383301967, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8741076295938774346, guid: b75f9dd420e734ddaa1d542c3d3292b5, type: 3}
       propertyPath: _collider

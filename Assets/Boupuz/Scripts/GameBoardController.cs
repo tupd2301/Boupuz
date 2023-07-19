@@ -40,9 +40,11 @@ public class GameBoardController : MonoBehaviour
     public List<BrickController> BrickControllers { get => _brickControllers; set => _brickControllers = value; }
     [SerializeField] private bool _playTest;
     [SerializeField] private bool _enableItemSpawner;
+    [SerializeField] private List<Color32> _listColorWallHp;
+    [SerializeField] private GameObject _wallBooster;
     public GameObject deathAnim;
 
-
+    private int _wallHp;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -247,6 +249,13 @@ public class GameBoardController : MonoBehaviour
                 {
                     _grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] = newBrick;
                     //newBrick.Initialize();
+                    if (newBrick.gameObject.CompareTag("MergeMachine"))
+                    {
+                        if (newBrick.GetComponent<MergeMachine>().HeldBrick)
+                        {
+                            newBrick.GetComponent<MergeMachine>().HeldBrick = null;
+                        }
+                    }
                 } 
                 else
                 {
@@ -406,7 +415,33 @@ public class GameBoardController : MonoBehaviour
     //         UIManager.Instance.LoadWinUI();
     //     }
     // }
+    public void WallBoosterContact()
+    {
+        if (_wallHp <= 0)
+        {
+            SetUpPositionWallDown(false);
+        }
+        else
+        {
+            _wallHp -= 1;
+            _wallBooster.GetComponentInChildren<ParticleSystem>().Play();
+            _wallBooster.GetComponent<SpriteRenderer>().color = _listColorWallHp[_wallHp];
+        }
+    }
 
+    public void SetUpPositionWallDown(bool enable)
+    {
+        if (enable)
+        {
+            _wallHp = _listColorWallHp.Count - 1;
+            _wallBooster.GetComponent<SpriteRenderer>().color = _listColorWallHp[_wallHp];
+            _wallBooster.transform.position = new Vector3(0, BallController.Instance.GunPosition.y, 0);
+        }
+        else
+        {
+            _wallBooster.transform.position = new Vector3(0, BallController.Instance.GunPosition.y - 50f, 0);
+        }
+    }
     void OnDestroy()
     {
         Debug.Log("-------------Gameboardcontroller destroyed");

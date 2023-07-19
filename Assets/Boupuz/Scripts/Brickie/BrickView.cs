@@ -59,7 +59,7 @@ public class BrickView : MonoBehaviour
 
     public void FartyDie()
     {
-        SoundManager.Instance.PlaySFX("die");
+        SoundManager.Instance.PlaySFX("fart");
 
         Instantiate(_fartyDieEffect, this.transform.position , Quaternion.identity, GameBoardController.Instance.transform);
     }
