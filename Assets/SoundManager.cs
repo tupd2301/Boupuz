@@ -12,6 +12,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _bGM;
     [SerializeField] private AudioSource _die;
     [SerializeField] private AudioSource _starvyEating;
+    [SerializeField] private AudioSource _portal;
     [SerializeField] private bool _isMuteBGM;
     [SerializeField] private bool _isMuteSFX;
 
@@ -53,6 +54,7 @@ public class SoundManager : MonoBehaviour
             case "ui": _uI.Play(); break;
             case "die": _die.Play(); break;
             case "starvyEating": _starvyEating.Play(); break;
+            case "portal": _portal.Play(); break;
             default: break;
         }
     }
