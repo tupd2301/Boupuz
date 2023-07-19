@@ -14,10 +14,10 @@ public class MergeMachine : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Block"))
-        {
-            _heldBrick = null;
-        }
+        // if (col.gameObject.CompareTag("Block"))
+        // {
+        //     _heldBrick = null;
+        // }
     }
 
     public void Merge()

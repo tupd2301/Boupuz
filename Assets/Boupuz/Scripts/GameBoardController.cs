@@ -247,6 +247,13 @@ public class GameBoardController : MonoBehaviour
                 {
                     _grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] = newBrick;
                     //newBrick.Initialize();
+                    if (newBrick.gameObject.CompareTag("MergeMachine"))
+                    {
+                        if (newBrick.GetComponent<MergeMachine>().HeldBrick)
+                        {
+                            newBrick.GetComponent<MergeMachine>().HeldBrick = null;
+                        }
+                    }
                 } 
                 else
                 {
