@@ -353,6 +353,10 @@ public class BrickController : MonoBehaviour
         // {
         //     GameBoardController.Instance.UpdateCandy(1);
         // }
+        if (gameObject.CompareTag("Block"))
+        {
+            GameBoardController.Instance.UpdateKillCountEachTurn();
+        }
     }
 
     public void DecreaseAdjacentBrickHealth()

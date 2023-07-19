@@ -38,13 +38,19 @@ public class GameBoardController : MonoBehaviour
     public GameObject BrickOri1 { get => _brickOri1; set => _brickOri1 = value; }
     public GameObject BrickOri2 { get => _brickOri2; set => _brickOri2 = value; }
     public List<BrickController> BrickControllers { get => _brickControllers; set => _brickControllers = value; }
+    
+
     [SerializeField] private bool _playTest;
     [SerializeField] private bool _enableItemSpawner;
     [SerializeField] private List<Color32> _listColorWallHp;
     [SerializeField] private GameObject _wallBooster;
     public GameObject deathAnim;
 
+    private int _killCountEachTurn;
+    public int KillCountEachTurn { get => _killCountEachTurn; set => _killCountEachTurn = value; }
     private int _wallHp;
+
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -237,6 +243,7 @@ public class GameBoardController : MonoBehaviour
             BrickControllers.Remove(_removedBrick[i]);
         }
         _removedBrick = new List<BrickController>();
+        _killCountEachTurn = 0;
         _brickControllers = _brickControllers.OrderBy(b => b.Data.BrickCoordinate.Y).ToList();
         _grid = new BrickController[_gridWidth, _gridHeight];
         for (int brickIndex = 0; brickIndex < BrickControllers.Count; brickIndex++)
@@ -442,9 +449,19 @@ public class GameBoardController : MonoBehaviour
             _wallBooster.transform.position = new Vector3(0, BallController.Instance.GunPosition.y - 50f, 0);
         }
     }
+
+    public void UpdateKillCountEachTurn()
+    {
+        _killCountEachTurn += 1;
+        UIManager.Instance.UpdatePraiseText(_killCountEachTurn);
+
+    }
+
     void OnDestroy()
     {
         Debug.Log("-------------Gameboardcontroller destroyed");
         BrickController.OnBrickieRemoval -= UpdateDestroyedBricks;
     }
+
+    
 }

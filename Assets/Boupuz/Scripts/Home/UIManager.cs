@@ -41,6 +41,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private PauseGame _pauseUI;
 
+    [Header("Praise")]
+    [SerializeField] private Text _praiseText;
+
     private int _level = 1;
 
     public List<Character> ListCharacter { get => _listCharacter; set => _listCharacter = value; }
@@ -347,5 +350,50 @@ public class UIManager : MonoBehaviour
             else
                 _muteBGMHome.color = new Color32(110, 110, 110, 255);
         }
+    }
+
+
+    public void UpdatePraiseText(int value)
+    {
+        //StopCoroutine(UpdatePraiseText(value-1));
+        _praiseText.gameObject.SetActive(false);
+        _praiseText.gameObject.SetActive(true);
+        switch (value)
+        {
+            case 1:
+                _praiseText.text = "Cool";
+                break;
+            case 2:
+                _praiseText.text = "Great";
+                break;
+            case 3:
+                _praiseText.text = "Perfect";
+                break;
+            case 4:
+                _praiseText.text = "Amazing";
+                break;
+            case 5:
+                _praiseText.text = "Excellent";
+                break;
+            case 6:
+                _praiseText.text = "Incredible";
+                break;
+            case 7:
+                _praiseText.text = "Brilliant";
+                break;
+            case 8:
+                _praiseText.text = "Fantastic";
+                break;
+            case 9:
+                _praiseText.text = "Awesome";
+                break;
+            case 10:
+                _praiseText.text = "Fabulous";
+                break;
+            case int n when (n > 10):
+                _praiseText.text = "Magnificent x" + (n-10);
+                break;
+        }
+        
     }
 }
