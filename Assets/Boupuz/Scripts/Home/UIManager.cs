@@ -50,6 +50,8 @@ public class UIManager : MonoBehaviour
 
     public void MinusLevel()
     {
+        SoundManager.Instance.PlaySFX("ui");
+
         _level -= 1;
         if (_level < 1)
             _level = 1;
@@ -57,27 +59,35 @@ public class UIManager : MonoBehaviour
     }
     public void AddLevel()
     {
+        SoundManager.Instance.PlaySFX("ui");
+
         _level += 1;
         if (_level > 99)
             _level = 99;
         _levelCheat.text = _level.ToString();
     }
 
+    public void Ready()
+    {
+        PlayerPrefs.SetInt("LevelID", _level);
+        SceneManager.LoadScene("GamePlay", LoadSceneMode.Single);
+    }
+
     public void LoadUI(string name)
     {
         UnpauseGame();
-        if (name == "Play")
-        {
-            PlayerPrefs.SetInt("LevelID", _level);
-            SceneManager.LoadScene("GamePlay", LoadSceneMode.Single);
-            return;
-        }
         for (int i = 0; i < _listUI.Count; i++)
         {
             if (_listNavigator[i].Parent.name != name)
             {
                 Debug.Log("ok");
-                _listNavigator[i].Parent.transform.localScale = Vector3.one;
+                _listNavigator[i].GetComponent<Image>().color = new Color32(160, 160, 160, 255);
+                _listNavigator[i].Parent.GetComponent<RectTransform>().anchoredPosition = new Vector2(_listNavigator[i].Parent.GetComponent<RectTransform>().anchoredPosition.x, 0);
+            }
+            else
+            {
+                _listNavigator[i].GetComponent<Image>().color = Color.white;
+                _listNavigator[i].Parent.GetComponent<RectTransform>().anchoredPosition = new Vector2(_listNavigator[i].Parent.GetComponent<RectTransform>().anchoredPosition.x, 55f);
             }
             if (_listUI[i].name != name + "Layout")
             {
@@ -126,7 +136,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            LoadUI("Home");
+            LoadUI("Play");
             if (PlayerPrefs.HasKey("LevelID"))
             {
                 _level = PlayerPrefs.GetInt("LevelID");
@@ -213,6 +223,8 @@ public class UIManager : MonoBehaviour
     }
     public void PauseGame()
     {
+        SoundManager.Instance.PlaySFX("ui");
+
         ShowPauseUI();
         if (Time.timeScale == 0)
         {
@@ -224,6 +236,8 @@ public class UIManager : MonoBehaviour
 
     public void UnpauseGame()
     {
+        SoundManager.Instance.PlaySFX("ui");
+
         Time.timeScale = 1;
     }
 
@@ -301,6 +315,8 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateUIBGM(bool isMute)
     {
+        SoundManager.Instance.PlaySFX("ui");
+
         if (!isMute)
         {
             if (SceneManager.GetActiveScene().name != "Home")

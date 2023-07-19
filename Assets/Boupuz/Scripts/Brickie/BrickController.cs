@@ -107,6 +107,8 @@ public class BrickController : MonoBehaviour
                     col.gameObject.SetActive(false);
                     //BallController.Instance.TotalBall -= 1;
                     BallController.Instance.AddListRemoveBall(col.gameObject);
+                    SoundManager.Instance.PlaySFX("starvyEating");
+
                     // Total number ball -= 1
 
                 }
@@ -320,6 +322,8 @@ public class BrickController : MonoBehaviour
 
     public void RemoveBrick()
     {
+        SoundManager.Instance.PlaySFX("die");
+
         gameObject.SetActive(false);
         //GameBoardController.Instance.BrickControllers.Remove(this);
         GameBoardController.Instance.RemovedBrick.Add(this);
@@ -350,8 +354,10 @@ public class BrickController : MonoBehaviour
 
     public void DecreaseAdjacentBrickHealth()
     {
-        _view.FartyDie();
-
+        if (Data.Id == 5 && Data.Type == ObjectType.Brickie)
+        {
+            _view.FartyDie();
+        }
         for (int i = 0; i < GameBoardController.Instance.BrickControllers.Count; i++)
         {
             BrickController otherBrick = GameBoardController.Instance.BrickControllers[i];

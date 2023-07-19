@@ -51,9 +51,9 @@ public class PoolManager : MonoBehaviour
     {
         List<GameObject> listObject = new List<GameObject>();
         List<GameObject> listObjectCanGet = new List<GameObject>();
-        if(_listObject.Where(obj=>obj.Name == name).Count() > 0)
+        if (_listObject.Where(obj => obj.Name == name).Count() > 0)
         {
-            if(_listObject.Where(obj => obj.Name == name).ToArray()[0].ListObject.Count() - amount >=0)
+            if (_listObject.Where(obj => obj.Name == name).ToArray()[0].ListObject.Count() - amount >= 0)
             {
                 listObject = _listObject.Where(obj => obj.Name == name).ToArray()[0].ListObject;
                 for (int i = 0; i < amount; i++)
@@ -66,5 +66,50 @@ public class PoolManager : MonoBehaviour
             }
         }
         return listObjectCanGet;
+    }
+
+    public void SendBackObjects(string name, GameObject obj)
+    {
+        if (_listObject.Where(list => list.Name + "(Clone)" == name).Count() >0)
+        {
+            for (int i = 0; i < _listObject.Count; i++)
+            {
+                if(_listObject[i].Name + "(Clone)" == name)
+                {
+                    Transform parent = _listObject[i].Parent.transform;
+                    obj.SetActive(false);
+                    obj.transform.SetParent(parent);
+                    break;
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("Pool name can not found.");
+        }
+    }
+
+    public void SendBackObjects(string name, List<GameObject> objects)
+    {
+        if (_listObject.Where(list => list.Name + "(Clone)" == name).Count() >0)
+        {
+            for (int i = 0; i < _listObject.Count; i++)
+            {
+                if (_listObject[i].Name + "(Clone)" == name)
+                {
+                    Transform parent = _listObject[i].Parent.transform;
+                    for (int j = 0; j < objects.Count; i++)
+                    {
+                        objects[j].SetActive(false);
+                        objects[j].transform.SetParent(parent);
+                    }
+                    break;
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("Pool name can not found.");
+        }
     }
 }

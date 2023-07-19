@@ -20,12 +20,17 @@ public class CharacterUI : MonoBehaviour
 
     public void ShowUI(int id)
     {
+        SoundManager.Instance.PlaySFX("ui");
+
         int countCharacter = UIManager.Instance.ListCharacter.Count - 1;
-        if (LeftID + id < countCharacter - 1 && LeftID + id >= 0) 
+        if (LeftID + id < countCharacter - 1 && LeftID + id >= 0)
         {
             LeftID += id;
             _leftCharacter.sprite = UIManager.Instance.ListCharacter[LeftID].Image;
             _rightCharacter.sprite = UIManager.Instance.ListCharacter[LeftID + 2].Image;
+            _rightCharacter.color = new Color32(255, 255, 255, 255);
+            _leftCharacter.color = new Color32(255, 255, 255, 255);
+
 
             _mainCharacterGraphic.sprite = UIManager.Instance.ListCharacter[LeftID + 1].Image;
             _mainCharacterInfo.text = UIManager.Instance.ListCharacter[LeftID + 1].Info;
@@ -33,21 +38,25 @@ public class CharacterUI : MonoBehaviour
         }
         else
         {
-            if(LeftID + id == countCharacter - 1)
+            _rightCharacter.color = new Color32(255, 255, 255, 255);
+            _leftCharacter.color = new Color32(255, 255, 255, 255);
+            if (LeftID + id == countCharacter - 1)
             {
                 LeftID += id;
                 _leftCharacter.sprite = UIManager.Instance.ListCharacter[LeftID].Image;
                 _rightCharacter.sprite = _noneCharacter;
+                _rightCharacter.color = new Color32(255, 255, 255, 0);
 
                 _mainCharacterGraphic.sprite = UIManager.Instance.ListCharacter[LeftID + 1].Image;
                 _mainCharacterInfo.text = UIManager.Instance.ListCharacter[LeftID + 1].Info;
                 _mainCharacterName.text = UIManager.Instance.ListCharacter[LeftID + 1].Name;
             }
-            if (LeftID + id == -1)
+            else if (LeftID + id == -1)
             {
                 LeftID += id;
                 _leftCharacter.sprite = _noneCharacter;
                 _rightCharacter.sprite = UIManager.Instance.ListCharacter[LeftID + 2].Image;
+                _leftCharacter.color = new Color32(255, 255, 255, 0);
 
                 _mainCharacterGraphic.sprite = UIManager.Instance.ListCharacter[LeftID + 1].Image;
                 _mainCharacterInfo.text = UIManager.Instance.ListCharacter[LeftID + 1].Info;
