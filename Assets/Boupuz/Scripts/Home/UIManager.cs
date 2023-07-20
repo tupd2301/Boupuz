@@ -71,8 +71,8 @@ public class UIManager : MonoBehaviour
         SoundManager.Instance.PlaySFX("ui");
 
         _level += 1;
-        if (_level > 99)
-            _level = 99;
+        if (_level > PlayerPrefs.GetInt("LevelMax"))
+            _level = PlayerPrefs.GetInt("LevelMax");
         _levelCheat.text = _level.ToString();
     }
 
@@ -129,6 +129,8 @@ public class UIManager : MonoBehaviour
     public void LoadWinUI()
     {
         _winUI.SetActive(true);
+        PlayerPrefs.SetInt("LevelMax", PlayerPrefs.GetInt("LevelID")+1);
+        PlayerPrefs.SetInt("LevelID", PlayerPrefs.GetInt("LevelID")+1);
     }
 
     public void LoadLoseUI()
@@ -151,9 +153,9 @@ public class UIManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name != "Home")
         {
             UpdateDestroyedBricksUI();
-            UpdateCoinUI();
-            UpdateCakeUI();
-            UpdateTurnUI();
+            //UpdateCoinUI();
+            //UpdateCakeUI();
+            //UpdateTurnUI();
             BrickController.OnBrickieRemoval += DisplayPlusOne;
         }
         else
@@ -162,6 +164,11 @@ public class UIManager : MonoBehaviour
             if (PlayerPrefs.HasKey("LevelID"))
             {
                 _level = PlayerPrefs.GetInt("LevelID");
+            }
+            if (!PlayerPrefs.HasKey("LevelMax"))
+            {
+                PlayerPrefs.SetInt("LevelMax", 1);
+                PlayerPrefs.SetInt("LevelID", 1);
             }
             _levelCheat.text = _level.ToString();
         }
