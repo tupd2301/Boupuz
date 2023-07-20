@@ -40,7 +40,7 @@ public class Laser : MonoBehaviour
     {
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.localRotation = Quaternion.Euler(0, 0, angle);
-        RaycastHit2D hit = Physics2D.CircleCast(this.transform.position, 0.15f, direction, 10f, _layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction, 10f, _layerMask);
         if (hit.collider == null)
         {
             LaserGraphic.GetComponent<SpriteRenderer>().size = new Vector2(50,0.25f);
