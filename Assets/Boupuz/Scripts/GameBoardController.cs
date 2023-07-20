@@ -367,7 +367,7 @@ public class GameBoardController : MonoBehaviour
             }
             
         }
-        //UpdateGrid();
+        UpdateGrid();
 
         for (int i = 0; i < movableObjects.Count; i++)
         {
