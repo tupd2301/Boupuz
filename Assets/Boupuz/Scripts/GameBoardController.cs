@@ -446,7 +446,6 @@ public class GameBoardController : MonoBehaviour
         if (enable)
         {
             SoundManager.Instance.PlaySFX("ui");
-
             _wallHp = _listColorWallHp.Count - 1;
             _wallBooster.GetComponent<SpriteRenderer>().color = _listColorWallHp[_wallHp];
             _wallBooster.transform.position = new Vector3(0, BallController.Instance.GunPosition.y, 0);
