@@ -944,14 +944,14 @@ MonoBehaviour:
   - {fileID: 0}
   _gridWidth: 7
   _gridHeight: 40
-  _brickOri1: {fileID: 0}
-  _brickOri2: {fileID: 0}
+  _brickOri1: {fileID: 388207597}
+  _brickOri2: {fileID: 721162742}
   _gridScreenWidth: 7
   _gridScreenHeight: 11
   _listWall:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 234699307}
+  - {fileID: 2015053744}
+  - {fileID: 1813245980}
   _playTest: 0
   _enableItemSpawner: 0
   _listColorWallHp:
@@ -967,7 +967,7 @@ MonoBehaviour:
     rgba: 4290822394
   - serializedVersion: 2
     rgba: 4293322493
-  _wallBooster: {fileID: 0}
+  _wallBooster: {fileID: 1340054531}
   deathAnim: {fileID: 1831413812366418387, guid: 0fc88e52f5b5e455baa1f721e35aa7fc, type: 3}
 --- !u!4 &342982376
 Transform:
@@ -985,6 +985,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &388207597 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5216889500241554640, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+  m_PrefabInstance: {fileID: 602318751}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &434336740 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 434336740, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
@@ -2335,6 +2340,11 @@ Transform:
   m_Father: {fileID: 1232033502}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &721162742 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9191722091211578000, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+  m_PrefabInstance: {fileID: 602318751}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &730152062 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 730152062, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
