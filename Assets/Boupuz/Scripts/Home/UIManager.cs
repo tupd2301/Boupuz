@@ -383,35 +383,46 @@ public class UIManager : MonoBehaviour
         {
             case 1:
                 _praiseText.text = "Cool";
+                _praiseText.color = new Color32(255, 255, 255, 255);
                 break;
             case 2:
                 _praiseText.text = "Great";
+                _praiseText.color = new Color32(199, 128, 232, 255);
                 break;
             case 3:
                 _praiseText.text = "Perfect";
+                _praiseText.color = new Color32(157, 148, 255, 255);
                 break;
             case 4:
                 _praiseText.text = "Amazing";
+                _praiseText.color = new Color32(89, 173, 246, 255);
                 break;
             case 5:
                 _praiseText.text = "Excellent";
+                _praiseText.color = new Color32(8, 202, 209, 255);
                 break;
             case 6:
                 _praiseText.text = "Incredible";
+                _praiseText.color = new Color32(66, 214, 164, 255);
                 break;
             case 7:
                 _praiseText.text = "Brilliant";
+                _praiseText.color = new Color32(248, 243, 141, 255);
                 break;
             case 8:
                 _praiseText.text = "Fantastic";
+                _praiseText.color = new Color32(255, 180, 128, 255);
                 break;
             case 9:
                 _praiseText.text = "Awesome";
+                _praiseText.color = new Color32(255, 160, 0, 255);
                 break;
             case 10:
                 _praiseText.text = "Fabulous";
+                _praiseText.color = new Color32(255, 105, 97, 255);
                 break;
             case int n when (n > 10):
+            _praiseText.color = new Color32(255, 105, 97, 255);
                 _praiseText.text = "Magnificent x" + (n-10);
                 break;
         }
