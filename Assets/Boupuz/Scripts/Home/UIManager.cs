@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text _praiseText;
 
     private int _level = 1;
+    private bool _level1TutorialBooster = false;
 
     public List<Character> ListCharacter { get => _listCharacter; set => _listCharacter = value; }
 
@@ -213,9 +214,17 @@ public class UIManager : MonoBehaviour
 
     public void HideTutorialUI()
     {
-        _tutorialUI.SetActive(false);
-        GameFlow.Instance.canShoot = true;
-        SoundManager.Instance.PlaySFX("ui");
+        if (PlayerPrefs.GetInt("LevelID") == 1 && !_level1TutorialBooster)
+        {
+            _tutorialUI.GetComponentInChildren<Animator>().Play(PlayerPrefs.GetInt("LevelID").ToString() + "-B");
+            _level1TutorialBooster = true;
+        }
+        else
+        {
+            _tutorialUI.SetActive(false);
+            GameFlow.Instance.canShoot = true;
+            SoundManager.Instance.PlaySFX("ui");
+        }
     }
 
     public void SetUpTopUI()

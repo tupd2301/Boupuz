@@ -1852,6 +1852,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3949702838718050127, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4059189494824686455, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1948,14 +1952,102 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1812392949
       objectReference: {fileID: 0}
+    - target: {fileID: 7399075677512278003, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7566006421943594972, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -25
       objectReference: {fileID: 0}
+    - target: {fileID: 7576705399547450068, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576705399547450068, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.data[0]
+      value: 
+      objectReference: {fileID: 2015053742}
+    - target: {fileID: 7576705399547450068, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.data[1]
+      value: 
+      objectReference: {fileID: 234699305}
+    - target: {fileID: 7576705399547450068, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.data[2]
+      value: 
+      objectReference: {fileID: 1813245978}
     - target: {fileID: 7724119902788390689, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7747126388772294955, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.quality
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: ShapeModule.m_Rotation.z
+      value: -259.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.collisionMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.m_Bounce.scalar
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.collidesWithDynamic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: InitialModule.startSpeed.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.data[0]
+      value: 
+      objectReference: {fileID: 2015053742}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.data[1]
+      value: 
+      objectReference: {fileID: 234699305}
+    - target: {fileID: 8102280899501806816, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.data[2]
+      value: 
+      objectReference: {fileID: 1813245978}
     - target: {fileID: 8143193244117928942, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: m_Name
       value: Canvas Set Up Outside
