@@ -356,7 +356,7 @@ public class UIManager : MonoBehaviour
     public void UpdatePraiseText(int value)
     {
         //StopCoroutine(UpdatePraiseText(value-1));
-        _praiseText.gameObject.SetActive(false);
+        //_praiseText.gameObject.SetActive(false);
         _praiseText.gameObject.SetActive(true);
         switch (value)
         {
@@ -395,5 +395,10 @@ public class UIManager : MonoBehaviour
                 break;
         }
         
+    }
+
+    public void DisablePraiseText()
+    {
+        _praiseText.gameObject.SetActive(false);
     }
 }

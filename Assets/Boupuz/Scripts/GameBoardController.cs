@@ -244,6 +244,7 @@ public class GameBoardController : MonoBehaviour
         }
         _removedBrick = new List<BrickController>();
         _killCountEachTurn = 0;
+        UIManager.Instance.DisablePraiseText();
         _brickControllers = _brickControllers.OrderBy(b => b.Data.BrickCoordinate.Y).ToList();
         _grid = new BrickController[_gridWidth, _gridHeight];
         for (int brickIndex = 0; brickIndex < BrickControllers.Count; brickIndex++)
