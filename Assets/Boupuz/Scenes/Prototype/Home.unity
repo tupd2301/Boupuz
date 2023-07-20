@@ -5662,7 +5662,11 @@ PrefabInstance:
       objectReference: {fileID: 1881803800}
     - target: {fileID: 1609751529393097309, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: _listCharacter.Array.size
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609751529393097309, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: _listCharacter.Array.data[2]._ID
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1609751529393097309, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: _listCharacter.Array.data[0]._Info
@@ -5682,11 +5686,24 @@ PrefabInstance:
       value: Bounnies
       objectReference: {fileID: 0}
     - target: {fileID: 1609751529393097309, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: _listCharacter.Array.data[2]._Info
+      value: '- Start with FIVE. - Bounnies will be destroyed after 10~20 impacts
+        against Brickies. - Receive extra +1 when collecting GAIN BOU items. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609751529393097309, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: _listCharacter.Array.data[2]._Name
+      value: Bounnies
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609751529393097309, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: _listCharacter.Array.data[0]._Image
       value: 
       objectReference: {fileID: 21300000, guid: 158f755c988cf354ba1d5ada90cd4fa2, type: 3}
     - target: {fileID: 1609751529393097309, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
       propertyPath: _listCharacter.Array.data[1]._Image
+      value: 
+      objectReference: {fileID: 21300000, guid: f03ea1af6d8d2cf4dab09db94e27dab3, type: 3}
+    - target: {fileID: 1609751529393097309, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
+      propertyPath: _listCharacter.Array.data[2]._Image
       value: 
       objectReference: {fileID: 21300000, guid: f03ea1af6d8d2cf4dab09db94e27dab3, type: 3}
     - target: {fileID: 1609751529669191583, guid: 4ab796c3e4b9dcc499601609ecb24587, type: 3}
