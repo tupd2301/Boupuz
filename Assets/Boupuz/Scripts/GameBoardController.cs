@@ -12,6 +12,8 @@ public class GameBoardController : MonoBehaviour
     private List<BrickController> _brickControllers = new List<BrickController>();
     //public List<BrickController> BrickControllers { get { return _brickControllers; } }
 
+    public List<BrickController> movableObjects;
+
     private List<BrickController> _removedBrick = new List<BrickController>();
     public List<BrickController> RemovedBrick { get { return _removedBrick; } }
 
@@ -239,9 +241,8 @@ public class GameBoardController : MonoBehaviour
         }
     }
 
-    public void UpdateGrid()
+    void PostTurnProcessing()
     {
-
         for (int i = 0; i < _removedBrick.Count; i++)
         {
             BrickControllers.Remove(_removedBrick[i]);
@@ -249,6 +250,12 @@ public class GameBoardController : MonoBehaviour
         _removedBrick = new List<BrickController>();
         _killCountEachTurn = 0;
         UIManager.Instance.DisablePraiseText();
+    }
+
+
+    public void UpdateGrid()
+    {
+
         _brickControllers = _brickControllers.OrderBy(b => b.Data.BrickCoordinate.Y).ToList();
         _grid = new BrickController[_gridWidth, _gridHeight];
         for (int brickIndex = 0; brickIndex < BrickControllers.Count; brickIndex++)
@@ -268,6 +275,7 @@ public class GameBoardController : MonoBehaviour
                             newBrick.GetComponent<MergeMachine>().HeldBrick = null;
                         }
                     }
+                    
                 } 
                 else
                 {
@@ -308,8 +316,10 @@ public class GameBoardController : MonoBehaviour
     public void MoveAll()
     {
         StopAllCoroutines();
+        PostTurnProcessing();
         UpdateGrid();
-        List<BrickController> movableObjects = new List<BrickController>();
+        
+        movableObjects = new List<BrickController>();
         for (int i = 0; i < BrickControllers.Count; i++)
         {
             if (BrickControllers[i].Data.Type == ObjectType.Item)

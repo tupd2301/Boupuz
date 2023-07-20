@@ -176,7 +176,8 @@ public class BrickController : MonoBehaviour
             if (newCoordinate.X >= 0 && newCoordinate.X < GameBoardController.Instance.GridScreenWidth &&
                 newCoordinate.Y >= 0 && newCoordinate.Y < GameBoardController.Instance.GridScreenHeight)
             {
-                if (GameBoardController.Instance.Grid[newCoordinate.X, newCoordinate.Y] == null)
+                if (GameBoardController.Instance.Grid[newCoordinate.X, newCoordinate.Y] == null ||
+                    GameBoardController.Instance.movableObjects.Contains(GameBoardController.Instance.Grid[newCoordinate.X, newCoordinate.Y]))
                 {
                     Data.BrickCoordinate = newCoordinate;
                 }
@@ -353,7 +354,7 @@ public class BrickController : MonoBehaviour
         // {
         //     GameBoardController.Instance.UpdateCandy(1);
         // }
-        if (gameObject.CompareTag("Block"))
+        if (gameObject.CompareTag("Block") && !BallController.Instance.isEndRound)
         {
             GameBoardController.Instance.UpdateKillCountEachTurn();
         }
