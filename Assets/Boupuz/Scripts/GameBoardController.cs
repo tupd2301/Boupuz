@@ -78,10 +78,14 @@ public class GameBoardController : MonoBehaviour
         {
             LoadLevelPrefab();
         }
+        else
+        {
+
+        UIManager.Instance.SetUpTopUI();
+        }
         //Debug.Log(LevelInfo.levelType);
         
 
-        UIManager.Instance.SetUpTopUI();
 
         _brickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
         _brickControllers = _brickControllers.OrderBy(b => b.Data.BrickCoordinate.Y).ToList();
@@ -441,6 +445,8 @@ public class GameBoardController : MonoBehaviour
     {
         if (enable)
         {
+            SoundManager.Instance.PlaySFX("ui");
+
             _wallHp = _listColorWallHp.Count - 1;
             _wallBooster.GetComponent<SpriteRenderer>().color = _listColorWallHp[_wallHp];
             _wallBooster.transform.position = new Vector3(0, BallController.Instance.GunPosition.y, 0);

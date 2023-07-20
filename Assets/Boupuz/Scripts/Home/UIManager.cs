@@ -40,6 +40,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _loseUI;
 
     [SerializeField] private PauseGame _pauseUI;
+    [SerializeField] private GameObject _tutorialUI;
+
 
     [Header("Praise")]
     [SerializeField] private Text _praiseText;
@@ -209,6 +211,13 @@ public class UIManager : MonoBehaviour
         _numCoinText.text = GameBoardController.Instance.LevelData.numCoins.ToString();
     }
 
+    public void HideTutorialUI()
+    {
+        _tutorialUI.SetActive(false);
+        GameFlow.Instance.canShoot = true;
+        SoundManager.Instance.PlaySFX("ui");
+    }
+
     public void SetUpTopUI()
     {
         _coinImage.enabled = true;
@@ -222,6 +231,11 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            if (GameBoardController.Instance.LevelInfo.HaveTutorial)
+            {
+        _tutorialUI.SetActive(true);
+                Invoke("PlayTutorial",0.2f);
+            }
             //_numCandyText.enabled = true;
             _destroyedBricksText.enabled = true;
             // if (GameBoardController.Instance.LevelInfo.levelType == LevelInfo.LevelType.Action)
@@ -240,6 +254,13 @@ public class UIManager : MonoBehaviour
             // }
         }
     }
+
+    void PlayTutorial()
+    {
+        GameFlow.Instance.canShoot = false;
+        _tutorialUI.GetComponentInChildren<Animator>().Play(PlayerPrefs.GetInt("LevelID").ToString());
+    }
+
     public void PauseGame()
     {
         SoundManager.Instance.PlaySFX("ui");

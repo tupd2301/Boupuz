@@ -27,4 +27,7 @@ public class LevelInfo : MonoBehaviour
     [SerializeField]
     private int _numDamageItem;
     public int NumDamageItem { get => _numDamageItem; set => _numDamageItem = value; }
+
+    [SerializeField] private bool _haveTutorial = false;
+    public bool HaveTutorial { get => _haveTutorial; set => _haveTutorial = value; }
 }
