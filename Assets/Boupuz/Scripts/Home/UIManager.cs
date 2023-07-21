@@ -74,8 +74,8 @@ public class UIManager : MonoBehaviour
         //if (_level > 34)
         //    _level = 34;
 
-        if (_level > PlayerPrefs.GetInt("LevelMax"))
-            _level = PlayerPrefs.GetInt("LevelMax");
+        if (_level > PlayerPrefs.GetInt("LevelMax1"))
+            _level = PlayerPrefs.GetInt("LevelMax1");
 
         _levelCheat.text = _level.ToString();
     }
@@ -133,7 +133,7 @@ public class UIManager : MonoBehaviour
     public void LoadWinUI()
     {
         _winUI.SetActive(true);
-        PlayerPrefs.SetInt("LevelMax", PlayerPrefs.GetInt("LevelID")+1);
+        PlayerPrefs.SetInt("LevelMax1", PlayerPrefs.GetInt("LevelID") + 1);
         PlayerPrefs.SetInt("LevelID", PlayerPrefs.GetInt("LevelID")+1);
     }
 
@@ -169,12 +169,16 @@ public class UIManager : MonoBehaviour
             {
                 _level = PlayerPrefs.GetInt("LevelID");
             }
-            if (!PlayerPrefs.HasKey("LevelMax"))
+            if (!PlayerPrefs.HasKey("LevelMax1"))
             {
-                PlayerPrefs.SetInt("LevelMax", 1);
+                PlayerPrefs.SetInt("LevelMax1", 1);
                 PlayerPrefs.SetInt("LevelID", 1);
             }
-            //PlayerPrefs.DeleteKey("LevelMax");
+            else
+            {
+                _level = PlayerPrefs.GetInt("LevelMax1");
+            }
+            //PlayerPrefs.DeleteKey("LevelMax1");
             _levelCheat.text = _level.ToString();
         }
 
@@ -254,7 +258,7 @@ public class UIManager : MonoBehaviour
         {
             if (GameBoardController.Instance.LevelInfo.HaveTutorial)
             {
-        _tutorialUI.SetActive(true);
+                _tutorialUI.SetActive(true);
                 Invoke("PlayTutorial",0.2f);
             }
             //_numCandyText.enabled = true;
