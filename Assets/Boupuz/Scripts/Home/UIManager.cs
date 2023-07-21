@@ -71,8 +71,12 @@ public class UIManager : MonoBehaviour
         SoundManager.Instance.PlaySFX("ui");
 
         _level += 1;
+        //if (_level > 34)
+        //    _level = 34;
+
         if (_level > PlayerPrefs.GetInt("LevelMax"))
             _level = PlayerPrefs.GetInt("LevelMax");
+
         _levelCheat.text = _level.ToString();
     }
 
@@ -170,6 +174,7 @@ public class UIManager : MonoBehaviour
                 PlayerPrefs.SetInt("LevelMax", 1);
                 PlayerPrefs.SetInt("LevelID", 1);
             }
+            //PlayerPrefs.DeleteKey("LevelMax");
             _levelCheat.text = _level.ToString();
         }
 

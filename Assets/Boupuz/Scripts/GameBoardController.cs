@@ -26,11 +26,11 @@ public class GameBoardController : MonoBehaviour
 
     [SerializeField]
     private int _gridScreenWidth, _gridScreenHeight;
-    public int GridScreenWidth { get { return _gridScreenWidth;}}
-    public int GridScreenHeight { get { return _gridScreenHeight;}}
+    public int GridScreenWidth { get { return _gridScreenWidth; } }
+    public int GridScreenHeight { get { return _gridScreenHeight; } }
 
     private BrickController[,] _grid;
-    public BrickController[,] Grid { get {return _grid;}}
+    public BrickController[,] Grid { get { return _grid; } }
 
     public LevelData LevelData { get; private set; }
     public LevelInfo LevelInfo { get; private set; }
@@ -40,7 +40,7 @@ public class GameBoardController : MonoBehaviour
     public GameObject BrickOri1 { get => _brickOri1; set => _brickOri1 = value; }
     public GameObject BrickOri2 { get => _brickOri2; set => _brickOri2 = value; }
     public List<BrickController> BrickControllers { get => _brickControllers; set => _brickControllers = value; }
-    
+
 
     [SerializeField] private bool _playTest;
     [SerializeField] private bool _enableItemSpawner;
@@ -83,10 +83,10 @@ public class GameBoardController : MonoBehaviour
         else
         {
 
-        UIManager.Instance.SetUpTopUI();
+            UIManager.Instance.SetUpTopUI();
         }
         //Debug.Log(LevelInfo.levelType);
-        
+
 
 
         _brickControllers = GetComponentsInChildren<BrickController>().ToList<BrickController>();
@@ -99,7 +99,7 @@ public class GameBoardController : MonoBehaviour
     private List<BrickController> LoadItemPrefab(string path)
     {
         List<BrickController> items = new List<BrickController>();
-        for (int i = 0; i < LevelInfo.NumAddItem; i ++)
+        for (int i = 0; i < LevelInfo.NumAddItem; i++)
         {
             var resource = Resources.Load(path);
             if (resource)
@@ -128,18 +128,18 @@ public class GameBoardController : MonoBehaviour
         _brickControllers.Add(item);
         item.Initialize();
         emptyCoord.Remove(emptyCoord[index]);
-}
+    }
 
     private void SpawnItems()
     {
         if (_enableItemSpawner)
         {
             int Ymin = _brickControllers[0].Data.BrickCoordinate.Y;
-            int Ymax = _brickControllers[_brickControllers.Count-1].Data.BrickCoordinate.Y;
+            int Ymax = _brickControllers[_brickControllers.Count - 1].Data.BrickCoordinate.Y;
 
             List<BrickController> addItems = LoadItemPrefab("Prefabs/Item/ItemAdd");
             List<BrickController> damageItems = LoadItemPrefab("Prefabs/Item/GainDamage");
-            
+
 
             for (int Y = Ymin; Y <= Ymax; Y++)
             {
@@ -148,7 +148,7 @@ public class GameBoardController : MonoBehaviour
                 {
                     if (_grid[X, Y] == null)
                     {
-                        emptyCoord.Add(new GridCoordinate(X,Y));
+                        emptyCoord.Add(new GridCoordinate(X, Y));
                     }
                 }
                 if (emptyCoord.Count > 0)
@@ -209,28 +209,28 @@ public class GameBoardController : MonoBehaviour
     public void InitGrid()
     {
         Debug.Log("Number of brick: " + BrickControllers.Count.ToString());
-        LevelData.GetTotalBricks(BrickControllers.Where(brick=>brick.CompareTag("Block")).Count());
-        LevelData.GetTotalCakes(BrickControllers.Where(brick=>brick.Data.Id == 6 && brick.Data.Type == ObjectType.Brickie).Count());
+        LevelData.GetTotalBricks(BrickControllers.Where(brick => brick.CompareTag("Block")).Count());
+        LevelData.GetTotalCakes(BrickControllers.Where(brick => brick.Data.Id == 6 && brick.Data.Type == ObjectType.Brickie).Count());
         _grid = new BrickController[_gridWidth, _gridHeight];
         for (int brickIndex = 0; brickIndex < BrickControllers.Count; brickIndex++)
         {
             BrickController newBrick = BrickControllers[brickIndex];
             if (newBrick?.Data.BrickCoordinate.X < _gridWidth && newBrick?.Data.BrickCoordinate.Y < _gridHeight)
             {
-                if (_grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] == null)
+                if (_grid[newBrick.Data.BrickCoordinate.X, newBrick.Data.BrickCoordinate.Y] == null)
                 {
-                    _grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] = newBrick;
+                    _grid[newBrick.Data.BrickCoordinate.X, newBrick.Data.BrickCoordinate.Y] = newBrick;
                     newBrick.Initialize();
-                } 
+                }
                 else
                 {
-                    Debug.LogError("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK: " + newBrick.gameObject.name + " " + _grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y].name);
+                    Debug.LogError("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK: " + newBrick.gameObject.name + " " + _grid[newBrick.Data.BrickCoordinate.X, newBrick.Data.BrickCoordinate.Y].name);
 
                 }
             }
         }
         ScaleWall(BrickControllers[0].Ratio);
-        
+
     }
 
     public void ScaleWall(float ratio)
@@ -263,10 +263,10 @@ public class GameBoardController : MonoBehaviour
             BrickController newBrick = BrickControllers[brickIndex];
             if (newBrick?.Data.BrickCoordinate.X < _gridWidth && newBrick?.Data.BrickCoordinate.Y < _gridHeight)
             {
-                if (_grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] == null ||
+                if (_grid[newBrick.Data.BrickCoordinate.X, newBrick.Data.BrickCoordinate.Y] == null ||
                     !newBrick.gameObject.CompareTag("MergeMachine"))
                 {
-                    _grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y] = newBrick;
+                    _grid[newBrick.Data.BrickCoordinate.X, newBrick.Data.BrickCoordinate.Y] = newBrick;
                     //newBrick.Initialize();
                     if (newBrick.gameObject.CompareTag("MergeMachine"))
                     {
@@ -275,11 +275,11 @@ public class GameBoardController : MonoBehaviour
                             newBrick.GetComponent<MergeMachine>().HeldBrick = null;
                         }
                     }
-                    
-                } 
+
+                }
                 else
                 {
-                    Debug.Log("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK: " + newBrick.gameObject.name + " " + _grid[newBrick.Data.BrickCoordinate.X,newBrick.Data.BrickCoordinate.Y].name);
+                    Debug.Log("WARNING: DUPLICATE COORDINATE. PLEASE DOULBE CHECK: " + newBrick.gameObject.name + " " + _grid[newBrick.Data.BrickCoordinate.X, newBrick.Data.BrickCoordinate.Y].name);
                 }
             }
         }
@@ -296,20 +296,22 @@ public class GameBoardController : MonoBehaviour
     // {
     //     // update coordinate
     //     brick.Data.BrickCoordinate = newCoordinate;
-        
+
     // }
 
     public bool CheckLose(BrickController brick)
     {
         
-        if((brick.Data.BrickCoordinate.Y<brick.Data.Speed || brick.Data.BrickCoordinate.Y<1)&&brick.gameObject.CompareTag("Block"))
+        if ((brick.Data.BrickCoordinate.Y < brick.Data.Speed || brick.Data.BrickCoordinate.Y < 1))
         {
-            Debug.Log("Lose");
-            GameFlow.Instance.canShoot = false;
-            UIManager.Instance.LoadLoseUI();
-            return true;
+            if (brick.gameObject.CompareTag("Block"))
+            {
+                Debug.Log("Lose");
+                GameFlow.Instance.canShoot = false;
+                UIManager.Instance.LoadLoseUI();
+                return true;
+            }
         }
-        
         return false;
     }
 
@@ -318,7 +320,7 @@ public class GameBoardController : MonoBehaviour
         StopAllCoroutines();
         PostTurnProcessing();
         UpdateGrid();
-        
+
         movableObjects = new List<BrickController>();
         for (int i = 0; i < BrickControllers.Count; i++)
         {
@@ -340,7 +342,8 @@ public class GameBoardController : MonoBehaviour
                 {
                     movableObjects.Add(BrickControllers[i]);
                     //StartCoroutine(_brickControllers[i].Move(1));
-                    if(!CheckLose(BrickControllers[i])){
+                    if (!CheckLose(BrickControllers[i]))
+                    {
                         UpdateBrickCoordinateBySpeed(BrickControllers[i]);
                         CheckLose(BrickControllers[i]);
                     }
@@ -357,7 +360,7 @@ public class GameBoardController : MonoBehaviour
                         BrickControllers[i].Data.isFreeze = false;
                         BrickControllers[i].View.DisableChildGraphic();
                         movableObjects.Add(BrickControllers[i]);
-                        if(!CheckLose(BrickControllers[i]))
+                        if (!CheckLose(BrickControllers[i]))
                         {
                             UpdateBrickCoordinateBySpeed(BrickControllers[i]);
                             CheckLose(BrickControllers[i]);
@@ -365,7 +368,7 @@ public class GameBoardController : MonoBehaviour
                     }
                 }
             }
-            
+
         }
         UpdateGrid();
 
@@ -379,26 +382,27 @@ public class GameBoardController : MonoBehaviour
     {
         GridCoordinate nextCoordinate = brick.Data.BrickCoordinate + brick.Data.Direction;
         //Debug.Log(nextCoordinate);
-        try{
-            if (_grid[nextCoordinate.X,nextCoordinate.Y] != null)
+        try
+        {
+            if (_grid[nextCoordinate.X, nextCoordinate.Y] != null)
             {
-                if (_grid[nextCoordinate.X,nextCoordinate.Y].Data.isFreeze || _grid[nextCoordinate.X,nextCoordinate.Y].Data.isBlocked)
+                if (_grid[nextCoordinate.X, nextCoordinate.Y].Data.isFreeze || _grid[nextCoordinate.X, nextCoordinate.Y].Data.isBlocked)
                 {
                     brick.Data.isBlocked = true;
                     return true;
                 }
             }
-           
+
             brick.Data.isBlocked = false;
-        
+
             return false;
         }
         catch
         {
             return false;
         }
-        
-        
+
+
     }
 
     public void UpdateDestroyedBricks()
@@ -406,7 +410,7 @@ public class GameBoardController : MonoBehaviour
         LevelData.UpdateDestroyedBricks();
         UIManager.Instance.UpdateDestroyedBricksUI();
         int destroyBricks = LevelData.totalBricks - BrickControllers.Where(brick => brick.CompareTag("Block") && brick.gameObject.activeInHierarchy).Count();
-        
+
         if (LevelData.totalBricks == /*LevelData.DestroyedBricks*/ destroyBricks)
         {
             //Win
@@ -453,7 +457,7 @@ public class GameBoardController : MonoBehaviour
 
     public void SetUpPositionWallDown(bool enable)
     {
-        if (enable)
+        if (enable && GameFlow.Instance.canShoot)
         {
             SoundManager.Instance.PlaySFX("ui");
             _wallHp = _listColorWallHp.Count - 1;
@@ -479,5 +483,5 @@ public class GameBoardController : MonoBehaviour
         BrickController.OnBrickieRemoval -= UpdateDestroyedBricks;
     }
 
-    
+
 }

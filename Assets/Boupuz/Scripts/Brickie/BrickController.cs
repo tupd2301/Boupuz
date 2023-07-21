@@ -76,6 +76,13 @@ public class BrickController : MonoBehaviour
             SetScenePositionBasedOnGridCoordinate();
         }
         yield return new WaitForSeconds(0.3f);
+        if (Data.BrickCoordinate.Y <= 0 && Data.Type == ObjectType.Item)
+        {
+            if (gameObject.CompareTag("Item"))
+            {
+                RemoveBrick();
+            }
+        }
         GameFlow.Instance.canShoot = true;
     }
 
@@ -96,6 +103,10 @@ public class BrickController : MonoBehaviour
                 if (!gameObject.CompareTag("Item"))
                 {
                     BallReflect(col);
+                }
+                else
+                {
+                    SoundManager.Instance.PlaySFX("item");
                 }
                 DecreaseHP(col);
 
@@ -143,6 +154,8 @@ public class BrickController : MonoBehaviour
             }
             else if (gameObject.CompareTag("Trampoline"))
             {
+                SoundManager.Instance.PlaySFX("trampoline");
+
                 Vector3 direction = new Vector3(UnityEngine.Random.Range(-180f, 180f), UnityEngine.Random.Range(-180f, 180f), 0).normalized;
                 col.gameObject.GetComponent<BallModel>().Direction = direction;
                 col.gameObject.transform.position = gameObject.transform.position;
@@ -159,6 +172,8 @@ public class BrickController : MonoBehaviour
         }
         else if (col.gameObject.CompareTag("Trampoline"))
         {
+            SoundManager.Instance.PlaySFX("trampoline");
+
             gameObject.SetActive(false);
             GridCoordinate newCoordinate = RandomChangeBrickCoordinate(this, 1);
             if (!GridCoordinate.IsNegative(newCoordinate))

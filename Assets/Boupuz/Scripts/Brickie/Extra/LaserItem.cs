@@ -29,6 +29,8 @@ public class LaserItem : MonoBehaviour
         if (other.gameObject.CompareTag("Ball"))
         {
             //StopCoroutine(SummonLaser());
+            SoundManager.Instance.PlaySFX("laser");
+
             _isTouched = true;
             UpdateIndex();
             StartCoroutine(SummonLaser());
